@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="/newAssets/css/style.css" />
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Edit User</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item">
+            <a href="/dashboard">Home</a>
+          </li>
+          <li class="breadcrumb-item active">Edit User</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<% if(messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if(messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <form
+            class="form"
+            action="/update/<%= user._id %>?method=put"
+            method="POST"
+            data-parsley-validate
+          >
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- text input -->
+                  <div class="form-group mandatory">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="full_name"
+                      id="full_name"
+                      value="<%= user.full_name %>"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mandatory">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      id="email"
+                      value="<%= user.email %>"
+                      placeholder="Email address"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- text input -->
+                  <div class="form-group mandatory">
+                    <label for="contact" class="form-label"
+                      >Contact Number</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phone"
+                      id="phone"
+                      value="<%= user.phone %>"
+                      placeholder="Enter Contact Number"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- text input -->
+                  <div class="form-group mandatory">
+                    <label for="roles" class="form-label">Role</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="role"
+                      id="role"
+                      value="<%= user.role %>"
+                      placeholder="Enter user role"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button type="submit" class="btn-sm btn-primary">Update</button>
+              <a class="btn-sm btn-danger float-right" href="/index"> Back</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/newAssets/parsleyjs/parsley.min.js"></script>
+<script src="/newAssets/js/parsley.js"></script>

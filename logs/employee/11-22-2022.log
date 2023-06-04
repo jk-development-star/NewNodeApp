@@ -1,0 +1,9 @@
+{
+  status: '201',
+  employee_id: '637cfbff5a70a545065033a9',
+  employee_name: 'undefined',
+  employee_email: 'darling@chetu.com',
+  level: 'info',
+  message: 'Employee created!',
+  timestamp: '2022-11-22T16:42:39.243Z'
+}

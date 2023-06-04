@@ -1,0 +1,27 @@
+{
+  status: '201',
+  employee_id: '637f67fe33fc906221d2031e',
+  employee_name: 'undefined',
+  employee_email: 'darling@chetu.com',
+  level: 'info',
+  message: 'Employee created!',
+  timestamp: '2022-11-24T12:47:58.270Z'
+}
+{
+  status: '201',
+  employee_id: '637f681e33fc906221d20322',
+  employee_name: 'undefined',
+  employee_email: 'abhay@chetu.com',
+  level: 'info',
+  message: 'Employee created!',
+  timestamp: '2022-11-24T12:48:30.835Z'
+}
+{
+  status: '201',
+  employee_id: '637f6c4233fc906221d2033a',
+  employee_name: 'undefined',
+  employee_email: 'abhay@chetu.com',
+  level: 'info',
+  message: 'Employee created!',
+  timestamp: '2022-11-24T13:06:10.377Z'
+}

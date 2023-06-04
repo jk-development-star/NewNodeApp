@@ -1,0 +1,93 @@
+{
+  status: '500',
+  error: ReferenceError: success_msg is not defined
+      at storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:43:25)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T14:19:53.750Z'
+}
+{
+  status: '500',
+  error: ReferenceError: success_msg is not defined
+      at storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:43:25)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T14:29:37.008Z'
+}
+{
+  status: '500',
+  error: ReferenceError: success_msg is not defined
+      at storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:43:25)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T14:37:11.241Z'
+}
+{
+  status: '500',
+  error: ReferenceError: success_msg is not defined
+      at storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:43:25)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T14:42:29.814Z'
+}
+{
+  status: '500',
+  error: ReferenceError: success_msg is not defined
+      at storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:43:25)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T14:49:27.134Z'
+}
+{
+  status: '500',
+  error: ReferenceError: success_msg is not defined
+      at storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:43:25)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T14:59:41.225Z'
+}
+{
+  status: '500',
+  error: ReferenceError: success_msg is not defined
+      at storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:43:25)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T15:00:19.331Z'
+}
+{
+  status: '500',
+  error: ReferenceError: success_msg is not defined
+      at storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:43:25)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T15:40:51.505Z'
+}
+{
+  status: '500',
+  error: ReferenceError: redirect is not defined
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:49:17
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async E:\Node-React\NodeApp\controllers\users\user.controller.js:37:9
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:28:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T17:11:34.901Z'
+}
+{
+  status: '500',
+  error: ReferenceError: redirect is not defined
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:53:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:41:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-04-28T17:14:34.689Z'
+}

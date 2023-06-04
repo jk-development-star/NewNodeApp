@@ -1,0 +1,48 @@
+{
+  status: '500',
+  error: TypeError: res.flash is not a function
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:38:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:37:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-09T10:13:34.627Z'
+}
+{
+  status: '500',
+  error: TypeError: res.flash is not a function
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:39:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:38:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-09T11:12:48.435Z'
+}
+{
+  status: '500',
+  error: TypeError: res.flash is not a function
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:40:17
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:38:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-09T11:21:30.358Z'
+}
+{
+  status: '500',
+  message: `Error in Edit User CastError: Cast to ObjectId failed for value "{ _id: 'index' }" (type Object) at path "_id" for model "Users"`,
+  level: 'error',
+  timestamp: '2023-05-09T15:30:41.791Z'
+}
+{
+  status: '500',
+  message: `Error in Edit User CastError: Cast to ObjectId failed for value "{ _id: 'index' }" (type Object) at path "_id" for model "Users"`,
+  level: 'error',
+  timestamp: '2023-05-09T15:31:34.588Z'
+}
+{
+  status: '500',
+  message: `Error in Edit User CastError: Cast to ObjectId failed for value "{ _id: 'index3.html' }" (type Object) at path "_id" for model "Users"`,
+  level: 'error',
+  timestamp: '2023-05-09T16:39:26.214Z'
+}

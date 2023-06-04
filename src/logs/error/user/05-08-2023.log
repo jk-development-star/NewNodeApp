@@ -1,0 +1,70 @@
+{
+  status: '500',
+  error: ReferenceError: redirect is not defined
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:53:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:41:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-08T16:32:43.656Z'
+}
+{
+  status: '500',
+  err_msg: ReferenceError: redirect is not defined
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:52:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:40:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-08T17:10:11.933Z'
+}
+{
+  status: '500',
+  err_msg: ReferenceError: render is not defined
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:52:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:40:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-08T17:11:52.112Z'
+}
+{
+  status: '500',
+  err_msg: ReferenceError: redirect is not defined
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:52:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:40:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-08T17:18:51.529Z'
+}
+{
+  status: '500',
+  err_msg: ReferenceError: redirect is not defined
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:45:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:40:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-08T17:21:29.269Z'
+}
+{
+  status: '500',
+  error: TypeError: res.flash is not a function
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:52:17
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:41:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-08T17:50:23.677Z'
+}
+{
+  status: '500',
+  error: TypeError: res.flash is not a function
+      at E:\Node-React\NodeApp\controllers\users\user.controller.js:52:17
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at async storeUser (E:\Node-React\NodeApp\controllers\users\user.controller.js:41:5),
+  level: 'error',
+  message: 'User not Created',
+  timestamp: '2023-05-08T17:58:48.617Z'
+}

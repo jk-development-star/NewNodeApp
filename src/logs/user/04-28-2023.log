@@ -1,0 +1,18 @@
+{
+  status: '201',
+  user_id: '644bfe46d4890400c65d9cb4',
+  user_name: 'Ritesh@123',
+  user_email: 'ritesh@y.com',
+  level: 'info',
+  message: 'User created!',
+  timestamp: '2023-04-28T17:11:34.884Z'
+}
+{
+  status: '201',
+  user_id: '644bfefa7b050f904a064fee',
+  user_name: 'Ritesh@123',
+  user_email: 'ritesh@yopmail.com',
+  level: 'info',
+  message: 'User created!',
+  timestamp: '2023-04-28T17:14:34.684Z'
+}

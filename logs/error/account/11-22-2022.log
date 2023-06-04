@@ -1,0 +1,12 @@
+{
+  status: '500',
+  level: 'error',
+  message: 'Error in getting Account',
+  timestamp: '2022-11-22T10:12:05.696Z'
+}
+{
+  status: '500',
+  level: 'error',
+  message: 'Error in getting Account',
+  timestamp: '2022-11-22T12:33:08.375Z'
+}

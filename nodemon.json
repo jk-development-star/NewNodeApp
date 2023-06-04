@@ -1,0 +1,6 @@
+{
+  "env": {
+    "JWT_KEY": "secret",
+    "TOKEN_LIFE": "1h"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  email: 'mobilepay52@f.com',
+  id: new ObjectId("639b40bcffb4f35ad06d6075"),
+  level: 'info',
+  message: 'Merchant logged in successfully',
+  timestamp: '2022-12-15T15:44:13.391Z'
+}
+{
+  email: 'mobilepay52@f.com',
+  id: new ObjectId("639b40bcffb4f35ad06d6075"),
+  level: 'info',
+  message: 'Merchant logged in successfully',
+  timestamp: '2022-12-15T16:03:13.186Z'
+}

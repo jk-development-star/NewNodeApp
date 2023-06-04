@@ -1,0 +1,120 @@
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:04:43.105Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:05:37.656Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:08:45.714Z'
+}
+{
+  status: '500',
+  message: 'Error in Edit User MongoServerError: unknown operator: $toObjectId',
+  level: 'error',
+  timestamp: '2023-05-11T14:08:53.166Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:12:17.622Z'
+}
+{
+  status: '500',
+  message: 'Error in Edit User ReferenceError: mongoose is not defined',
+  level: 'error',
+  timestamp: '2023-05-11T14:12:23.679Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:14:43.292Z'
+}
+{
+  status: '500',
+  message: "Error in Edit User TypeError: Class constructor ObjectId cannot be invoked without 'new'",
+  level: 'error',
+  timestamp: '2023-05-11T14:14:49.217Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:17:08.931Z'
+}
+{
+  status: '500',
+  message: "Error in Edit User TypeError: Class constructor ObjectId cannot be invoked without 'new'",
+  level: 'error',
+  timestamp: '2023-05-11T14:17:14.707Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:18:51.446Z'
+}
+{
+  status: '500',
+  message: "Error in Edit User TypeError: Class constructor ObjectId cannot be invoked without 'new'",
+  level: 'error',
+  timestamp: '2023-05-11T14:18:56.842Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:19:10.143Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:19:59.593Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:21:13.831Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:23:19.632Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:24:23.794Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:25:56.919Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:29:03.057Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T14:31:26.166Z'
+}

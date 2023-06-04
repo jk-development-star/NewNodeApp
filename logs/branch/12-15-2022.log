@@ -1,0 +1,68 @@
+{
+  status: '201',
+  Branch_details: {
+    branch_name: 'Vishal',
+    branch_contact_person: 'Vishal',
+    branch_contact_number: '9588888888',
+    branch_address: 'LA 48106 USA',
+    city: 'Los Angles',
+    pin_code: '48106',
+    branch_email: 'wendy12@mobilepay.com'
+  },
+  level: 'info',
+  message: 'Branch created!',
+  timestamp: '2022-12-15T15:46:12.551Z'
+}
+{
+  status: '201',
+  Branch_details: {
+    branch_name: 'Vishal',
+    branch_contact_person: 'Vishal',
+    branch_contact_number: '9588888886',
+    branch_address: 'LA 48106 USA',
+    city: 'Los Angles',
+    pin_code: '48106',
+    branch_email: 'wendy32@mobilepay.com'
+  },
+  level: 'info',
+  message: 'Branch created!',
+  timestamp: '2022-12-15T15:50:37.754Z'
+}
+{
+  status: '201',
+  branch_id: '639b424d32b101053d028351',
+  Updated_data: { pin_code: '48106' },
+  level: 'info',
+  message: 'BranchUpdated Successfully!',
+  timestamp: '2022-12-15T16:03:33.440Z'
+}
+{
+  status: '201',
+  branch_id: '639b424d32b101053d028351',
+  Updated_data: {
+    branch_contact_number: '7418529630',
+    branch_contact_person: 'Vishal',
+    branch_address: 'LA 48106 USA',
+    city: 'Los Angles',
+    pin_code: '48106',
+    branch_email: 'wendy19@mobilepay.com'
+  },
+  level: 'info',
+  message: 'BranchUpdated Successfully!',
+  timestamp: '2022-12-15T16:03:59.655Z'
+}
+{
+  status: '201',
+  branch_id: '639b424d32b101053d028351',
+  Updated_data: {
+    branch_contact_number: '7418529650',
+    branch_contact_person: 'Vishal',
+    branch_address: 'LA 48106 USA',
+    city: 'Los Angles',
+    pin_code: '48106',
+    branch_email: 'wendy1@mobilepay.com'
+  },
+  level: 'info',
+  message: 'BranchUpdated Successfully!',
+  timestamp: '2022-12-15T16:04:42.296Z'
+}

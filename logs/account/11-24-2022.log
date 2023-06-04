@@ -1,0 +1,80 @@
+{
+  status: '201',
+  Account_details: {
+    beneficiary_name: 'abhaayyyyy',
+    account_number: '007089468547845',
+    swift_code: 'US123',
+    national_clearing_code: '123',
+    bank_name: 'Usa Bank',
+    bank_address: 'USA',
+    employee: '637f681e33fc906221d20322',
+    account_type: 'Employee'
+  },
+  level: 'info',
+  message: 'Branch Account created!',
+  timestamp: '2022-11-24T12:48:50.686Z'
+}
+{
+  status: '201',
+  Account_details: {
+    beneficiary_name: 'abhaayyyyy',
+    account_number: '007089468547845',
+    swift_code: 'US123',
+    national_clearing_code: '123',
+    bank_name: 'Usa Bank',
+    bank_address: 'USA',
+    employee: '637f6c4233fc906221d2033a',
+    account_type: 'Employee'
+  },
+  level: 'info',
+  message: 'Branch Account created!',
+  timestamp: '2022-11-24T13:07:32.952Z'
+}
+{
+  status: '201',
+  Account_details: {
+    beneficiary_name: 'abhaayyyyy',
+    account_number: '007089468547849',
+    swift_code: 'US123',
+    national_clearing_code: '123',
+    bank_name: 'Usa Bank',
+    bank_address: 'USA',
+    branch: '637f6c3733fc906221d20337',
+    account_type: 'Branch'
+  },
+  level: 'info',
+  message: 'Branch Account created!',
+  timestamp: '2022-11-24T13:09:03.773Z'
+}
+{
+  status: '201',
+  Account_details: {
+    beneficiary_name: 'Employee Account',
+    account_number: '007089468547849',
+    swift_code: 'US123',
+    national_clearing_code: '123',
+    bank_name: 'Usa Bank',
+    bank_address: 'USA',
+    employee: '637f6c4233fc906221d2033a',
+    account_type: 'Employee'
+  },
+  level: 'info',
+  message: 'Branch Account created!',
+  timestamp: '2022-11-25T17:03:03.677Z'
+}
+{
+  status: '201',
+  Account_details: {
+    beneficiary_name: 'Employee Account',
+    account_number: '007089468547848',
+    swift_code: 'US123',
+    national_clearing_code: '123',
+    bank_name: 'Usa Bank',
+    bank_address: 'USA',
+    branch: '637f6c3733fc906221d20337',
+    account_type: 'Branch'
+  },
+  level: 'info',
+  message: 'Branch Account created!',
+  timestamp: '2022-11-25T17:05:42.942Z'
+}

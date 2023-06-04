@@ -1,0 +1,18 @@
+{
+  status: '201',
+  merchant_id: '637cc1745a70a54506503398',
+  merchant_name: 'MobilePay',
+  merchant_email: 'mobilepay@mobilepay.com',
+  level: 'info',
+  message: 'Merchant created!',
+  timestamp: '2022-11-22T12:32:52.607Z'
+}
+{
+  status: '201',
+  merchant_id: '637cfb8c5a70a545065033a2',
+  merchant_name: 'MobilePay',
+  merchant_email: 'mobilepay@mobilepay.com',
+  level: 'info',
+  message: 'Merchant created!',
+  timestamp: '2022-11-22T16:40:44.684Z'
+}

@@ -1,0 +1,6 @@
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-20T13:36:40.845Z'
+}

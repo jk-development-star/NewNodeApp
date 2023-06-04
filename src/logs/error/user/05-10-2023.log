@@ -1,0 +1,96 @@
+{
+  status: '500',
+  message: 'Error in Edit User TypeError: userSchema.findByIdcl is not a function',
+  level: 'error',
+  timestamp: '2023-05-10T15:39:51.667Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:19:57.744Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:21:16.143Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:22:50.758Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:24:18.819Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:30:56.340Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:34:16.505Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:35:18.104Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:38:24.727Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:39:11.400Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:39:44.903Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:40:31.673Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:42:54.912Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:48:43.067Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:49:57.775Z'
+}
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-10T17:50:39.102Z'
+}

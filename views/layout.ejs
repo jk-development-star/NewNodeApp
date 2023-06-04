@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%- locals.title %></title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="/newAssets/plugins/fontawesome-free/css/all.min.css"
+    />
+    <!-- overlayScrollbars -->
+    <link
+      rel="stylesheet"
+      href="/newAssets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/newAssets/dist/css/adminlte.min.css" />
+    <%- style %>
+  </head>
+  <body
+    class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"
+  >
+    <div class="wrapper">
+      <!-- Preloader -->
+      <%- include('partials/newPartials/preloader') %>
+      <!-- Navbar -->
+      <%- include('partials/newPartials/navbar') %>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <%- include('partials/newPartials/sidebar') %>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <%- body %>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+      <!-- Main Footer -->
+      <%- include('partials/newPartials/footer') %>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="/newAssets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/newAssets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/newAssets/dist/js/adminlte.js"></script>
+
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+    <script src="/newAssets/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="/newAssets/plugins/raphael/raphael.min.js"></script>
+    <script src="/newAssets/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+    <script src="/newAssets/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+    <!-- ChartJS -->
+    <script src="/newAssets/plugins/chart.js/Chart.min.js"></script>
+
+    <!-- AdminLTE for demo purposes -->
+    <script src="/newAssets/dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="/newAssets/dist/js/pages/dashboard2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <%- script %>
+    <script>
+      let url = window.location;
+
+      // for sidebar menu entirely but not cover treeview
+      $("ul.nav-sidebar a")
+        .filter(function () {
+          return this.href == url;
+        })
+        .addClass("active");
+
+      // for treeview
+      $("ul.nav-treeview a")
+        .filter(function () {
+          return this.href == url;
+        })
+        .parentsUntil(".nav-sidebar > .nav-treeview")
+        .addClass("menu-open")
+        .prev("a")
+        .addClass("active");
+    </script>
+  </body>
+</html>

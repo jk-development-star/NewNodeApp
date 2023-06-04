@@ -1,0 +1,9 @@
+{
+  status: '201',
+  merchant_id: '637f6bc133fc906221d20331',
+  merchant_name: 'MobilePay',
+  merchant_email: 'mobilepay@mobilepay.com',
+  level: 'info',
+  message: 'Merchant created!',
+  timestamp: '2022-11-24T13:04:01.267Z'
+}

@@ -1,0 +1,48 @@
+{
+  status: '201',
+  Account_details: {
+    beneficiary_name: 'wendy',
+    account_number: '00700468547835',
+    swift_code: 'US123',
+    national_clearing_code: '123',
+    bank_name: 'Usa Bank',
+    bank_address: 'USA',
+    employee: '637c9f88028f771c15253d50',
+    account_type: 'Employee'
+  },
+  level: 'info',
+  message: 'Branch Account created!',
+  timestamp: '2022-11-22T12:33:01.783Z'
+}
+{
+  status: '201',
+  Account_details: {
+    beneficiary_name: 'wendy',
+    account_number: '00700468547835',
+    swift_code: 'US123',
+    national_clearing_code: '123',
+    bank_name: 'Usa Bank',
+    bank_address: 'USA',
+    branch: '637cfbbf5a70a545065033a6',
+    account_type: 'Branch'
+  },
+  level: 'info',
+  message: 'Branch Account created!',
+  timestamp: '2022-11-22T16:43:07.575Z'
+}
+{
+  status: '201',
+  Account_details: {
+    beneficiary_name: 'Employee1',
+    account_number: '00700468547845',
+    swift_code: 'US123',
+    national_clearing_code: '123',
+    bank_name: 'Usa Bank',
+    bank_address: 'USA',
+    employee: '637cfbff5a70a545065033a9',
+    account_type: 'Employee'
+  },
+  level: 'info',
+  message: 'Branch Account created!',
+  timestamp: '2022-11-22T16:43:59.204Z'
+}

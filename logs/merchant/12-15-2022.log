@@ -1,0 +1,18 @@
+{
+  status: '201',
+  merchant_id: '639b14fea094ee88e805943f',
+  merchant_name: 'MobilePay Pvt Ltd',
+  merchant_email: 'mobilepayh@etu.com',
+  level: 'info',
+  message: 'Merchant created!',
+  timestamp: '2022-12-15T12:37:18.961Z'
+}
+{
+  status: '201',
+  merchant_id: '639b40bcffb4f35ad06d6075',
+  merchant_name: 'MobilePay Inc',
+  merchant_email: 'mobilepay52@f.com',
+  level: 'info',
+  message: 'Merchant created!',
+  timestamp: '2022-12-15T15:43:56.039Z'
+}

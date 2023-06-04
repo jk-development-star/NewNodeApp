@@ -1,0 +1,54 @@
+{
+  status: '201',
+  user_id: '6459242b4ae7909c117d21bb',
+  user_name: 'Test',
+  user_email: 'test@yopmail.com',
+  level: 'info',
+  message: 'User created!',
+  timestamp: '2023-05-08T16:32:43.634Z'
+}
+{
+  status: '201',
+  user_id: '64592cf38376916015ccc3e2',
+  user_name: 'asfdfdsf',
+  user_email: 'emaafsdil@yopmail.com',
+  level: 'info',
+  message: 'User created!',
+  timestamp: '2023-05-08T17:10:11.923Z'
+}
+{
+  status: '201',
+  user_id: '64592d588b84fd6874705fcd',
+  user_name: 'asdfsf',
+  user_email: 'ezadasdmail@yopmail.com',
+  level: 'info',
+  message: 'User created!',
+  timestamp: '2023-05-08T17:11:52.110Z'
+}
+{
+  status: '201',
+  user_id: '64592efbc2c81a08e403d7b8',
+  user_name: 'vgsdfggf',
+  user_email: 'edfgdfmail@yopmail.com',
+  level: 'info',
+  message: 'User created!',
+  timestamp: '2023-05-08T17:18:51.527Z'
+}
+{
+  status: '201',
+  user_id: '6459365f33e9bc9e44f17afb',
+  user_name: 'Jhon Wick',
+  user_email: 'john@yopmail.com',
+  level: 'info',
+  message: 'User created!',
+  timestamp: '2023-05-08T17:50:23.674Z'
+}
+{
+  status: '201',
+  user_id: '6459385864397767f9466d29',
+  user_name: 'Jhon Wick',
+  user_email: 'jhon@yopmail.com',
+  level: 'info',
+  message: 'User created!',
+  timestamp: '2023-05-08T17:58:48.614Z'
+}

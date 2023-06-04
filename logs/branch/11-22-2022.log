@@ -1,0 +1,15 @@
+{
+  status: '201',
+  Branch_details: {
+    branch_name: 'Mobilepay First Branch',
+    branch_contact_person: 'Weendy',
+    branch_contact_number: '9888888888',
+    branch_address: 'LA 48106 UK',
+    city: 'Los Angles',
+    pin_code: '48106',
+    branch_email: 'Mobilepay2@mobilepay.com'
+  },
+  level: 'info',
+  message: 'Branch created!',
+  timestamp: '2022-11-22T16:41:35.333Z'
+}
