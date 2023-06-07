@@ -10,26 +10,13 @@ const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts");
 const expressSession = require("express-session");
 const flash = require("express-flash");
-const passport = require("passport");
-const { initializingPassport } = require("./config/passport.config");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-initializingPassport(passport);
-app.use(
-  expressSession({
-    secret: "secret string",
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true },
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-
+app.use(cookieParser());
 // set the template engine
 app.set("view engine", "ejs");
 app.use(expressLayouts);
@@ -39,8 +26,18 @@ app.set("layout extractScripts", true);
 app.set("layout extractStyles", true);
 
 app.use(flash());
+
+app.use(
+  expressSession({
+    secret: "secret string",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true },
+  })
+);
+
 app.use(function (req, res, next) {
-  res.locals.user = req.session.user;
+  res.locals.user = req.cookies.auth;
   next();
 });
 app.use(require("./routes/authroutes"));
