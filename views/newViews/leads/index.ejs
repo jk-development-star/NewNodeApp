@@ -30,6 +30,29 @@
   .action {
     width: 120px;
   }
+  /* right-panel css */
+
+  .right-panel {
+    position: fixed;
+    right: 0;
+    top: 57px;
+    min-height: 100vh;
+    background-color: #343a40;
+    width: 50em;
+    box-shadow: -6px 0 10px #00000096;
+    right: -50em;
+    transition: 0.5s;
+    z-index: 999;
+  }
+
+  .right-panel.open {
+    right: 0;
+  }
+
+  .close-panel {
+    cursor: pointer;
+    font-size: 1.4rem;
+  }
 </style>
 <section class="content-header">
   <div class="container-fluid">
@@ -98,8 +121,7 @@
                   <td><%= lead.assignedTo.full_name %></td>
                   <td style="display: inline">
                     <a
-                      href="/view/<%= lead._id %>"
-                      class="btn-sm btn-info"
+                      class="btn-sm btn-info panel-trigger"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="View lead"
@@ -125,6 +147,17 @@
                     </a>
                   </td>
                 </tr>
+                <div class="right-panel">
+                  <div class="panel-head p-2 pr-4 text-right">
+                    <i class="fa fa-times close-panel"></i>
+                  </div>
+
+                  <div class="panel-body">
+                    <div class="header">
+                      <h3>Lead Details</h3>
+                    </div>
+                  </div>
+                </div>
                 <% }) %> <% } %>
               </tbody>
             </table>
@@ -138,6 +171,7 @@
     <!-- /.row -->
   </div>
   <!-- /.container-fluid -->
+  <!-- <button class="btn btn-primary panel-trigger">Add</button> -->
 </section>
 
 <script src="/newAssets/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -176,6 +210,18 @@
       info: true,
       autoWidth: false,
       responsive: true,
+    });
+  });
+
+  /* right-panel js */
+
+  $(document).ready(function () {
+    $(".panel-trigger").click(function () {
+      $(".right-panel").addClass("open");
+    });
+
+    $(".close-panel").click(function () {
+      $(".right-panel").removeClass("open");
     });
   });
 </script>

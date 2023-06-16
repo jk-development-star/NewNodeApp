@@ -26,7 +26,6 @@ const getAllLead = async (req, res) => {
             layout: true,
           });
         } else {
-          console.log(leads);
           return res.render("newViews/leads/index", {
             leads,
             title: "Lead List",

@@ -149,7 +149,6 @@ const userView = async (req, res) => {
   try {
     // Edit the User
     await userDriver.userEdit(req.params.id).then((userProfile) => {
-      console.log(userProfile.full_name);
       if (userProfile)
         return res.render("newViews/users/view", {
           userProfile,
