@@ -31,7 +31,7 @@
         <div class="card card-primary">
           <form
             class="form"
-            action="/update/<%= user._id %>?method=put"
+            action="/update/<%= user[0]._id %>?method=put"
             method="POST"
             data-parsley-validate
           >
@@ -46,7 +46,7 @@
                       class="form-control"
                       name="full_name"
                       id="full_name"
-                      value="<%= user.full_name %>"
+                      value="<%= user[0].full_name %>"
                       data-parsley-required="true"
                     />
                   </div>
@@ -59,7 +59,7 @@
                       class="form-control"
                       name="email"
                       id="email"
-                      value="<%= user.email %>"
+                      value="<%= user[0].email %>"
                       placeholder="Email address"
                       data-parsley-required="true"
                     />
@@ -78,7 +78,7 @@
                       class="form-control"
                       name="phone"
                       id="phone"
-                      value="<%= user.phone %>"
+                      value="<%= user[0].phone %>"
                       placeholder="Enter Contact Number"
                       data-parsley-required="true"
                     />
@@ -93,7 +93,7 @@
                       class="form-control"
                       name="role"
                       id="role"
-                      value="<%= user.role %>"
+                      value="<%= user[0].role %>"
                       placeholder="Enter user role"
                       data-parsley-required="true"
                     />
@@ -105,9 +105,7 @@
 
             <div class="card-footer">
               <button type="submit" class="btn-sm btn-primary">Update</button>
-              <a class="btn btn-sm btn-danger float-right" href="/index">
-                Back</a
-              >
+              <a class="btn-sm btn-danger float-right" href="/users"> Back</a>
             </div>
           </form>
         </div>

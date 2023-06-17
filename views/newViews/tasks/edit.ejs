@@ -1,0 +1,118 @@
+<!-- summernote -->
+<link
+  rel="stylesheet"
+  href="/newAssets/plugins/summernote/summernote-bs4.min.css"
+/>
+<link rel="stylesheet" href="/newAssets/css/style.css" />
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Edit Task</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item">
+            <a href="/dashboard">Home</a>
+          </li>
+          <li class="breadcrumb-item active">Edit Task</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<% if(messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if(messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <form
+            class="form"
+            action="/tasks/update/<%= task._id %>?method=put"
+            method="POST"
+            data-parsley-validate
+          >
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- text input -->
+                  <div class="form-group mandatory">
+                    <label for="name" class="form-label">Task Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="task_name"
+                      value="<%= task.task_name %>"
+                      placeholder="Enter task name"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mandatory">
+                    <label for="email" class="form-label">Task Type</label>
+                    <select
+                      class="form-control"
+                      name="task_type"
+                      id="task_type"
+                    >
+                    <option value="1"  <%= task.task_type === "1" ?  "selected" : '' %>>Informational</option>
+                    <option value="2" <%= task.task_type === "2" ?  "selected" : '' %>>Check List</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mandatory">
+                      <label for="email" class="form-label">Task Status</label>
+                      <select
+                        class="form-control"
+                        name="task_status"
+                        id="task_status"
+                      >
+                      <option value="Active" <%= task.task_status === "Active" ?  "selected" : '' %>>Active</option>
+                      <option value="In-Active" <%= task.task_status === "In-Active" ?  "selected" : '' %>>In-Active</option>
+                      </select>
+                    </div>
+                  </div>
+                <!-- text input -->
+                <div class="col-md-6">
+                  <label for="description" class="form-label"
+                    >Task Description</label
+                  >
+                  <textarea class="summernote" name="task_description">
+                    <%- task.task_description %>
+                  </textarea>
+                </div>
+              </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button type="submit" class="btn-sm btn-primary">Submit</button>
+              <a class="btn-sm btn-danger float-right" href="/tasks"> Back</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/newAssets/parsleyjs/parsley.min.js"></script>
+<script src="/newAssets/js/parsley.js"></script>
+<!-- Summernote -->
+<script src="/newAssets/plugins/summernote/summernote-bs4.min.js"></script>
+<script>
+  $(function () {
+    // Summernote
+    $(".summernote").summernote();
+  });
+</script>

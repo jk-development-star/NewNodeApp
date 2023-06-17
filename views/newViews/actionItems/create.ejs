@@ -1,0 +1,272 @@
+<!-- Tempusdominus Bootstrap 4 -->
+<link
+  rel="stylesheet"
+  href="/newAssets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"
+/>
+<!-- Bootstrap4 Duallistbox -->
+<link
+  rel="stylesheet"
+  href="/newAssets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css"
+/>
+<!-- summernote -->
+<link
+  rel="stylesheet"
+  href="/newAssets/plugins/summernote/summernote-bs4.min.css"
+/>
+<link rel="stylesheet" href="/newAssets/css/style.css" />
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Add New Action Item</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item">
+            <a href="/dashboard">Home</a>
+          </li>
+          <li class="breadcrumb-item active">Add New Action Item</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<% if(messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if(messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <form
+            class="form"
+            action="/actionItems/store"
+            method="POST"
+            data-parsley-validate
+          >
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- text input -->
+                  <div class="form-group mandatory">
+                    <label for="status" class="form-label">Type</label>
+                    <select
+                      class="form-control"
+                      name="action_item_type"
+                      id="action_item_type"
+                    >
+                      <option>Select Type</option>
+                      <option value="Follow-Up">Follow Up</option>
+                      <option value="In-Process">In-Process</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Closed">Closed</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mandatory">
+                    <label for="name" class="form-label">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="action_item_name"
+                      id="action_item_name"
+                      placeholder="Enter Name"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <!-- text input -->
+                  <div class="form-group mandatory">
+                    <label for="date" class="form-label">Start Date</label>
+                    <div
+                      class="input-group date"
+                      id="datetimepicker1"
+                      data-target-input="nearest"
+                    >
+                      <input
+                        type="text"
+                        class="form-control datetimepicker-input"
+                        data-target="#datetimepicker1"
+                        name="action_item_start_date"
+                        data-parsley-required="true"
+                      />
+                      <div
+                        class="input-group-append"
+                        data-target="#datetimepicker1"
+                        data-toggle="datetimepicker"
+                      >
+                        <div class="input-group-text">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mandatory">
+                    <label for="email" class="form-label">Predecessor</label>
+                    <select
+                      class="form-control"
+                      name="action_item_predecessor"
+                      id="action_item_predecessor"
+                    >
+                      <option>Select Predecessor</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mandatory">
+                    <label for="email" class="form-label">Successor</label>
+                    <select
+                      class="form-control"
+                      name="action_item_successor"
+                      id="action_item_successor"
+                    >
+                      <option>Select Successor</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mandatory">
+                    <label for="text" class="form-label"
+                      >Completion Day(s)</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="action_item_completion_days"
+                      id="action_item_completion_days"
+                      placeholder="Enter completion day(s)"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <!-- text input -->
+                  <div class="form-group mandatory">
+                    <label for="country" class="form-label">Work Type</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="action_item_type_of_work"
+                      id="action_item_type_of_work"
+                      placeholder="Enter work type"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mandatory">
+                    <label for="date" class="form-label">End Date</label>
+                    <div
+                      class="input-group date"
+                      id="datetimepicker2"
+                      data-target-input="nearest"
+                    >
+                      <input
+                        type="text"
+                        class="form-control datetimepicker-input"
+                        data-target="#datetimepicker2"
+                        name="action_item_end_date"
+                        data-parsley-required="true"
+                      />
+                      <div
+                        class="input-group-append"
+                        data-target="#datetimepicker2"
+                        data-toggle="datetimepicker"
+                      >
+                        <div class="input-group-text">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group mandatory">
+                    <label class="form-label">Tasks</label>
+                    <select
+                      class="duallistbox"
+                      multiple="multiple"
+                      name="action_item_tasks[]"
+                      data-parsley-required="true"
+                    >
+                      <% if(typeof task !== 'undefined' && task.length > 0){ %>
+                      <% task.forEach(function(tasks){ %>
+                      <option value="<%= tasks._id %>">
+                        <%= tasks.task_name %>
+                      </option>
+                      <%})%> <% } else{%>
+                      <option value="">No Tasks Found</option>
+                      <%}%>
+                    </select>
+                  </div>
+                  <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="follow" class="form-label">Description</label>
+                  <textarea class="summernote" name="action_item_description">
+                  </textarea>
+                </div>
+                <!-- /.col-->
+              </div>
+
+              <!-- /.col-->
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-sm btn-primary">
+                Submit
+              </button>
+              <a class="btn-sm btn-danger float-right" href="/leads"> Back</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/newAssets/plugins/moment/moment.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/newAssets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="/newAssets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<script src="/newAssets/parsleyjs/parsley.min.js"></script>
+<script src="/newAssets/js/parsley.js"></script>
+
+<!-- Summernote -->
+<script src="/newAssets/plugins/summernote/summernote-bs4.min.js"></script>
+<script>
+  $(function () {
+    // Summernote
+    $(".summernote").summernote();
+  });
+
+  $(function () {
+    $("#datetimepicker1, #datetimepicker2").datetimepicker({
+      format: "L",
+    });
+  });
+
+  //Bootstrap Duallistbox
+  $(".duallistbox").bootstrapDualListbox();
+</script>

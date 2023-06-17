@@ -1,22 +1,18 @@
-"use strict";
+'use strict'
 
-const express = require("express");
+const express = require('express')
 const router = express.Router();
-const {
-  loginView,
-  dashboardView,
-  login,
-} = require("../controllers/authcontroller");
-const checkJWTAuth = require("../middlewares/jwtAuth");
+const checkJWTAuth = require('../middlewares/jwtAuth')
+const { loginView, login, dashboardView } = require('../controllers/authcontroller')
 
-router.get("/", loginView);
 
-router.get("/dashboard", checkJWTAuth, dashboardView);
+router.get('/', loginView);
+
+router.get('/dashboard', checkJWTAuth, dashboardView)
 router.post("/login", login);
 
-router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect(301, "/");
-});
+
+
+
 
 module.exports = router;

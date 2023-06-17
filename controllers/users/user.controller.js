@@ -5,6 +5,7 @@ const { message } = require("../../constants");
 const { validateSignup } = require("../../validations/users/user.validation");
 const bcryptPassword = require("../../helpers/bcrypt.password");
 const { userLogger } = require("../../utils/loggers");
+const currencyFormat = require("../../helpers/common");
 
 const userCreate = (req, res) => {
   res.render("newViews/users/create", {
@@ -22,7 +23,6 @@ const userCreate = (req, res) => {
  * @param {text} role role that define the user permission
  * @returns {object} added user details
  */
-
 const storeUser = async (req, res) => {
   //to check the validations
   var { error, value } = validateSignup(req.body);
@@ -63,10 +63,15 @@ const storeUser = async (req, res) => {
     });
 };
 
-// Get All users
+/**
+ *
+ * @param {ObjectId} generatedBy User Document unique ID
+ * @param {ObjectId} assignedTo Document unique ID
+ * @returns {Array} To get all the added users details with their Generated and Assigned leads info
+ */
 const userList = async (req, res) => {
   await userDriver
-    .getAllUsers()
+    .getAllUsers(req.userId, req.userRole)
     .then((users) => {
       if (users)
         return res.render("newViews/users/index", {
@@ -76,6 +81,7 @@ const userList = async (req, res) => {
         });
       else req.flash("error", message.MESSAGE_NO_USER_FOUND);
       return res.render("newViews/users/index", {
+        users: "",
         title: "Users List",
         layout: true,
       });
@@ -93,7 +99,11 @@ const userList = async (req, res) => {
     });
 };
 
-// Delete user
+/**
+ *
+ * @param {Hexadecimal} _id Document object id to match the user
+ * @returns {object} With success or Error message
+ */
 const deleteAUser = async (req, res) => {
   try {
     //Deleting the User
@@ -105,7 +115,7 @@ const deleteAUser = async (req, res) => {
           layout: true,
         });
       } else req.flash("success", message.MESSAGE_SUCCESS_DELETE_USER);
-      return res.redirect(301, "/index");
+      return res.redirect(301, "/users");
     });
   } catch (error) {
     //Logging the error
@@ -121,7 +131,15 @@ const deleteAUser = async (req, res) => {
   }
 };
 
-// Edit user
+/**
+ *
+ * @param {id} _id pass the user object id
+ * @param {text} full_name user full name
+ * @param {text} email user email address
+ * @param {number} phone phone number
+ * @param {text} role role that define the user permission
+ * @returns {object} updated user details
+ */
 const userEditView = async (req, res) => {
   try {
     // Edit the User
@@ -144,7 +162,11 @@ const userEditView = async (req, res) => {
   }
 };
 
-// View user profile
+/**
+ *
+ * @param {id} _id to view the specific user details
+ * @returns {object}  selected user details to view on view page
+ */
 const userView = async (req, res) => {
   try {
     // Edit the User
@@ -152,6 +174,7 @@ const userView = async (req, res) => {
       if (userProfile)
         return res.render("newViews/users/view", {
           userProfile,
+          currencyFormat: currencyFormat,
           title: "User Profile",
           layout: true,
         });
@@ -167,7 +190,15 @@ const userView = async (req, res) => {
   }
 };
 
-// Update existing user details
+/**
+ *
+ * @param {id} _id pass the user object id
+ * @param {text} full_name user full name
+ * @param {text} email user email address
+ * @param {number} phone phone number
+ * @param {text} role role that define the user permission
+ * @returns {object} updated user details
+ */
 const updateUser = async (req, res) => {
   try {
     await userDriver
@@ -181,7 +212,7 @@ const updateUser = async (req, res) => {
           });
         } else {
           req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
-          return res.redirect(301, "/index");
+          return res.redirect(301, "/users");
         }
       })
       .catch((error) => {

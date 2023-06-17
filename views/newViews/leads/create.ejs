@@ -201,7 +201,7 @@
                       id="assignedTo"
                     >
                       <option>Select Assignee</option>
-                      <% if(usersList && usersList.length > 0) { %> <%
+                      <% if(usersList && usersList !== "undefined") { %> <%
                       usersList.forEach(function (user) { %>
                       <option value="<%= user._id %>">
                         <%= user.full_name %>

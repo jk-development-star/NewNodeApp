@@ -2,7 +2,6 @@
 
 const jwt = require("jsonwebtoken");
 const { message } = require("../constants/index");
-const responseCode = require("../constants/responseCode.constant");
 const { userLogger } = require("../utils/loggers");
 
 /**
@@ -12,14 +11,15 @@ const { userLogger } = require("../utils/loggers");
  */
 const checkJWTAuth = async (req, res, next) => {
   try {
-    const authorization = req.cookies.auth.accessToken;
-    if (authorization) {
+    const token = req.cookies.auth.token;
+    if (token) {
       try {
-        const user = jwt.verify(authorization, process.env.JWT_KEY);
+        const user = jwt.verify(token, process.env.JWT_KEY);
         req.userId = await user.id;
-        req.role = await user.role;
+        req.userRole = await user.role;
         next();
       } catch (error) {
+        req.flash("error", message.MESSAGE_USER_NOT_AUTHORIZED);
         return res.redirect("/");
       }
     } else {
@@ -27,12 +27,12 @@ const checkJWTAuth = async (req, res, next) => {
       return res.redirect("/");
     }
   } catch (error) {
+    req.flash("error", "Something went wrong, Please try again!!");
     userLogger.error("Error in Authorizing the User", {
       status: "500",
       message: error,
     });
-    req.flash("error", error);
-    return res.redirect("/");
+    return res.redirect("back");
   }
 };
 

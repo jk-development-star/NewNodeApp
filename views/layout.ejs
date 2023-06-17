@@ -43,46 +43,34 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-      <!-- Control Sidebar -->
-      <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-      </aside>
-      <!-- /.control-sidebar -->
 
       <!-- Main Footer -->
       <%- include('partials/newPartials/footer') %>
     </div>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
     <script src="/newAssets/plugins/jquery/jquery.min.js"></script>
+    <script src="/newAssets/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap -->
     <script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="/newAssets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/newAssets/dist/js/adminlte.js"></script>
-
-    <!-- PAGE PLUGINS -->
-    <!-- jQuery Mapael -->
-    <script src="/newAssets/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="/newAssets/plugins/raphael/raphael.min.js"></script>
-    <script src="/newAssets/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-    <script src="/newAssets/plugins/jquery-mapael/maps/usa_states.min.js"></script>
-    <!-- ChartJS -->
-    <script src="/newAssets/plugins/chart.js/Chart.min.js"></script>
-
-    <!-- AdminLTE for demo purposes -->
-    <script src="/newAssets/dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="/newAssets/dist/js/pages/dashboard2.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <%- script %>
+    <!-- PAGE PLUGINS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="/newAssets/dist/js/demo.js"></script>
+
     <script>
       let url = window.location;
-
       // for sidebar menu entirely but not cover treeview
       $("ul.nav-sidebar a")
         .filter(function () {
@@ -99,6 +87,12 @@
         .addClass("menu-open")
         .prev("a")
         .addClass("active");
+
+      $("[data-open-details]").click(function (e) {
+        e.preventDefault();
+        $(this).next().toggleClass("is-active");
+        $(this).toggleClass("is-active");
+      });
     </script>
   </body>
 </html>

@@ -118,3 +118,9 @@
   level: 'error',
   timestamp: '2023-05-11T14:31:26.166Z'
 }
+{
+  status: '500',
+  message: "Error in Authorizing the User TypeError: Cannot read properties of undefined (reading 'accessToken')",
+  level: 'error',
+  timestamp: '2023-05-11T16:15:17.199Z'
+}

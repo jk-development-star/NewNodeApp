@@ -81,8 +81,8 @@
                 </tr>
               </thead>
               <tbody>
-                <% if(users.length > 0) { %> <% users.forEach(function (user) {
-                %>
+                <% if(typeof users !== 'undefined' && users.length > 0) { %> <%
+                users.forEach(function (user) { %>
                 <tr>
                   <td><%= user.full_name %></td>
                   <td><%= user.email%></td>
@@ -155,6 +155,7 @@
         responsive: true,
         lengthChange: false,
         autoWidth: false,
+        ordering: true,
         // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
       })
       .buttons()
@@ -164,7 +165,7 @@
       paging: true,
       lengthChange: false,
       searching: false,
-      ordering: true,
+      ordering: false,
       info: true,
       autoWidth: false,
       responsive: true,

@@ -4,9 +4,15 @@ const leadDriver = require("../../drivers/leads/leads.driver");
 const { leadMessage } = require("../../constants");
 const { validateLead } = require("../../validations/leads/lead.validation");
 const userDriver = require("../../drivers/users/user.driver");
+const currencyFormat = require("../../helpers/common");
 
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 const leadCreate = async (req, res) => {
-  const usersList = await userDriver.getAllUsers();
+  const usersList = await userDriver.getAllUsersForAssignLeads();
   res.render("newViews/leads/create", {
     usersList,
     layout: true,
@@ -14,10 +20,17 @@ const leadCreate = async (req, res) => {
   });
 };
 
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 const getAllLead = async (req, res) => {
   try {
+    let status = req.params.status ? req.params.status : "";
     await leadDriver
-      .getAllLeads()
+      .getAllLeads(status)
       .then((leads) => {
         if (!leads) {
           req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
@@ -28,6 +41,7 @@ const getAllLead = async (req, res) => {
         } else {
           return res.render("newViews/leads/index", {
             leads,
+            currencyFormat: currencyFormat,
             title: "Lead List",
             layout: true,
           });
@@ -49,6 +63,52 @@ const getAllLead = async (req, res) => {
   }
 };
 
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+const leadDetails = async (req, res) => {
+  try {
+    await leadDriver
+      .getLead(req.params.id)
+      .then((lead) => {
+        if (!lead) {
+          req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
+          return res.render("newViews/leads/index", {
+            title: "Lead List",
+            layout: true,
+          });
+        } else {
+          return res.render("newViews/leads/lead_details", {
+            lead,
+            currencyFormat: currencyFormat,
+            title: "Lead Details",
+            layout: true,
+          });
+        }
+      })
+      .catch((error) => {
+        req.flash("error", error);
+        return res.render("newViews/leads/index", {
+          title: "Lead List",
+          layout: true,
+        });
+      });
+  } catch (error) {
+    req.flash("error", leadMessage.MESSAGE_INTERNAL_SERVER_ERROR);
+    return res.render("newViews/leads/index", {
+      title: "Lead List",
+      layout: true,
+    });
+  }
+};
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 const storeLead = async (req, res) => {
   //to check the validations
   var { error, value } = validateLead(req.body);
@@ -86,8 +146,57 @@ const storeLead = async (req, res) => {
   }
 };
 
+const leadEdit = async (req, res) => {
+  try{
+    const usersList = await userDriver.getAllUsersForAssignLeads();
+    await leadDriver.getLead(req.params.id).then(lead => {
+      if(lead) return res.render('newViews/leads/edit', {lead, usersList, title: "Edit Lead", layout: true})
+    }).catch(error => {
+      req.flash('error', error)
+      res.render("newViews/leads/edit", {
+        layout: true,
+        title: "Edit Lead",
+      });
+    })
+  }catch(error){
+    req.flash('error', error)
+    res.render("newViews/leads/edit", {
+      layout: true,
+      title: "Edit Lead",
+    });
+  }
+ 
+};
+
+const leadUpdate = async(req, res) => {
+  try{
+    await leadDriver.updateLead(req.params.id, req.body).then(lead => {
+      if (!lead) {
+        req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
+        return res.render("newViews/leads/edit", {
+          title: "Edit Lead",
+          layout: true,
+        });
+      } else {
+        req.flash("success", leadMessage.MESSAGE_SUCCESS_UPDATE_LEAD);
+        return res.redirect(301, "/leads");
+      }
+    }).catch(error => {
+      req.flash('error', error)
+      return res.render('newView/leads/edit', { title: "Edit Lead", layout: true})
+    })
+  }catch(error){
+    req.flash('error', error)
+    return res.render('newView/leads/edit', { title: "Edit Lead", layout: true})
+  }
+
+}
+
 module.exports = {
   getAllLead,
   leadCreate,
   storeLead,
+  leadDetails,
+  leadEdit,
+  leadUpdate
 };

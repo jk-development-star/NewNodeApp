@@ -4,8 +4,6 @@ const connectDB = async (DATABASE_URL) => {
   try {
     const DB_OPTIONS = {
       dbName: process.env.DB_NAME,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       family: 4,
     };
     await mongoose
