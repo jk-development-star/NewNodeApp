@@ -3,6 +3,9 @@
   rel="stylesheet"
   href="/newAssets/plugins/summernote/summernote-bs4.min.css"
 />
+<!-- Select2 -->
+<link rel="stylesheet" href="/newAssets/plugins/select2/css/select2.min.css" />
+
 <link rel="stylesheet" href="/newAssets/css/style.css" />
 <section class="content-header">
   <div class="container-fluid">
@@ -41,217 +44,216 @@
             data-parsley-validate
           >
             <div class="card-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <!-- text input -->
-                  <div class="form-group mandatory">
-                    <label for="name" class="form-label">Customer Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="customer_name"
-                      id="customer_name"
-                      placeholder="Enter Name"
-                      data-parsley-required="true"
-                    />
+              <div>
+                <h5>Customer Information</h5>
+                <div class="row">
+                  <div class="col-md-6">
+                    <!-- text input -->
+                    <div class="form-group mandatory">
+                      <label for="name" class="form-label">Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="customer_name"
+                        id="customer_name"
+                        placeholder="Enter Name"
+                        data-parsley-required="true"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mandatory">
+                      <label for="email" class="form-label"
+                        >Email Address</label
+                      >
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="customer_email"
+                        id="customer_email"
+                        placeholder="Email Email address"
+                        data-parsley-required="true"
+                      />
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group mandatory">
-                    <label for="email" class="form-label"
-                      >Customer Email Address</label
-                    >
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="customer_email"
-                      id="customer_email"
-                      placeholder="Email Email address"
-                      data-parsley-required="true"
-                    />
+                <div class="row">
+                  <div class="col-md-6">
+                    <!-- text input -->
+                    <div class="form-group mandatory">
+                      <label for="contact" class="form-label"
+                        >Contact Number</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="customer_phone"
+                        id="customer_phone"
+                        placeholder="Enter Contact Number"
+                        data-parsley-required="true"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mandatory">
+                      <label for="email" class="form-label">Address</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="customer_address"
+                        id="customer_address"
+                        placeholder="Email address"
+                        data-parsley-required="true"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <!-- text input -->
-                  <div class="form-group mandatory">
-                    <label for="contact" class="form-label"
-                      >Customer Contact Number</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="customer_phone"
-                      id="customer_phone"
-                      placeholder="Enter Contact Number"
-                      data-parsley-required="true"
-                    />
+                <div class="row">
+                  <div class="col-md-3">
+                    <!-- text input -->
+                    <div class="form-group mandatory">
+                      <label for="country" class="form-label">Country</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="customer_country"
+                        id="customer_country"
+                        placeholder="Enter Country"
+                        data-parsley-required="true"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group mandatory">
-                    <label for="email" class="form-label"
-                      >Customer Address</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="customer_address"
-                      id="customer_address"
-                      placeholder="Email address"
-                      data-parsley-required="true"
-                    />
+                  <div class="col-md-3">
+                    <div class="form-group mandatory">
+                      <label for="state" class="form-label">State</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="customer_state"
+                        id="customer_state"
+                        placeholder="Enter State"
+                        data-parsley-required="true"
+                      />
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                  <!-- text input -->
-                  <div class="form-group mandatory">
-                    <label for="country" class="form-label">Country</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="customer_country"
-                      id="customer_country"
-                      placeholder="Enter Country"
-                      data-parsley-required="true"
-                    />
+                  <div class="col-md-3">
+                    <div class="form-group mandatory">
+                      <label for="city" class="form-label">City</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="customer_city"
+                        id="customer_city"
+                        placeholder="Enter City"
+                        data-parsley-required="true"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group mandatory">
-                    <label for="state" class="form-label">State</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="customer_state"
-                      id="customer_state"
-                      placeholder="Enter State"
-                      data-parsley-required="true"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group mandatory">
-                    <label for="city" class="form-label">City</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="customer_city"
-                      id="customer_city"
-                      placeholder="Enter City"
-                      data-parsley-required="true"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group mandatory">
-                    <label for="code" class="form-label">Zip Code</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="customer_zipcode"
-                      id="customer_zipcode"
-                      placeholder="Enter zip code"
-                      data-parsley-required="true"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                  <!-- text input -->
-                  <div class="form-group mandatory">
-                    <label for="contact" class="form-label">Lead Budget</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="lead_budget"
-                      id="lead_budget"
-                      placeholder="EnterBudget"
-                      data-parsley-required="true"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <!-- text input -->
-                  <div class="form-group mandatory">
-                    <label for="area" class="form-label">Covered Area</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="covered_area"
-                      id="covered_area"
-                      placeholder="Enter Area"
-                      data-parsley-required="true"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <!-- text input -->
-                  <div class="form-group mandatory">
-                    <label for="assign" class="form-label"
-                      >Assign Lead To
-                    </label>
-                    <select
-                      class="form-control"
-                      name="assignedTo"
-                      id="assignedTo"
-                    >
-                      <option>Select Assignee</option>
-                      <% if(usersList && usersList !== "undefined") { %> <%
-                      usersList.forEach(function (user) { %>
-                      <option value="<%= user._id %>">
-                        <%= user.full_name %>
-                      </option>
-                      <% }) %> <% } else { %>
-                      <option>No User Found</option>
-                      <% } %>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <!-- text input -->
-                  <div class="form-group mandatory">
-                    <label for="status" class="form-label">Lead Status </label>
-                    <select
-                      class="form-control"
-                      name="lead_status"
-                      id="lead_status"
-                    >
-                      <option>Select Status</option>
-                      <option value="Active">Active</option>
-                      <option value="Follow-Up">Follow Up</option>
-                      <option value="In-Process">In-Process</option>
-                      <option value="Completed">Completed</option>
-                      <option value="Closed">Closed</option>
-                    </select>
+                  <div class="col-md-3">
+                    <div class="form-group mandatory">
+                      <label for="code" class="form-label">Zip Code</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="customer_zipcode"
+                        id="customer_zipcode"
+                        placeholder="Enter zip code"
+                        data-parsley-required="true"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label for="follow" class="form-label"
-                    >Lead Remark(Follow Up)</label
-                  >
-                  <textarea class="summernote" name="lead_remark_followup">
-                  </textarea>
+              <div>
+                <h5>Lead Information</h5>
+                <div class="row">
+                  <div class="col-md-3">
+                    <!-- text input -->
+                    <div class="form-group mandatory">
+                      <label for="contact" class="form-label">Budget</label>
+                      <input
+                        type="text"
+                        class="form-control budget"
+                        name="lead_budget"
+                        id="lead_budget"
+                        placeholder="Enter Budget"
+                        data-parsley-required="true"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <!-- text input -->
+                    <div class="form-group mandatory">
+                      <label for="area" class="form-label">Covered Area</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="covered_area"
+                        id="covered_area"
+                        placeholder="Enter Area"
+                        data-parsley-required="true"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="assign" class="form-label"
+                        >Assign Lead To
+                      </label>
+                      <select
+                        class="select2 assignedTo"
+                        data-placeholder="Select Assignee"
+                        style="width: 100%"
+                        multiple="multiple"
+                        name="assignedTo[]"
+                        id="assignedTo"
+                      >
+                        <% if(usersList && usersList !== "undefined") { %> <%
+                        usersList.forEach(function (user) { %>
+                        <option value="<%= user._id %>">
+                          <%= user.full_name %>
+                        </option>
+                        <% }) %> <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="work_category" class="form-label"
+                        >Work Category</label
+                      >
+                      <select
+                        class="select2 work_category"
+                        multiple="multiple"
+                        data-placeholder="Select Work Type(s)"
+                        style="width: 100%"
+                        name="work_category[]"
+                        id="work_category"
+                      >
+                        <option value="KW">Kitchen Wooden</option>
+                        <option value="RF">Room Furniture</option>
+                        <option value="GW">Gates and Windows</option>
+                        <option value="TC">Table and Chairs</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <label for="description" class="form-label"
-                    >Lead Decription</label
-                  >
-                  <textarea class="summernote" name="description"> </textarea>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="description" class="form-label"
+                      >Description</label
+                    >
+                    <textarea class="summernote" name="description"> </textarea>
+                  </div>
+                  <!-- /.col-->
                 </div>
-                <!-- /.col-->
               </div>
-
               <!-- /.col-->
             </div>
             <div class="card-footer">
-              <button type="submit" class="btn-sm btn-primary">Submit</button>
+              <button type="submit" class="btn btn-sm btn-primary">
+                Submit
+              </button>
               <a class="btn-sm btn-danger float-right" href="/leads"> Back</a>
             </div>
           </form>
@@ -262,13 +264,21 @@
 </section>
 
 <script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/newAssets/js/leads/lead.create.js"></script>
 <script src="/newAssets/parsleyjs/parsley.min.js"></script>
 <script src="/newAssets/js/parsley.js"></script>
 <!-- Summernote -->
 <script src="/newAssets/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- Select2 -->
+<script src="/newAssets/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function () {
     // Summernote
     $(".summernote").summernote();
+  });
+
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
   });
 </script>

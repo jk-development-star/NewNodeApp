@@ -1,8 +1,10 @@
+<link rel="stylesheet" href="/newAssets/css/style.css" />
 <!-- Tempusdominus Bootstrap 4 -->
 <link
   rel="stylesheet"
   href="/newAssets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"
 />
+
 <!-- Bootstrap4 Duallistbox -->
 <link
   rel="stylesheet"
@@ -13,7 +15,6 @@
   rel="stylesheet"
   href="/newAssets/plugins/summernote/summernote-bs4.min.css"
 />
-<link rel="stylesheet" href="/newAssets/css/style.css" />
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -38,6 +39,7 @@
 <div class="alert alert-success" role="alert"><%= messages.success %></div>
 <% } %>
 <!-- Main content -->
+
 <section class="content">
   <div class="container-fluid">
     <div class="row">
@@ -114,26 +116,21 @@
                   </div>
                 </div>
                 <div class="col-md-3">
-                  <div class="form-group mandatory">
-                    <label for="email" class="form-label">Predecessor</label>
+                  <div class="form-group">
+                    <label class="form-label">Predecessor</label>
                     <select
                       class="form-control"
                       name="action_item_predecessor"
                       id="action_item_predecessor"
                     >
-                      <option>Select Predecessor</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group mandatory">
-                    <label for="email" class="form-label">Successor</label>
-                    <select
-                      class="form-control"
-                      name="action_item_successor"
-                      id="action_item_successor"
-                    >
-                      <option>Select Successor</option>
+                      <option value=" ">Select Predecessor</option>
+                      <% if(typeof actionItems !== 'undefined' &&
+                      actionItems.length > 0){ %> <%
+                      actionItems.forEach(function(item){ %>
+                      <option value="<%= item._id %>">
+                        <%= item.action_item_name %>
+                      </option>
+                      <%})%> <%}%>
                     </select>
                   </div>
                 </div>
@@ -143,7 +140,7 @@
                       >Completion Day(s)</label
                     >
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       name="action_item_completion_days"
                       id="action_item_completion_days"
@@ -152,8 +149,6 @@
                     />
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-md-3">
                   <!-- text input -->
                   <div class="form-group mandatory">
@@ -168,6 +163,8 @@
                     />
                   </div>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-md-3">
                   <div class="form-group mandatory">
                     <label for="date" class="form-label">End Date</label>
@@ -245,9 +242,11 @@
 </section>
 
 <script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 <script src="/newAssets/plugins/moment/moment.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="/newAssets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
 <!-- Bootstrap4 Duallistbox -->
 <script src="/newAssets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <script src="/newAssets/parsleyjs/parsley.min.js"></script>

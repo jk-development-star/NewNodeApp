@@ -111,10 +111,36 @@ const updateTasks = async (req, res) => {
     });
   }
 };
+
+const deleteTask = async (req, res) => {
+  try {
+    //Deleting the User
+    const { id } = req.params;
+    await tasksDriver.deleteTask(id).then((task) => {
+      if (!task) {
+        return res.status(404).json({
+          status: 404,
+          message: "Task can not be find",
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        message: "Task has been deleted successfully!",
+      });
+    });
+  } catch (error) {
+    //Logging the error
+    return res.status(500).json({
+      status: 500,
+      message: error,
+    });
+  }
+};
 module.exports = {
   createTask,
   storeTasks,
   tasksList,
   editTask,
   updateTasks,
+  deleteTask,
 };

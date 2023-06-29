@@ -38,7 +38,7 @@
     top: 57px;
     min-height: 100vh;
     background-color: #343a40;
-    width: 40em;
+    width: 50em;
     box-shadow: -6px 0 10px #00000096;
     right: -50em;
     transition: 0.5s;
@@ -126,17 +126,14 @@
                     <span class="badge badge-primary"
                       ><%= actionItem.action_item_status %></span
                     >
-
                     <% break; case 'In-Process' :%>
                     <span class="badge badge-info"
                       ><%= actionItem.action_item_status %></span
                     >
-
                     <% break; case 'Completed' :%>
                     <span class="badge badge-success"
                       ><%= actionItem.action_item_status %></span
                     >
-
                     <% break; case 'Closed' :%>
                     <span class="badge badge-danger"
                       ><%= actionItem.action_item_status %></span
@@ -153,15 +150,16 @@
                     %>
                   </td>
                   <td><%= actionItem.action_item_predecessor %></td>
+
                   <td><%= actionItem.action_item_created_by.full_name %></td>
                   <td>
                     <a
-                      class="btn-sm btn-primary view panel-trigger"
+                      class="btn-sm btn-info view panel-trigger"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="Edit Task"
                       data-id="<%= actionItem._id %>"
-                      ><i class="fa fa-edit"></i
+                      ><i class="fa fa-eye"></i
                     ></a>
                     <a
                       href="/actionItem/edit/<%= actionItem._id %>"
@@ -172,9 +170,8 @@
                       ><i class="fa fa-edit"></i
                     ></a>
                     <a
-                      href="#"
-                      value="actionItem/delete/<%= actionItem._id %>"
                       class="btn-sm btn-danger delete"
+                      value="<%= actionItem._id %>"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="Delete User"
@@ -221,8 +218,9 @@
           <table class="table table-sm">
             <thead>
               <tr>
-                <th style="width: 10px">#</th>
+                <th style="width: 10px">Sr.No.</th>
                 <th>Task</th>
+                <th>Type</th>
                 <th>Progress</th>
                 <th style="width: 40px">Label</th>
               </tr>
@@ -232,45 +230,45 @@
         </div>
       </div>
     </div>
-
-    <script src="/newAssets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/newAssets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/newAssets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/newAssets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="/newAssets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="/newAssets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="/newAssets/plugins/jszip/jszip.min.js"></script>
-    <script src="/newAssets/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="/newAssets/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="/newAssets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="/newAssets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="/newAssets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="/newAssets/dist/js/adminlte.min.js"></script>
-    <script src="/newAssets/js/actionItems/actionItem.js"></script>
-    <script>
-      $(function () {
-        $("#example1")
-          .DataTable({
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#example1_wrapper .col-md-6:eq(0)");
-        $("#example2").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: false,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-      });
-      /* right-panel js */
-    </script>
   </div>
 </div>
+
+<script src="/newAssets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/newAssets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/newAssets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/newAssets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/newAssets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/newAssets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/newAssets/plugins/jszip/jszip.min.js"></script>
+<script src="/newAssets/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/newAssets/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/newAssets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/newAssets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/newAssets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/newAssets/dist/js/adminlte.min.js"></script>
+<script src="/newAssets/js/actionItems/actionItem.js"></script>
+<script>
+  $(function () {
+    $("#example1")
+      .DataTable({
+        responsive: true,
+        lengthChange: false,
+        autoWidth: false,
+        // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+      })
+      .buttons()
+      .container()
+      .appendTo("#example1_wrapper .col-md-6:eq(0)");
+    $("#example2").DataTable({
+      paging: true,
+      lengthChange: false,
+      searching: false,
+      ordering: true,
+      info: true,
+      autoWidth: false,
+      responsive: true,
+    });
+  });
+  /* right-panel js */
+</script>

@@ -10,6 +10,12 @@
   rel="stylesheet"
   href="/newAssets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css"
 />
+<!-- Select2 -->
+<link rel="stylesheet" href="/newAssets/plugins/select2/css/select2.min.css" />
+<link
+  rel="stylesheet"
+  href="/newAssets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"
+/>
 <style>
   .btn {
     background-color: DodgerBlue;
@@ -69,7 +75,6 @@
     box-shadow: -6px 0 10px #00000096;
     right: -50em;
     transition: 0.5s;
-    z-index: 9999;
   }
   .right-panel.open {
     right: 0;
@@ -77,6 +82,9 @@
   .close-panel {
     cursor: pointer;
     font-size: 1.4rem;
+  }
+  .select_action {
+    margin-top: 100px;
   }
 </style>
 <section class="content-header">
@@ -135,21 +143,56 @@
           </div>
           <!-- /.card-body -->
         </div>
+
         <!-- /.card -->
       </div>
+
       <!-- /.col -->
     </div>
     <!-- /.row -->
   </div>
   <!-- /.container-fluid -->
 </section>
-<button class="btn btn-primary panel-trigger">Add</button>
 <div class="right-panel">
   <div class="panel-head p-2 pr-4 text-right">
     <i class="fa fa-times close-panel"></i>
   </div>
-  <div class="panel-body"></div>
+  <div class="panel-body">
+    <div class="card-body">
+      <h2>Add Action Item and Task Details</h2>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Action Item(s)</label>
+            <select
+              class="select2 action_item_selectd_id"
+              multiple="multiple"
+              data-placeholder="Select Action Item(s)"
+              style="width: 100%"
+              name="action_item_id[]"
+              id="action_item_id"
+              onchange="selectedValue()"
+            >
+              <% if(typeof leads["action_items"] !== 'undefined' &&
+              leads["action_items"].length > 0) {%> <%
+              leads["action_items"].forEach(function(item){ %>
+              <option value="<%= item._id %>">
+                <%= item.action_item_name %>
+              </option>
+              <% }) %> <%} else{%>
+              <option>No Action Item Found</option>
+              <%}%>
+            </select>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+  </div>
 </div>
+
 <script src="/newAssets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/newAssets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="/newAssets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -169,14 +212,16 @@
   const leadsData = <%- JSON.stringify(leads) %>;
 </script>
 <script src="/newAssets/js/leads/lead.index.js"></script>
+<!-- Select2 -->
+<script src="/newAssets/plugins/select2/js/select2.full.min.js"></script>
 <script>
-  /* right-panel js */
-  $(document).ready(function () {
-    $(".panel-trigger").click(function () {
-      $(".right-panel").addClass("open");
-    });
-    $(".close-panel").click(function () {
-      $(".right-panel").removeClass("open");
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+
+    //Initialize Select2 Elements
+    $(".select2bs4").select2({
+      theme: "bootstrap4",
     });
   });
 </script>
