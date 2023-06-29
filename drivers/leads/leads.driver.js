@@ -4,7 +4,7 @@ const leadSchema = require("../../models/leads/leads.model");
 
 exports.leadCreate = async (data) => {
   const newLead = await leadSchema.create(data);
-  const { generatedBy, lead_id, __v, ...result } = newLead._doc;
+  const { generatedBy, lead_id, lead_status, __v, ...result } = newLead._doc;
   return result;
 };
 
@@ -60,9 +60,7 @@ exports.getCompletedLead = async () => {
   return CompletedLead;
 };
 exports.getClosedLead = async () => {
-  const closedLead = await leadSchema
-    .find({ lead_status: "Closed" })
-    .count();
+  const closedLead = await leadSchema.find({ lead_status: "Closed" }).count();
   return closedLead;
 };
 
@@ -81,12 +79,14 @@ exports.getLatestLeads = async () => {
   return latestLeads;
 };
 
-exports.updateLead = async(id, data) => {
- const lead = await leadSchema.findByIdAndUpdate( id,
-  {
-    $set: data,
-  },
-  { new: true });
-   const { lead_id, generatedBy , __v, ...result } = lead._doc;
+exports.updateLead = async (id, data) => {
+  const lead = await leadSchema.findByIdAndUpdate(
+    id,
+    {
+      $set: data,
+    },
+    { new: true }
+  );
+  const { lead_id, generatedBy, __v, ...result } = lead._doc;
   return result;
-}
+};
