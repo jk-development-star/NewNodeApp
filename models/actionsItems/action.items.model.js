@@ -20,14 +20,6 @@ const actionItemSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    action_item_predecessor: {
-      type: String,
-      required: false,
-    },
-    action_item_successor: {
-      type: String,
-      required: false,
-    },
     action_item_completion_days: {
       type: String,
       required: true,

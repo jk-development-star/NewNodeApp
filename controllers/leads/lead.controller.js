@@ -5,6 +5,7 @@ const { leadMessage } = require("../../constants");
 const { validateLead } = require("../../validations/leads/lead.validation");
 const userDriver = require("../../drivers/users/user.driver");
 const currencyFormat = require("../../helpers/common");
+const actionItemsDriver = require("../../drivers/actionItems/actionItems.driver");
 
 /**
  *
@@ -20,7 +21,6 @@ const leadCreate = async (req, res) => {
   });
 };
 
-
 /**
  *
  * @param {*} req
@@ -29,6 +29,7 @@ const leadCreate = async (req, res) => {
 const getAllLead = async (req, res) => {
   try {
     let status = req.params.status ? req.params.status : "";
+    const actionItems = await actionItemsDriver.getActionItems();
     await leadDriver
       .getAllLeads(status)
       .then((leads) => {
@@ -39,6 +40,7 @@ const getAllLead = async (req, res) => {
             layout: true,
           });
         } else {
+          leads["action_items"] = actionItems;
           return res.render("newViews/leads/index", {
             leads,
             currencyFormat: currencyFormat,
@@ -55,7 +57,7 @@ const getAllLead = async (req, res) => {
         });
       });
   } catch (error) {
-    req.flash("error", leadMessage.MESSAGE_INTERNAL_SERVER_ERROR);
+    req.flash("error", error.message);
     return res.render("newViews/leads/index", {
       title: "Lead List",
       layout: true,
@@ -96,7 +98,7 @@ const leadDetails = async (req, res) => {
         });
       });
   } catch (error) {
-    req.flash("error", leadMessage.MESSAGE_INTERNAL_SERVER_ERROR);
+    req.flash("error", error.message);
     return res.render("newViews/leads/index", {
       title: "Lead List",
       layout: true,
@@ -111,8 +113,7 @@ const leadDetails = async (req, res) => {
  */
 const storeLead = async (req, res) => {
   //to check the validations
-  var { error, value } = validateLead(req.body);
-
+  const { error, value } = validateLead(req.body);
   if (error) {
     req.flash("error", error.details[0].message);
     return res.render("newViews/leads/create", {
@@ -120,10 +121,10 @@ const storeLead = async (req, res) => {
       layout: true,
     });
   }
+  const { generatedBy, lead_id, lead_status, ...data } = value;
+  data["generatedBy"] = req.userId;
+  data["lead_id"] = Date.now();
   try {
-    var { generatedBy, lead_id, ...data } = value;
-    data["generatedBy"] = req.userId;
-    data["lead_id"] = Date.now();
     await leadDriver
       .leadCreate(data)
       .then((lead) => {
@@ -131,66 +132,82 @@ const storeLead = async (req, res) => {
         return res.redirect(301, "/leads");
       })
       .catch((error) => {
-        req.flash("error", error);
+        req.flash("error", error.message);
         return res.render("newViews/leads/create", {
           title: "Add New Lead",
-          layout: "layout",
+          layout: true,
         });
       });
   } catch (error) {
-    req.flash("error", leadMessage.MESSAGE_INTERNAL_SERVER_ERROR);
+    req.flash("error", error.message);
     return res.render("newViews/leads/create", {
       title: "Add New Lead",
-      layout: "layout",
+      layout: true,
     });
   }
 };
 
 const leadEdit = async (req, res) => {
-  try{
+  try {
     const usersList = await userDriver.getAllUsersForAssignLeads();
-    await leadDriver.getLead(req.params.id).then(lead => {
-      if(lead) return res.render('newViews/leads/edit', {lead, usersList, title: "Edit Lead", layout: true})
-    }).catch(error => {
-      req.flash('error', error)
-      res.render("newViews/leads/edit", {
-        layout: true,
-        title: "Edit Lead",
+    await leadDriver
+      .getLead(req.params.id)
+      .then((lead) => {
+        if (lead)
+          return res.render("newViews/leads/edit", {
+            lead,
+            usersList,
+            title: "Edit Lead",
+            layout: true,
+          });
+      })
+      .catch((error) => {
+        req.flash("error", error.message);
+        res.render("newViews/leads/edit", {
+          layout: true,
+          title: "Edit Lead",
+        });
       });
-    })
-  }catch(error){
-    req.flash('error', error)
+  } catch (error) {
+    req.flash("error", error.message);
     res.render("newViews/leads/edit", {
       layout: true,
       title: "Edit Lead",
     });
   }
- 
 };
 
-const leadUpdate = async(req, res) => {
-  try{
-    await leadDriver.updateLead(req.params.id, req.body).then(lead => {
-      if (!lead) {
-        req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
-        return res.render("newViews/leads/edit", {
+const leadUpdate = async (req, res) => {
+  try {
+    await leadDriver
+      .updateLead(req.params.id, req.body)
+      .then((lead) => {
+        if (!lead) {
+          req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
+          return res.render("newViews/leads/edit", {
+            title: "Edit Lead",
+            layout: true,
+          });
+        } else {
+          req.flash("success", leadMessage.MESSAGE_SUCCESS_UPDATE_LEAD);
+          return res.redirect(301, "/leads");
+        }
+      })
+      .catch((error) => {
+        req.flash("error", error.message);
+        return res.render("newView/leads/edit", {
           title: "Edit Lead",
           layout: true,
         });
-      } else {
-        req.flash("success", leadMessage.MESSAGE_SUCCESS_UPDATE_LEAD);
-        return res.redirect(301, "/leads");
-      }
-    }).catch(error => {
-      req.flash('error', error)
-      return res.render('newView/leads/edit', { title: "Edit Lead", layout: true})
-    })
-  }catch(error){
-    req.flash('error', error)
-    return res.render('newView/leads/edit', { title: "Edit Lead", layout: true})
+      });
+  } catch (error) {
+    req.flash("error", error.message);
+    return res.render("newView/leads/edit", {
+      title: "Edit Lead",
+      layout: true,
+    });
   }
-
-}
+};
 
 module.exports = {
   getAllLead,
@@ -198,5 +215,5 @@ module.exports = {
   storeLead,
   leadDetails,
   leadEdit,
-  leadUpdate
+  leadUpdate,
 };

@@ -11,10 +11,12 @@ const leadSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "Users",
     },
-    assignedTo: {
-      type: Schema.Types.ObjectId,
-      ref: "Users",
-    },
+    assignedTo: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
     description: {
       type: String,
       required: true,
@@ -56,17 +58,29 @@ const leadSchema = new mongoose.Schema(
       type: String,
     },
     lead_budget: {
-      required: true,
+      required: false,
       type: String,
     },
     lead_remark_followup: {
-      required: true,
+      required: false,
       type: String,
     },
-   
+    work_category: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     lead_status: {
       type: String,
-      enum: ["Active", "Follow-Up", "In-Process", "Completed", "Closed"],
+      enum: [
+        "Active",
+        "Completed",
+        "In-Progress",
+        "Completed",
+        "Quality-Inspection",
+        "Closed",
+      ],
       default: "Active",
     },
   },

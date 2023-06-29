@@ -15,6 +15,7 @@
       rel="stylesheet"
       href="/newAssets/plugins/fontawesome-free/css/all.min.css"
     />
+    <%- style %>
     <!-- overlayScrollbars -->
     <link
       rel="stylesheet"
@@ -22,7 +23,6 @@
     />
     <!-- Theme style -->
     <link rel="stylesheet" href="/newAssets/dist/css/adminlte.min.css" />
-    <%- style %>
   </head>
   <body
     class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"
@@ -30,12 +30,14 @@
     <div class="wrapper">
       <!-- Preloader -->
       <%- include('partials/newPartials/preloader') %>
+
       <!-- Navbar -->
       <%- include('partials/newPartials/navbar') %>
       <!-- /.navbar -->
 
       <!-- Main Sidebar Container -->
       <%- include('partials/newPartials/sidebar') %>
+
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -44,55 +46,29 @@
       </div>
       <!-- /.content-wrapper -->
 
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+      <!-- /.control-sidebar -->
+
       <!-- Main Footer -->
       <%- include('partials/newPartials/footer') %>
     </div>
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
     <script src="/newAssets/plugins/jquery/jquery.min.js"></script>
-    <script src="/newAssets/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap -->
     <script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="/newAssets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/newAssets/dist/js/adminlte.js"></script>
+    <script src="/newAssets/dist/js/demo.js"></script>
     <%- script %>
     <!-- PAGE PLUGINS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <script src="/newAssets/dist/js/demo.js"></script>
-
-    <script>
-      let url = window.location;
-      // for sidebar menu entirely but not cover treeview
-      $("ul.nav-sidebar a")
-        .filter(function () {
-          return this.href == url;
-        })
-        .addClass("active");
-
-      // for treeview
-      $("ul.nav-treeview a")
-        .filter(function () {
-          return this.href == url;
-        })
-        .parentsUntil(".nav-sidebar > .nav-treeview")
-        .addClass("menu-open")
-        .prev("a")
-        .addClass("active");
-
-      $("[data-open-details]").click(function (e) {
-        e.preventDefault();
-        $(this).next().toggleClass("is-active");
-        $(this).toggleClass("is-active");
-      });
-    </script>
   </body>
 </html>
