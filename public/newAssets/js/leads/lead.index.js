@@ -70,11 +70,8 @@ function format(d) {
   );
 }
 
-$(document).ready(function () {});
-
 $(document).ready(function () {
   const data = leadsData;
-  console.log(data);
   const table = $("#example1").DataTable({
     responsive: true,
     lengthChange: false,
@@ -90,13 +87,6 @@ $(document).ready(function () {
       { data: "covered_area" },
       {
         data: "lead_budget",
-        render: function (data, type, row) {
-          return Number(data).toLocaleString("en-IN", {
-            maximumFractionDigits: 2,
-            style: "currency",
-            currency: "INR",
-          });
-        },
       },
 
       {
@@ -140,6 +130,12 @@ $(document).ready(function () {
           return new Date(data).toDateString();
         },
       },
+      {
+        data: "updatedAt",
+        render: function (data) {
+          return new Date(data).toDateString();
+        },
+      },
     ],
   });
 
@@ -171,7 +167,7 @@ $(document).ready(function () {
   });
 });
 
-function selectedValue() {
+function selectedValues() {
   let values = [];
   const ids = document.getElementById("action_item_id").selectedOptions;
   [...ids].map((options) => values.push(options.value));
