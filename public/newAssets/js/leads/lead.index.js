@@ -1,73 +1,72 @@
 function format(d) {
   // `d` is the original data object for the row
-  return (
-    '<table class="table table-bordered table-hover">' +
-    "<tr>" +
-    "<td>Customer Name</td>" +
-    "<td>" +
-    d.customer_name +
-    "</td>" +
-    "</tr>" +
-    "<tr>" +
-    "<td>Customer Email</td>" +
-    "<td>" +
-    d.customer_email +
-    "</td>" +
-    "</tr>" +
-    "<tr>" +
-    "<td>Customer Contact Number</td>" +
-    "<td>" +
-    d.customer_phone +
-    "</td>" +
-    "</tr>" +
-    "<tr>" +
-    "<td>Customer Address</td>" +
-    "<td>" +
-    d.customer_address +
-    ", " +
-    d.customer_city +
-    ", " +
-    d.customer_state +
-    ", " +
-    d.customer_zipcode +
-    "</td>" +
-    "</tr>" +
-    "<tr>" +
-    "<td>Customer Country</td>" +
-    "<td>" +
-    d.customer_country +
-    "</td>" +
-    "</tr>" +
-    "<tr>" +
-    "<td>Lead Follow Up</td>" +
-    "<td>" +
-    d.lead_remark_followup +
-    "</td>" +
-    "</tr>" +
-    "<tr>" +
-    "<td>Lead Description</td>" +
-    "<td>" +
-    d.description +
-    "</td>" +
-    "</tr>" +
-    "<tr>" +
-    "<td>Actions</td>" +
-    "<td>" +
-    '<a href="/edit/lead/' +
-    d._id +
-    '" class="btn-sm btn-primary"  data-toggle="tooltip" data-placement="bottom" title="Edit lead"><i class="fa fa-edit"></i></a>' +
-    '<a href="/delete/lead/' +
-    d._id +
-    '" class="btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="View lead"><i class="fa fa-trash"></i></a>' +
-    '<a href="#" class="btn-sm btn-warning add_action_tasks" data-id="' +
-    d._id +
-    '"  data-toggle="tooltip" data-placement="bottom" title="Add Action Items and Tasks"><i class="fa fa-plus"></i></a>' +
-    '<a href="/track/lead/' +
-    d._id +
-    '" class="btn-sm btn-success"  data-toggle="tooltip" data-placement="bottom" title="Track Lead" style="color: white">Track Lead <i class="fa fa-arrow-alt-circle-right"></i></a></td>' +
-    "</tr>" +
-    "</table>"
-  );
+  return `
+    <table class="table table-bordered table-hover">
+    <tr>
+    <td>Customer Name</td>
+    <td>
+    ${d.customer_name}
+    </td>
+    </tr>
+    <tr>
+    <td>Customer Email</td>
+    <td>
+    ${d.customer_email}
+    </td>
+    </tr>
+    <tr>
+    <td>Customer Contact Number</td>
+    <td>
+    ${d.customer_phone}
+    </td>
+    </tr>
+    <tr>
+    <td>Customer Address</td>
+    <td>
+    ${d.customer_address}, 
+    ${d.customer_city}
+    , 
+    ${d.customer_state}
+    , 
+    ${d.customer_zipcode}
+    </td>
+    </tr>
+    <tr>
+    <td>Customer Country</td>
+    <td>
+    ${d.customer_country}
+    </td>
+    </tr>
+    <tr>
+    <td>Lead Follow Up</td>
+    <td>
+    ${d.lead_remark_followup}
+    </td>
+    </tr>
+    <tr>
+    <td>Lead Description</td>
+    <td>
+    ${d.description}
+    </td>
+    </tr>
+    <tr>
+    <td>Actions</td>
+    <td>
+    <a href="/edit/lead/${
+      d._id
+    }" class="btn-sm btn-primary"  data-toggle="tooltip" data-placement="bottom" title="Edit lead"><i class="fa fa-edit"></i> Edit Lead</a>
+    <a href="/estimate/lead/${d._id}" class="btn-sm btn-warning" ${
+    d.lead_status === "Follow-Up"
+      ? ""
+      : "style='opacity: .4;cursor: default !important; pointer-events: none;'"
+  } data-toggle="tooltip" data-placement="bottom" title="Prepare Estimate"><i class="fa fa-mail-forward"></i> Prepare Intial Estimate</a>
+    <a href="/track/lead/${
+      d._id
+    }" class="btn-sm btn-success"  data-toggle="tooltip" data-placement="bottom" title="Track Lead" style="color: white"><i class="fa fa-arrow-alt-circle-right"></i> Track Lead </a>
+    <a href="/delete/lead/${
+      d._id
+    }" class="btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Delete lead"><i class="fa fa-trash"></i> Delete Lead </a>
+    </td></tr></table>`;
 }
 
 $(document).ready(function () {
@@ -153,17 +152,17 @@ $(document).ready(function () {
       row.child(format(row.data())).show();
       tr.addClass("shown");
     }
-    document.querySelectorAll(".add_action_tasks").forEach((event) => {
-      event.addEventListener("click", function () {
-        document.querySelector(".right-panel").classList.add("open");
-        const id = event.getAttribute("data-id");
-      });
-    });
-    document
-      .querySelector(".close-panel")
-      .addEventListener("click", function () {
-        document.querySelector(".right-panel").classList.remove("open");
-      });
+    // document.querySelectorAll(".add_action_tasks").forEach((event) => {
+    //   event.addEventListener("click", function () {
+    //     document.querySelector(".right-panel").classList.add("open");
+    //     const id = event.getAttribute("data-id");
+    //   });
+    // });
+    // document
+    //   .querySelector(".close-panel")
+    //   .addEventListener("click", function () {
+    //     document.querySelector(".right-panel").classList.remove("open");
+    //   });
   });
 });
 

@@ -1,0 +1,274 @@
+<!-- summernote -->
+<link
+  rel="stylesheet"
+  href="/newAssets/plugins/summernote/summernote-bs4.min.css"
+/>
+<!-- Select2 -->
+<link rel="stylesheet" href="/newAssets/plugins/select2/css/select2.min.css" />
+
+<link rel="stylesheet" href="/newAssets/css/style.css" />
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Estimate</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item">
+            <a href="/dashboard">Home</a>
+          </li>
+          <li class="breadcrumb-item active">Estimate</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<% if(messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if(messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <form
+            class="form"
+            action="/estimate/lead/<%= lead._id %>"
+            method="POST"
+            data-parsley-validate
+          >
+            <div class="card-body">
+              <div>
+                <h5>Estimate Information</h5>
+                <div class="row">
+                  <div class="col-md-6">
+                    <!-- text input -->
+                    <div class="form-group mandatory">
+                      <label for="action_item" class="form-label"
+                        >Action Item</label
+                      >
+                      <select
+                        name="action_item[]"
+                        class="select2"
+                        style="width: 100%"
+                        id="action_items"
+                        multiple="multiple"
+                      >
+                        <% if(typeof actionItems !== 'undefined' &&
+                        actionItems.length > 0) {%> <%
+                        actionItems.forEach(function(item){ %>
+                        <option
+                          value="<%= item._id %>"
+                          data-name="<%= item.action_item_name %> "
+                        >
+                          <%= item.action_item_name %>
+                        </option>
+                        <% }) %> <%}%>
+                      </select>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mandatory">
+                          <label for="email" class="form-label"
+                            >Estimate Completion In Day(s)</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="completion_days"
+                            id="completion_days"
+                            placeholder="Enter Days"
+                            data-parsley-required="true"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mandatory">
+                          <label for="cost" class="form-label"
+                            >Estimate Cost</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="estimate_cost"
+                            id="estimate_cost"
+                            placeholder="Enter Cost"
+                            data-parsley-required="true"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mandatory">
+                          <label for="email" class="form-label"
+                            >Area(Sqft)</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="area"
+                            id="area"
+                            value="<%= lead.covered_area %>"
+                            readonly
+                            data-parsley-required="true"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mandatory">
+                          <label for="text" class="form-label"
+                            >Work Category</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="work_category"
+                            id="work_category"
+                            readonly
+                            value="<%= lead.work_category %>"
+                            data-parsley-required="true"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mandatory">
+                          <label for="email" class="form-label"
+                            >Lead ID(Auto-generated)</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="lead_id"
+                            id="lead_id"
+                            value="<%= lead.lead_id %>"
+                            readonly
+                            data-parsley-required="true"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mandatory">
+                          <label for="email" class="form-label"
+                            >Owner Name</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="owner_name"
+                            id="owner_name"
+                            value="<%= lead.customer_name %>"
+                            readonly
+                            data-parsley-required="true"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mandatory">
+                          <label for="email" class="form-label">Email</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="email"
+                            id="email"
+                            value="<%= lead.customer_email %>"
+                            readonly
+                            data-parsley-required="true"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mandatory">
+                          <label for="contact" class="form-label"
+                            >Contact Number</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="contact_number"
+                            id="contact_number"
+                            value="<%= lead.customer_phone %>"
+                            readonly
+                            data-parsley-required="true"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group mandatory">
+                      <label for="action_item" class="form-label"
+                        >Address</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="address"
+                        id="address"
+                        value="<%= lead.customer_address%>, <%= lead.customer_city%>, <%= lead.customer_state%>,  <%= lead.customer_zipcode%>, <%= lead.customer_country%>"
+                        readonly
+                        data-parsley-required="true"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    type="hidden"
+                    name="actionItemValue"
+                    id="actionItemValue"
+                    value
+                  ></div>
+                  <div class="col-md-6">
+                    <div class="form-group mandatory">
+                      <label for="contact" class="form-label"
+                        >Action Item with Tasks</label
+                      >
+                      <div id="tasks" class="task-section row g-3"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.col-->
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-sm btn-primary submitButton">
+                Generate PDF
+              </button>
+              <a class="btn-sm btn-danger float-right" href="/leads"> Back</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/newAssets/js/estimate/estimate.js"></script>
+<script src="/newAssets/parsleyjs/parsley.min.js"></script>
+<script src="/newAssets/js/parsley.js"></script>
+<!-- Summernote -->
+<script src="/newAssets/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- Select2 -->
+<script src="/newAssets/plugins/select2/js/select2.full.min.js"></script>
+<script>
+  $(function () {
+    // Summernote
+    $(".summernote").summernote();
+  });
+
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2({
+      placeholder: "Select Action Item(s)",
+    });
+  });
+</script>
