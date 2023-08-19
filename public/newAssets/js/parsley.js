@@ -1,7 +1,7 @@
 $.extend(window.Parsley.options, {
   focus: "first",
   excluded:
-    "input[type=button], input[type=submit], input[type=reset], .search, .ignore",
+    "input[type=button], input[type=submit], input[type=reset], .search, .ignore, .select",
   triggerAfterFailure: "change blur",
   errorsContainer: function (element) {},
   trigger: "change",

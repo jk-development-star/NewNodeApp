@@ -209,6 +209,15 @@ const leadUpdate = async (req, res) => {
   }
 };
 
+const estimateForm = async (req, res) => {
+  let lead = await leadDriver.getLead(req.params.id);
+  res.render("newViews/estimatelead/estimateForm", {
+    lead,
+    layout: true,
+    title: "Initial Estimate",
+  });
+};
+
 module.exports = {
   getAllLead,
   leadCreate,
@@ -216,4 +225,5 @@ module.exports = {
   leadDetails,
   leadEdit,
   leadUpdate,
+  estimateForm,
 };

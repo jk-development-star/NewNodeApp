@@ -70,6 +70,7 @@ app.use(require("./routes/calendar.routes"));
 app.use(require("./routes/tasks.routes"));
 app.use(require("./routes/actionitems.routes"));
 app.use(require("./routes/actionItemsTasks.routes"));
+app.use(require("./routes/estimate.routes"));
 
 // connect database
 connectDB(DATABASE_URL);
