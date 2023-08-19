@@ -166,30 +166,30 @@ $(document).ready(function () {
   });
 });
 
-// function selectedValues() {
-//   let values = [];
-//   const ids = document.getElementById("action_item_id").selectedOptions;
-//   [...ids].map((options) => values.push(options.value));
-//   let taskList = [];
-//   values.forEach(function (id) {
-//     let url = "http://localhost:8081/tasks/list/" + id;
-//     fetch(url)
-//       .then(function (response) {
-//         if (response.status === 200) {
-//           return response.json();
-//         } else {
-//           throw new Error("Error: " + response.status);
-//         }
-//       })
-//       .then(function (data) {
-//         // Process the response data here
-//         const details = data.task.tasks_id;
-//         taskList = [...taskList, ...details];
-//         return taskList;
-//       })
-//       .catch(function (error) {
-//         // Handle any errors that occurred during the request
-//         console.log(error);
-//       });
-//   });
-// }
+function selectedValues() {
+  let values = [];
+  const ids = document.getElementById("action_item_id").selectedOptions;
+  [...ids].map((options) => values.push(options.value));
+  let taskList = [];
+  values.forEach(function (id) {
+    let url = "http://localhost:8081/tasks/list/" + id;
+    fetch(url)
+      .then(function (response) {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error("Error: " + response.status);
+        }
+      })
+      .then(function (data) {
+        // Process the response data here
+        const details = data.task.tasks_id;
+        taskList = [...taskList, ...details];
+        return taskList;
+      })
+      .catch(function (error) {
+        // Handle any errors that occurred during the request
+        console.log(error);
+      });
+  });
+}
