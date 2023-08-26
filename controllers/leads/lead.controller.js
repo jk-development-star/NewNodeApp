@@ -211,8 +211,10 @@ const leadUpdate = async (req, res) => {
 
 const estimateForm = async (req, res) => {
   let lead = await leadDriver.getLead(req.params.id);
+  const actionItems = await actionItemsDriver.getAllActionItems();
   res.render("newViews/estimatelead/estimateForm", {
     lead,
+    actionItems,
     layout: true,
     title: "Initial Estimate",
   });

@@ -55,7 +55,7 @@
                         >Action Item</label
                       >
                       <select
-                        name="action_item[]"
+                        name="action_items[]"
                         class="select2"
                         style="width: 100%"
                         id="action_items"
@@ -127,15 +127,19 @@
                           <label for="text" class="form-label"
                             >Work Category</label
                           >
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="work_category"
+                          <select
+                            class="select2 work_category"
+                            multiple="multiple"
+                            data-placeholder="Select Work Type(s)"
+                            style="width: 100%"
+                            name="work_category[]"
                             id="work_category"
-                            readonly
-                            value="<%= lead.work_category %>"
-                            data-parsley-required="true"
-                          />
+                          >
+                            <option value="KW">Kitchen Wooden</option>
+                            <option value="RF">Room Furniture</option>
+                            <option value="GW">Gates and Windows</option>
+                            <option value="TC">Table and Chairs</option>
+                          </select>
                         </div>
                       </div>
                     </div>

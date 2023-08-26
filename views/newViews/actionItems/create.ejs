@@ -15,6 +15,8 @@
   rel="stylesheet"
   href="/newAssets/plugins/summernote/summernote-bs4.min.css"
 />
+<!-- Select2 -->
+<link rel="stylesheet" href="/newAssets/plugins/select2/css/select2.min.css" />
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -59,11 +61,11 @@
                   <div class="form-group mandatory">
                     <label for="status" class="form-label">Type</label>
                     <select
-                      class="form-control"
+                      class="select2 form-control"
                       name="action_item_type"
                       id="action_item_type"
                     >
-                      <option>Select Type</option>
+                      <option></option>
                       <option value="Follow-Up">Follow Up</option>
                       <option value="In-Process">In-Process</option>
                       <option value="Completed">Completed</option>
@@ -119,11 +121,11 @@
                   <div class="form-group">
                     <label class="form-label">Predecessor</label>
                     <select
-                      class="form-control"
+                      class="select2 form-control"
                       name="action_item_predecessor"
                       id="action_item_predecessor"
                     >
-                      <option value=" ">Select Predecessor</option>
+                      <option></option>
                       <% if(typeof actionItems !== 'undefined' &&
                       actionItems.length > 0){ %> <%
                       actionItems.forEach(function(item){ %>
@@ -254,6 +256,8 @@
 
 <!-- Summernote -->
 <script src="/newAssets/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- Select2 -->
+<script src="/newAssets/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function () {
     // Summernote
@@ -263,6 +267,15 @@
   $(function () {
     $("#datetimepicker1, #datetimepicker2").datetimepicker({
       format: "L",
+    });
+  });
+
+  $(function () {
+    $("#action_item_type").select2({
+      placeholder: "Select a Type",
+    });
+    $("#action_item_predecessor").select2({
+      placeholder: "Select a Predecessor",
     });
   });
 
