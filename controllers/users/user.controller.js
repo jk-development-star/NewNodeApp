@@ -44,8 +44,9 @@ const storeUser = async (req, res) => {
   }
   //convert password in to hashed
   const hasPass = await bcryptPassword.encrypt(value.password);
-  var { password, ...data } = value;
+  var { password, profile_image, ...data } = value;
   data["password"] = hasPass;
+  data["profile_image"] = req.file.filename;
   //create new user
   await userDriver
     .createUser(data)
