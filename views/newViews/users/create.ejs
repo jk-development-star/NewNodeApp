@@ -33,6 +33,7 @@
             class="form"
             action="/store"
             method="POST"
+            enctype="multipart/form-data"
             data-parsley-validate
           >
             <div class="card-body">
@@ -128,15 +129,30 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- text input -->
+                  <div class="form-group mandatory">
+                    <label for="image" class="form-label">Profile Image</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      name="profile_image"
+                      id="profile_image"
+                      data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- /.card-body -->
 
             <div class="card-footer">
-              <button type="submit" class="btn-sm btn-primary float-right">
+              <button type="submit" class="btn btn-sm btn-primary float-right">
                 Submit
               </button>
               <a
-                class="btn-sm btn-danger float-right"
+                class="btn btn-sm btn-danger float-right"
                 style="margin-right: 5px"
                 href="/users"
               >

@@ -77,6 +77,7 @@
                   <th>Email</th>
                   <th>Contact Number</th>
                   <th>User Role</th>
+                  <th>Profile Image</th>
                   <th class="action">Actions</th>
                 </tr>
               </thead>
@@ -88,6 +89,23 @@
                   <td><%= user.email%></td>
                   <td><%= user.phone %></td>
                   <td><%= user.role %></td>
+                  <td>
+                    <% if(user.profile_image){%>
+                    <img
+                      src="/images/profileImage/<%= user.profile_image %>"
+                      width="70"
+                      height="70"
+                      alt="profile image"
+                    />
+                    <% } else{ %>
+                    <img
+                      src="/images/default-user-icon-3.jpg"
+                      width="70"
+                      height="70"
+                      alt="profile image"
+                    />
+                    <%}%>
+                  </td>
                   <td style="display: inline">
                     <a
                       href="/view/<%= user._id %>"
