@@ -1,7 +1,7 @@
 const fs = require("fs");
 const PDFDocument = require("pdfkit");
 const actionItemTaskDriver = require("../../drivers/associations/actionItemTasks.driver");
-// const sendMail = require("../../config/email.config");
+const sendMail = require("../../config/email.config");
 const currencyFormat = require("../../helpers/common");
 const estimateDriver = require("../../drivers/estimate/estimate.driver");
 const path = require("path");
@@ -61,12 +61,12 @@ const createInvoice = async (req, res) => {
         await estimateDriver.createEstimate(data).then((result) => {
           if (result) {
             res.redirect("back");
-            // setTimeout(() => {
-            //   const text = `Hi ${estimate.ownerDetail.name}, We have successfully generated the estimate for your Lead!!
-            // Thanks!! `;
-            //   sendMail("jitendra@yopmail.com", "Estimate Generation", text),
-            //     req.flash("success", "Estimate Generated Successfully");
-            // }, 3000);
+            setTimeout(() => {
+              const text = `Hi ${estimate.ownerDetail.name}, We have successfully generated the estimate for your Lead!!
+            Thanks!! `;
+              sendMail("jitendra@yopmail.com", "Estimate Generation", text),
+                req.flash("success", "Estimate Generated Successfully");
+            }, 3000);
           }
         })
     );

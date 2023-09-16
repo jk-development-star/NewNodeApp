@@ -31,7 +31,6 @@
 <div class="alert alert-success" role="alert"><%= messages.success %></div>
 <% } %>
 
-
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
@@ -172,9 +171,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group mandatory">
-                          <label for="email" class="form-label"
-                            >Email</label
-                          >
+                          <label for="email" class="form-label">Email</label>
                           <input
                             type="text"
                             class="form-control"
@@ -223,8 +220,7 @@
                       <label for="contact" class="form-label"
                         >Action Item with Tasks</label
                       >
-                      <div id="tasks" class="task-section row g-3"> 
-                      </div>
+                      <div id="tasks" class="task-section row g-3"></div>
                     </div>
                   </div>
                 </div>
@@ -232,10 +228,16 @@
               <!-- /.col-->
             </div>
             <div class="card-footer">
-              <button type="submit" class="btn btn-sm btn-primary">
+              <button type="submit" class="btn btn-sm btn-primary float-right">
                 Generate PDF
               </button>
-              <a class="btn-sm btn-danger float-right" href=""> Back</a>
+              <a
+                class="btn btn-sm btn-danger float-right"
+                style="margin-right: 5px"
+                href=""
+              >
+                Back</a
+              >
             </div>
           </form>
         </div>
