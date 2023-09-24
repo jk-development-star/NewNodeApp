@@ -51,18 +51,18 @@ function format(d) {
     </tr>
     <tr>
     <td>Actions</td>
-    <td>
+    <td class="action-column">
     <a href="/edit/lead/${
       d._id
     }" class="btn-sm btn-primary"  data-toggle="tooltip" data-placement="bottom" title="Edit lead"><i class="fa fa-edit"></i> Edit Lead</a>
     <a href="/estimate/lead/${d._id}" class="btn-sm btn-warning" ${
-    d.lead_status === "Follow-Up"
+    d.pdf_path === "" || d.lead_status === "Follow-Up"
       ? ""
       : "style='opacity: .4;cursor: default !important; pointer-events: none;'"
   } data-toggle="tooltip" data-placement="bottom" title="Prepare Estimate"><i class="fa fa-mail-forward"></i> Prepare Intial Estimate</a>
-    <a href="/track/lead/${
+    <a href="/activity/lead/${
       d._id
-    }" class="btn-sm btn-success"  data-toggle="tooltip" data-placement="bottom" title="Track Lead" style="color: white"><i class="fa fa-arrow-alt-circle-right"></i> Track Lead </a>
+    }" class="btn-sm btn-success"  data-toggle="tooltip" data-placement="bottom" title="Lead Activity" style="color: white"><i class="fa fa-arrow-alt-circle-right"></i> Lead Activity </a>
     <a href="/delete/lead/${
       d._id
     }" class="btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Delete lead"><i class="fa fa-trash"></i> Delete Lead </a>
@@ -99,7 +99,7 @@ $(document).ready(function () {
             case "Follow-Up":
               status = '<span class="badge badge-warning">' + data + "</span>";
               break;
-            case "In-Process":
+            case "In-Progress":
               status = '<span class="badge badge-info">' + data + "</span>";
               break;
             case "Completed":
@@ -166,30 +166,30 @@ $(document).ready(function () {
   });
 });
 
-function selectedValues() {
-  let values = [];
-  const ids = document.getElementById("action_item_id").selectedOptions;
-  [...ids].map((options) => values.push(options.value));
-  let taskList = [];
-  values.forEach(function (id) {
-    let url = "http://localhost:8081/tasks/list/" + id;
-    fetch(url)
-      .then(function (response) {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          throw new Error("Error: " + response.status);
-        }
-      })
-      .then(function (data) {
-        // Process the response data here
-        const details = data.task.tasks_id;
-        taskList = [...taskList, ...details];
-        return taskList;
-      })
-      .catch(function (error) {
-        // Handle any errors that occurred during the request
-        console.log(error);
-      });
-  });
-}
+// function selectedValues() {
+//   let values = [];
+//   const ids = document.getElementById("action_item_id").selectedOptions;
+//   [...ids].map((options) => values.push(options.value));
+//   let taskList = [];
+//   values.forEach(function (id) {
+//     let url = "http://localhost:8081/tasks/list/" + id;
+//     fetch(url)
+//       .then(function (response) {
+//         if (response.status === 200) {
+//           return response.json();
+//         } else {
+//           throw new Error("Error: " + response.status);
+//         }
+//       })
+//       .then(function (data) {
+//         // Process the response data here
+//         const details = data.task.tasks_id;
+//         taskList = [...taskList, ...details];
+//         return taskList;
+//       })
+//       .catch(function (error) {
+//         // Handle any errors that occurred during the request
+//         console.log(error);
+//       });
+//   });
+// }

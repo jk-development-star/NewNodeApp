@@ -33,9 +33,9 @@ $("#action_items").on("change", function () {
             element.appendChild(cards);
             valuesArray.push(id);
           }
-          // finalData[id] = data.task.tasks_id;
-          // finalData[id].action_item_name =
-          //   data.task.action_item_id.action_item_name;
+          finalData[id] = data.task.tasks_id;
+          finalData[id].action_item_name =
+            data.task.action_item_id.action_item_name;
         })
         .catch(function (error) {
           // Handle any errors that occurred during the request
@@ -55,7 +55,7 @@ $("#action_items").on("change", function () {
     valuesArray = [];
   }
 });
-//document.getElementById('actionItemValue').value = finalData;
+document.getElementById("actionItemValue").value = finalData;
 
 const cost = document.querySelector("input#estimate_cost");
 cost.addEventListener("blur", (event) => {

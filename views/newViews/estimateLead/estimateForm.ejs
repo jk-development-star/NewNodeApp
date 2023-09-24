@@ -127,19 +127,15 @@
                           <label for="text" class="form-label"
                             >Work Category</label
                           >
-                          <select
-                            class="select2 work_category"
-                            multiple="multiple"
-                            data-placeholder="Select Work Type(s)"
-                            style="width: 100%"
-                            name="work_category[]"
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="work_category"
                             id="work_category"
-                          >
-                            <option value="KW">Kitchen Wooden</option>
-                            <option value="RF">Room Furniture</option>
-                            <option value="GW">Gates and Windows</option>
-                            <option value="TC">Table and Chairs</option>
-                          </select>
+                            readonly
+                            value="<%= lead.work_category %>"
+                            data-parsley-required="true"
+                          />
                         </div>
                       </div>
                     </div>
@@ -228,7 +224,7 @@
                     type="hidden"
                     name="actionItemValue"
                     id="actionItemValue"
-                    value
+                    value=""
                   ></div>
                   <div class="col-md-6">
                     <div class="form-group mandatory">
@@ -243,10 +239,19 @@
               <!-- /.col-->
             </div>
             <div class="card-footer">
-              <button type="submit" class="btn btn-sm btn-primary submitButton">
+              <button
+                type="submit"
+                class="btn btn-sm btn-primary submitButton float-right"
+              >
                 Generate PDF
               </button>
-              <a class="btn-sm btn-danger float-right" href="/leads"> Back</a>
+              <a
+                class="btn btn-sm btn-danger float-right"
+                style="margin-right: 5px"
+                href="/leads"
+              >
+                Back</a
+              >
             </div>
           </form>
         </div>

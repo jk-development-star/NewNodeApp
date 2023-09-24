@@ -29,7 +29,7 @@ const leadCreate = async (req, res) => {
 const getAllLead = async (req, res) => {
   try {
     let status = req.params.status ? req.params.status : "";
-    const actionItems = await actionItemsDriver.getActionItems();
+
     await leadDriver
       .getAllLeads(status)
       .then((leads) => {
@@ -40,52 +40,10 @@ const getAllLead = async (req, res) => {
             layout: true,
           });
         } else {
-          leads["action_items"] = actionItems;
           return res.render("newViews/leads/index", {
             leads,
             currencyFormat: currencyFormat,
             title: "Lead List",
-            layout: true,
-          });
-        }
-      })
-      .catch((error) => {
-        req.flash("error", error);
-        return res.render("newViews/leads/index", {
-          title: "Lead List",
-          layout: true,
-        });
-      });
-  } catch (error) {
-    req.flash("error", error.message);
-    return res.render("newViews/leads/index", {
-      title: "Lead List",
-      layout: true,
-    });
-  }
-};
-
-/**
- *
- * @param {*} req
- * @param {*} res
- */
-const leadDetails = async (req, res) => {
-  try {
-    await leadDriver
-      .getLead(req.params.id)
-      .then((lead) => {
-        if (!lead) {
-          req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
-          return res.render("newViews/leads/index", {
-            title: "Lead List",
-            layout: true,
-          });
-        } else {
-          return res.render("newViews/leads/lead_details", {
-            lead,
-            currencyFormat: currencyFormat,
-            title: "Lead Details",
             layout: true,
           });
         }
@@ -150,6 +108,7 @@ const storeLead = async (req, res) => {
 const leadEdit = async (req, res) => {
   try {
     const usersList = await userDriver.getAllUsersForAssignLeads();
+    const actionItems = await actionItemsDriver.getActionItems();
     await leadDriver
       .getLead(req.params.id)
       .then((lead) => {
@@ -157,6 +116,7 @@ const leadEdit = async (req, res) => {
           return res.render("newViews/leads/edit", {
             lead,
             usersList,
+            actionItems,
             title: "Edit Lead",
             layout: true,
           });
@@ -210,21 +170,26 @@ const leadUpdate = async (req, res) => {
 };
 
 const estimateForm = async (req, res) => {
-  let lead = await leadDriver.getLead(req.params.id);
-  const actionItems = await actionItemsDriver.getAllActionItems();
-  res.render("newViews/estimatelead/estimateForm", {
-    lead,
-    actionItems,
-    layout: true,
-    title: "Initial Estimate",
-  });
+  try {
+    const { id } = req.params;
+    const lead = await leadDriver.getLead(id);
+    const actionItems = await actionItemsDriver.getActionItems();
+    return res.render("newViews/estimateLead/estimateForm", {
+      lead,
+      actionItems,
+      id,
+      layout: true,
+      title: "Intital Estimate",
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {
   getAllLead,
   leadCreate,
   storeLead,
-  leadDetails,
   leadEdit,
   leadUpdate,
   estimateForm,

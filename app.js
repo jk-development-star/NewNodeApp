@@ -5,6 +5,7 @@ const express = require("express");
 const connectDB = require("./config/db.config");
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 8082;
+const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts");
@@ -12,19 +13,23 @@ const session = require("express-session");
 const checkJWTAuth = require("./middlewares/jwtAuth");
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
-
+const corsOptions = {
+  origin: "http://localhost:8081",
+};
 const app = express();
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, "public")));
 // set the template engine
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 
 // set the public folder path
-app.use(express.static(path.join(__dirname, "public")));
+
 app.set("layout extractScripts", true);
 app.set("layout extractStyles", true);
 
@@ -72,6 +77,7 @@ app.use(require("./routes/actionitems.routes"));
 app.use(require("./routes/actionItemsTasks.routes"));
 app.use(require("./routes/estimate.routes"));
 app.use(require("./routes/lead.estimate.routes"));
+app.use(require("./routes/lead.activity.routes"));
 
 // connect database
 connectDB(DATABASE_URL);

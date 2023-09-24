@@ -9,7 +9,7 @@ const passwordPattern =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
 const stringPassswordError =
   "Password length must be 8 to 20 characters long and password must contains a combination of uppercase, lowercase letter, number, and a special character are required.";
-const mobilePattern = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
+const mobilePattern = /^(\+\d{1,3}[- ]?)?\d{10}$/;
 const stringMobileError = "Enter a valid Mobile Number";
 const stringDateError = "Date should be less than today's date";
 
