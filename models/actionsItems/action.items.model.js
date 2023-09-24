@@ -12,14 +12,6 @@ const actionItemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    action_item_start_date: {
-      type: Date,
-      required: true,
-    },
-    action_item_end_date: {
-      type: Date,
-      required: true,
-    },
     action_item_completion_days: {
       type: String,
       required: true,
@@ -29,6 +21,10 @@ const actionItemSchema = new mongoose.Schema(
       required: true,
     },
     action_item_description: {
+      type: String,
+      required: true,
+    },
+    unit_charge: {
       type: String,
       required: true,
     },

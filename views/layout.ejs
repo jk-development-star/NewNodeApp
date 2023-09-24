@@ -15,7 +15,7 @@
       rel="stylesheet"
       href="/newAssets/plugins/fontawesome-free/css/all.min.css"
     />
-    <%- style %>
+
     <!-- overlayScrollbars -->
     <link
       rel="stylesheet"
@@ -23,6 +23,7 @@
     />
     <!-- Theme style -->
     <link rel="stylesheet" href="/newAssets/dist/css/adminlte.min.css" />
+    <%- style %>
   </head>
   <body
     class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"
@@ -45,7 +46,7 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-
+      <%- include('partials/newPartials/footer') %>
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
@@ -53,7 +54,6 @@
       <!-- /.control-sidebar -->
 
       <!-- Main Footer -->
-      <%- include('partials/newPartials/footer') %>
     </div>
     <!-- ./wrapper -->
 
@@ -62,13 +62,36 @@
     <script src="/newAssets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <%- script %>
     <!-- overlayScrollbars -->
     <script src="/newAssets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/newAssets/dist/js/adminlte.js"></script>
+
     <script src="/newAssets/dist/js/demo.js"></script>
-    <%- script %>
     <!-- PAGE PLUGINS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script>
+      const url = window.location;
+      // for sidebar menu entirely but not cover treeview
+      $("ul.nav-sidebar a")
+        .filter(function () {
+          if (this.href) {
+            return this.href == url || url.href.indexOf(this.href) == 0;
+          }
+        })
+        .addClass("active");
+      // for the treeview
+      $("ul.nav-treeview a")
+        .filter(function () {
+          if (this.href) {
+            return this.href == url || url.href.indexOf(this.href) == 0;
+          }
+        })
+        .parentsUntil(".nav-sidebar > .nav-treeview")
+        .addClass("menu-open")
+        .prev("a")
+        .addClass("active");
+    </script>
   </body>
 </html>

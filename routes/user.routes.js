@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const checkJWTAuth = require("../middlewares/jwtAuth");
+const upload = require("../middlewares/imageUpload");
 const {
   userList,
   userCreate,
@@ -12,7 +13,6 @@ const {
   userView,
   updateUser,
 } = require("../controllers/users/user.controller");
-const upload = require("../middlewares/imageUpload");
 
 router.get("/users", checkJWTAuth, userList);
 router.get("/create", checkJWTAuth, userCreate);

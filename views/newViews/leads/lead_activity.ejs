@@ -1,0 +1,279 @@
+<link rel="stylesheet" href="/newAssets/css/style.css" />
+<style>
+  /* right-panel css */
+  .right-panel {
+    position: fixed;
+    right: 0;
+    top: 57px;
+    min-height: 100vh;
+    background-color: #343a40;
+    width: 35em;
+    box-shadow: -6px 0 10px #00000096;
+    right: -50em;
+    transition: 0.5s;
+  }
+  .right-panel.open {
+    right: 0;
+  }
+  .close-panel {
+    cursor: pointer;
+    font-size: 1.4rem;
+  }
+</style>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Lead Activity-<%= lead.lead_id %></h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+          <li class="breadcrumb-item active">Lead Activity</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<% if(messages.error) { %>
+<div class="alert alert-danger" role="alert"><%= messages.error %></div>
+<% } %> <% if(messages.success) { %>
+<div class="alert alert-success" role="alert"><%= messages.success %></div>
+<% } %>
+<!-- Main content -->
+<section class="content">
+  <!-- Default box -->
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="info-box-text text-center text-muted"
+                    >Estimated budget</span
+                  >
+                  <span class="info-box-number text-center text-muted mb-0"
+                    ><%= lead.lead_budget %></span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="info-box-text text-center text-muted"
+                    >Total amount spent</span
+                  >
+                  <span class="info-box-number text-center text-muted mb-0"
+                    >2000</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="info-box-text text-center text-muted"
+                    >Estimated Lead duration</span
+                  >
+                  <span class="info-box-number text-center text-muted mb-0"
+                    >20</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4>Recent Activity</h4>
+              <% if(leadActivity !== 'undefined' && leadActivity.length > 0) {%>
+              <% leadActivity.forEach(function(activity) { %>
+              <div class="post">
+                <div class="user-block">
+                  <% if(activity.acitvity_added_by.profile_image.length > 0){%>
+                  <%
+                  activity.acitvity_added_by.profile_image.forEach(function(image){%>
+                  <img
+                    class="img-circle img-bordered-sm"
+                    src="/images/userProfiles/<%= image.filename %>"
+                    alt="user image"
+                  />
+                  <% }) %> <%} else {%>
+                  <img
+                    class="img-circle img-bordered-sm"
+                    src="/images/User-icon-256-blue.png"
+                    alt="user image"
+                  />
+                  <%}%>
+                  <span class="username">
+                    <a href="#"><%= activity.acitvity_added_by.full_name %>.</a>
+                  </span>
+                  <span class="description"
+                    >Shared <%= activity.activity_type === '1' ? 'Publicly':
+                    'Privately' %> - <%=
+                    displayTime.timeSince(activity.createdAt); %></span
+                  >
+                </div>
+                <!-- /.user-block -->
+                <p><%= activity.activity_comment %></p>
+
+                <p>
+                  <a href="#" class="link-black text-sm"
+                    ><i class="fas fa-link mr-1"></i> Demo File 1 v2</a
+                  >
+                </p>
+              </div>
+
+              <% }); %> <% } else{%> No Activity Found <%} %>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+          <h3 class="text-primary">
+            <i class="fas fa-paint-brush"></i> AdminLTE v3
+          </h3>
+          <p class="text-muted">
+            Raw denim you probably haven't heard of them jean shorts Austin.
+            Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher
+            synth. Cosby sweater eu banh mi, qui irure terr.
+          </p>
+          <br />
+          <div class="text-muted">
+            <p class="text-sm">
+              Client Name
+              <b class="d-block"><%= lead.customer_name %></b>
+            </p>
+            <p class="text-sm">
+              Customer Contact
+              <b class="d-block"
+                ><i class="fa fa-phone-volume"></i> <%= lead.customer_phone
+                %></b
+              >
+            </p>
+            <p class="text-sm">
+              Customer Email
+              <b class="d-block"
+                ><i class="fa fa-mail-bulk"></i> <%= lead.customer_email %></b
+              >
+            </p>
+          </div>
+
+          <h5 class="mt-5 text-muted">Lead files</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a
+                href="/estimate/<%= lead.pdf_path %>"
+                target="_blank"
+                class="btn-link text-secondary"
+                ><i class="far fa-fw fa-file-pdf"></i> <%= lead.pdf_path %></a
+              >
+            </li>
+          </ul>
+          <div class="text-center mt-5 mb-3">
+            <a href="#" class="btn btn-sm btn-primary panel-trigger"
+              >Add Files and Comments</a
+            >
+            <a
+              href="/lead/gallery/<%= lead._id %>"
+              class="btn btn-sm btn-warning"
+              >View Gallery</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</section>
+
+<div class="right-panel">
+  <div class="panel-head p-2 pr-4 text-right">
+    <i class="fa fa-times close-panel"></i>
+  </div>
+  <div class="panel-body">
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Upload/Add Images</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card card-primary">
+          <form
+            class="form"
+            action="/store/lead/activity/<%= lead._id %>"
+            method="POST"
+            enctype="multipart/form-data"
+            data-parsley-validate
+          >
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group mandatory">
+                    <label for="comment" class="form-label"
+                      >Activity Type</label
+                    >
+                    <select
+                      class="form-control"
+                      name="activity_type"
+                      id="activity_type"
+                      data-parsley-required="true"
+                    >
+                      <option value="">Select Activity Type</option>
+                      <option value="1">Public</option>
+                      <option value="2">Private</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group mandatory">
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      name="lead_image"
+                      id="lead_images"
+                      multiple
+                    />
+                  </div>
+                  <div class="form-group mandatory">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea
+                      class="form-control"
+                      name="activity_comment"
+                      id="comment"
+                      data-parsley-required="true"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-sm btn-primary">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for add comment -->
+<!-- Modal -->
+<script src="/newAssets/parsleyjs/parsley.min.js"></script>
+<script src="/newAssets/js/parsley.js"></script>
+<script>
+  /* right-panel js */
+  $(document).ready(function () {
+    $(".panel-trigger").click(function () {
+      $(".right-panel").addClass("open");
+    });
+    $(".close-panel").click(function () {
+      $(".right-panel").removeClass("open");
+    });
+  });
+</script>

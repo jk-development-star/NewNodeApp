@@ -213,11 +213,11 @@
                         id="lead_status"
                       >
                         <option value="">Select Lead Status</option>
-                        <option data-id="Active" value="Active" <%= lead.lead_status === "Active" ? "selected": "" %>>Active</option>
-                      <option data-id="Follow-Up" value="Follow-Up" <%= lead.lead_status === "Follow-Up" ? "selected": "" %>>Follow-Up</option>
-                      <option data-id="n-Process" value="In-Process" <%= lead.lead_status === "In-Process" ? "selected": "" %>>In-Process</option>
-                      <option data-id="Completed" value="Completed" <%= lead.lead_status === "Completed" ? "selected": "" %>>Completed</option>
-                      <option data-id="Closed" value="Closed" <%= lead.lead_status === "Closed" ? "selected": "" %>>Closed</option>
+                        <option  value="Active" <%= lead.lead_status==='Active' ? "selected": "" %> >Active</option>
+                      <option value="Follow-Up" <%= lead.lead_status === "Follow-Up" ? "selected": "" %> >Follow-Up</option>
+                      <option  value="In-Process" <%= lead.lead_status === "In-Process" ? "selected": "" %> >In-Process</option>
+                      <option  value="Completed" <%= lead.lead_status === "Completed" ? "selected": "" %> >Completed</option>
+                      <option  value="Closed" <%= lead.lead_status === "Closed" ? "selected": "" %> >Closed</option>
                       </select>
                     </div>
                   </div>
@@ -270,7 +270,7 @@
                     </div>
                   </div>
                 </div>
-                <div id="action_item_and_task">
+                <div class="action_item_and_task" id="action_item_and_task">
                   <div class="row">
                     <div class="col-md-6">
                       <!-- text input -->
@@ -279,9 +279,8 @@
                           >Action Item</label
                         >
                         <select
-                          name="action_item"
+                          name="action_item[]"
                           class="select2"
-                          placeholder="Select Action Item(s)"
                           style="width: 100%;"
                           id="action_items"
                           multiple="multiple"
@@ -300,10 +299,7 @@
                     <div class="col-md-6">
                       <div class="form-group mandatory">
                         <label for="tasks" class="form-label">Tasks</label>
-                        <select name="tasks[]"id="tasks" class="form-control"
-                       >
-                         
-                        </select>
+                        <div id="tasks"></div>
                       </div>
                     </div>
                   </div>
@@ -332,12 +328,14 @@
 
                 <!-- /.col-->
               </div>
+             
             </div>
+            
             <div class="card-footer">
-              <button type="submit" class="btn btn-sm btn-primary float-right">
+              <button type="submit" class="btn btn-sm btn-primary">
                 Submit
               </button>
-              <a class="btn btn-sm btn-danger float-right" style="margin-right: 5px;" href="/leads"> Back</a>
+              <a class="btn-sm btn-danger float-right" href="/leads"> Back</a>
             </div>
           </form>
         </div>
@@ -360,42 +358,8 @@
 <script src="/newAssets/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- Select2 -->
 <script src="/newAssets/plugins/select2/js/select2.full.min.js"></script>
-
 <script>
-   const usersData = <%- JSON.stringify(usersList) %>;
-   const lead = <%- JSON.stringify(lead) %>;
-    $(function () {
-      // Summernote
-      $(".summernote").summernote();
-    });
-  function displayActionItemDiv(status){
-      const element = document.getElementById('action_item_and_task');
-        status === 'Follow-Up' || status === 'In-Process' || status === 'Completed' ? element.style.display = "block" : element.style.display = "none";
-  }  
-    window.addEventListener('load', () =>{
-      let status = document.getElementById('lead_status');
-     displayActionItemDiv(status.value)
-      status.addEventListener('change', function(event){
-        displayActionItemDiv(status.value)
-        })
-    })
-
-
-  const userName =[];
-   $.each(usersData, function (i, v) {
-      userName.push(v["_id"]);
-  $(document).ready(function() {
-    $('.select2').select2().val(userName);
-  });
-  });
-
-  // display work category selected
-  $(document).ready(function() {
-    let workCategory = lead.work_category;
-    $('#work_category').select2('val',[workCategory])
-  });
-  // display work category selected
-  $(document).ready(function() {
-    $('#action_items').select2()
-  });
+  $("#action_items").select2();
 </script>
+
+

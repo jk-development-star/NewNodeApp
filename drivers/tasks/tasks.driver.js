@@ -40,6 +40,10 @@ exports.getTaskDetails = async () => {
       },
     },
   ]);
-
   return taskDetails;
+};
+
+exports.deleteTask = async (id) => {
+  const task = await taskSchema.findOneAndDelete({ _id: id });
+  return task;
 };

@@ -1,10 +1,3 @@
-<link rel="stylesheet" href="/newAssets/css/style.css" />
-<!-- Tempusdominus Bootstrap 4 -->
-<link
-  rel="stylesheet"
-  href="/newAssets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"
-/>
-
 <!-- Bootstrap4 Duallistbox -->
 <link
   rel="stylesheet"
@@ -17,6 +10,7 @@
 />
 <!-- Select2 -->
 <link rel="stylesheet" href="/newAssets/plugins/select2/css/select2.min.css" />
+<link rel="stylesheet" href="/newAssets/css/style.css" />
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -59,17 +53,20 @@
                 <div class="col-md-6">
                   <!-- text input -->
                   <div class="form-group mandatory">
-                    <label for="status" class="form-label">Type</label>
+                    <label for="work_category" class="form-label"
+                      >Work Category</label
+                    >
                     <select
-                      class="select2 form-control"
-                      name="action_item_type"
-                      id="action_item_type"
+                      class="select2 work_category"
+                      style="width: 100%"
+                      name="work_category"
+                      id="work_category"
                     >
                       <option></option>
-                      <option value="Follow-Up">Follow Up</option>
-                      <option value="In-Process">In-Process</option>
-                      <option value="Completed">Completed</option>
-                      <option value="Closed">Closed</option>
+                      <option value="KW">Kitchen Wooden</option>
+                      <option value="RF">Room Furniture</option>
+                      <option value="GW">Gates and Windows</option>
+                      <option value="TC">Table and Chairs</option>
                     </select>
                   </div>
                 </div>
@@ -90,53 +87,6 @@
 
               <div class="row">
                 <div class="col-md-3">
-                  <!-- text input -->
-                  <div class="form-group mandatory">
-                    <label for="date" class="form-label">Start Date</label>
-                    <div
-                      class="input-group date"
-                      id="datetimepicker1"
-                      data-target-input="nearest"
-                    >
-                      <input
-                        type="text"
-                        class="form-control datetimepicker-input"
-                        data-target="#datetimepicker1"
-                        name="action_item_start_date"
-                        data-parsley-required="true"
-                      />
-                      <div
-                        class="input-group-append"
-                        data-target="#datetimepicker1"
-                        data-toggle="datetimepicker"
-                      >
-                        <div class="input-group-text">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label class="form-label">Predecessor</label>
-                    <select
-                      class="select2 form-control"
-                      name="action_item_predecessor"
-                      id="action_item_predecessor"
-                    >
-                      <option></option>
-                      <% if(typeof actionItems !== 'undefined' &&
-                      actionItems.length > 0){ %> <%
-                      actionItems.forEach(function(item){ %>
-                      <option value="<%= item._id %>">
-                        <%= item.action_item_name %>
-                      </option>
-                      <%})%> <%}%>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-3">
                   <div class="form-group mandatory">
                     <label for="text" class="form-label"
                       >Completion Day(s)</label
@@ -151,47 +101,21 @@
                     />
                   </div>
                 </div>
+
                 <div class="col-md-3">
                   <!-- text input -->
                   <div class="form-group mandatory">
-                    <label for="country" class="form-label">Work Type</label>
+                    <label for="country" class="form-label"
+                      >Per Unit Charge/Day</label
+                    >
                     <input
                       type="text"
                       class="form-control"
-                      name="action_item_type_of_work"
-                      id="action_item_type_of_work"
-                      placeholder="Enter work type"
+                      name="unit_charge"
+                      id="unit_charge"
+                      placeholder="Enter unit charge"
                       data-parsley-required="true"
                     />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group mandatory">
-                    <label for="date" class="form-label">End Date</label>
-                    <div
-                      class="input-group date"
-                      id="datetimepicker2"
-                      data-target-input="nearest"
-                    >
-                      <input
-                        type="text"
-                        class="form-control datetimepicker-input"
-                        data-target="#datetimepicker2"
-                        name="action_item_end_date"
-                        data-parsley-required="true"
-                      />
-                      <div
-                        class="input-group-append"
-                        data-target="#datetimepicker2"
-                        data-toggle="datetimepicker"
-                      >
-                        <div class="input-group-text">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -231,16 +155,10 @@
               <!-- /.col-->
             </div>
             <div class="card-footer">
-              <button type="submit" class="btn btn-sm btn-primary float-right">
+              <button type="submit" class="btn btn-sm btn-primary">
                 Submit
               </button>
-              <a
-                class="btn btn-sm btn-danger float-right"
-                style="margin-right: 5px"
-                href="/leads"
-              >
-                Back</a
-              >
+              <a class="btn-sm btn-danger float-right" href="/leads"> Back</a>
             </div>
           </form>
         </div>
@@ -251,20 +169,13 @@
 
 <script src="/newAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script src="/newAssets/plugins/moment/moment.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="/newAssets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-
-<!-- Bootstrap4 Duallistbox -->
-<script src="/newAssets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <script src="/newAssets/js/actionItems/create.actionItem.js"></script>
-
 <script src="/newAssets/parsleyjs/parsley.min.js"></script>
 <script src="/newAssets/js/parsley.js"></script>
-
+<!-- Bootstrap4 Duallistbox -->
+<script src="/newAssets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <!-- Summernote -->
 <script src="/newAssets/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- Select2 -->
 <script src="/newAssets/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function () {
@@ -273,17 +184,9 @@
   });
 
   $(function () {
-    $("#datetimepicker1, #datetimepicker2").datetimepicker({
-      format: "L",
-    });
-  });
-
-  $(function () {
-    $("#action_item_type").select2({
-      placeholder: "Select a Type",
-    });
-    $("#action_item_predecessor").select2({
-      placeholder: "Select a Predecessor",
+    //Initialize Select2 Elements
+    $("#work_category").select2({
+      placeholder: "Select Work Type",
     });
   });
 

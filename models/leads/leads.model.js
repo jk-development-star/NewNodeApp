@@ -71,13 +71,15 @@ const leadSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    pdf_path: {
+      type: String,
+    },
     lead_status: {
       type: String,
       enum: [
         "Active",
         "Completed",
         "In-Progress",
-        "Completed",
         "Quality-Inspection",
         "Closed",
       ],
