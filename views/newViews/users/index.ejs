@@ -90,21 +90,20 @@
                   <td><%= user.phone %></td>
                   <td><%= user.role %></td>
                   <td>
-                    <% if(user.profile_image){%>
+                    <% if(user.profile_image) { %>
                     <img
-                      src="/images/profileImage/<%= user.profile_image %>"
-                      width="70"
-                      height="70"
-                      alt="profile image"
+                      src="/images/userProfiles/<%= user.profile_image %>"
+                      width="50"
+                      height="50"
                     />
-                    <% } else{ %>
+                    <% } else { %>
                     <img
-                      src="/images/default-user-icon-3.jpg"
-                      width="70"
-                      height="70"
-                      alt="profile image"
+                      src="/newAssets/dist/img/user2-160x160.jpg"
+                      alt="<%= user.full_name %>"
+                      width="50"
+                      height="50"
                     />
-                    <%}%>
+                    <% } %>
                   </td>
                   <td style="display: inline">
                     <a
@@ -156,9 +155,6 @@
 <script src="/newAssets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="/newAssets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="/newAssets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="/newAssets/plugins/jszip/jszip.min.js"></script>
-<script src="/newAssets/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="/newAssets/plugins/pdfmake/vfs_fonts.js"></script>
 <script src="/newAssets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/newAssets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/newAssets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>

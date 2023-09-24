@@ -60,7 +60,8 @@ function myFilter(array) {
   return true;
 }
 function finalMain(key) {
-  document.getElementById("tasks").innerHTML = "";
+  let element = document.getElementById("tasks");
+  element.innerHTML = "";
   let html = "";
   for (key in MainTaskList) {
     html += `
@@ -70,5 +71,43 @@ function finalMain(key) {
     </div>
       `;
   }
-  document.getElementById("tasks").innerHTML = html;
+  element.innerHTML = html;
 }
+
+$(function () {
+  // Summernote
+  $(".summernote").summernote();
+});
+function displayActionItemDiv(status) {
+  const element = document.getElementById("action_item_and_task");
+  status === "In-Process" || status === "Completed"
+    ? (element.style.display = "block")
+    : (element.style.display = "none");
+}
+window.addEventListener("load", () => {
+  let status = document.getElementById("lead_status");
+  displayActionItemDiv(status.value);
+  status.addEventListener("change", function (event) {
+    displayActionItemDiv(status.value);
+  });
+});
+
+const userName = [];
+$.each(usersData, function (i, v) {
+  userName.push(v["_id"]);
+  $(document).ready(function () {
+    $(".select2").select2().val(userName);
+  });
+});
+
+// display work category selected
+$(document).ready(function () {
+  let workCategory = lead.work_category;
+  $("#work_category").select2("val", [workCategory]);
+});
+// display work category selected
+$(document).ready(function () {
+  $("#action_items").select2({
+    placeholder: "Select Action Item(s)",
+  });
+});

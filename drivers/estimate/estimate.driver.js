@@ -7,3 +7,8 @@ exports.createEstimate = async (data) => {
   const { generatedBy, lead_id, ...result } = estimateData._doc;
   return result;
 };
+
+exports.getEstimateDetails = async (id) => {
+  const details = await estimateModel.findById(id);
+  return details;
+};

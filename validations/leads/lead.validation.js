@@ -28,6 +28,7 @@ const leadSchemaValidation = Joi.object({
   description: Joi.string().trim().required(),
   work_category: Joi.required(),
   assignedTo: Joi.required(),
+  pdf_path: Joi.optional().allow(null),
   files: Joi.optional().allow(null),
 });
 
