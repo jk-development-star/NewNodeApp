@@ -8,7 +8,8 @@ const leadGallery = async (req, res) => {
     leadImages,
     id,
     title: "Lead Gallery",
-    layout: true,
+        layout: true,
+    user : req.user,
   });
 };
 const storeLeadImages = async (req, res) => {

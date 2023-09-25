@@ -10,7 +10,8 @@ const actionItemsIndex = async (req, res) => {
   const actionItems = await actionItemDriver.getActionItems();
   return res.render("newViews/actionItems/index", {
     title: "Action Items List",
-    layout: true,
+        layout: true,
+    user : req.user,
     actionItems,
   });
 };
@@ -22,7 +23,8 @@ const actionItemsCreate = async (req, res) => {
     task: tasksList,
     actionItems: actionItems,
     title: "Create Action Item",
-    layout: true,
+        layout: true,
+    user : req.user,
   });
 };
 
@@ -32,7 +34,8 @@ const storeActionItems = async (req, res) => {
     req.flash("error", error.details[0].message);
     return res.render("newViews/actionItems/create", {
       title: "Create Action Item",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
   const { action_item_created_by, action_item_status, ...data } = value;
@@ -58,7 +61,8 @@ const storeActionItems = async (req, res) => {
                 req.flash("error", "Something went wrong");
                 return res.render("newViews/actionItems/create", {
                   title: "Create Action Item",
-                  layout: true,
+                      layout: true,
+    user : req.user,
                 });
               });
           }
@@ -66,7 +70,8 @@ const storeActionItems = async (req, res) => {
           req.flash("error", "Action Item not created");
           return res.render("newViews/actionItems/create", {
             title: "Create Action Item",
-            layout: true,
+                layout: true,
+    user : req.user,
           });
         }
       })
@@ -74,14 +79,16 @@ const storeActionItems = async (req, res) => {
         req.flash("error", error.message);
         return res.render("newViews/actionItems/create", {
           title: "Create Action Item",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       });
   } catch (error) {
     req.flash("error", error);
     return res.render("newViews/actionItems/create", {
       title: "Create Action Item",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };

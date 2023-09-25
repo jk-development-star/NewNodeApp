@@ -9,7 +9,8 @@ const currencyFormat = require("../../helpers/common");
 
 const userCreate = (req, res) => {
   res.render("newViews/users/create", {
-    layout: true,
+        layout: true,
+    user : req.user,
     title: "Create New User",
   });
 };
@@ -30,8 +31,8 @@ const storeUser = async (req, res) => {
     req.flash("error", error.details[0].message);
     return res.render("newViews/users/create", {
       title: "Create New User",
-      layout: "layout",
-    });
+layout: "layout",
+      user : req.user    });
   }
   //check the duplicate email
   const duplicateUser = await userDriver.findUserByEmail(value.email);
@@ -39,7 +40,8 @@ const storeUser = async (req, res) => {
     req.flash("error", message.MESSAGE_DUPLICATE_EMAIL);
     return res.render("newViews/users/create", {
       title: "Create New User",
-      layout: "layout",
+layout: "layout",
+      user : req.user
     });
   }
   //convert password in to hashed
@@ -59,8 +61,8 @@ const storeUser = async (req, res) => {
       req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
       return res.render("newViews/users/create", {
         title: "Create New User",
-        layout: "layout",
-      });
+  layout: "layout",
+      user : req.user      });
     });
 };
 
@@ -78,13 +80,15 @@ const userList = async (req, res) => {
         return res.render("newViews/users/index", {
           users,
           title: "Users List",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       else req.flash("error", message.MESSAGE_NO_USER_FOUND);
       return res.render("newViews/users/index", {
         users: "",
         title: "Users List",
-        layout: true,
+            layout: true,
+    user : req.user,
       });
     })
     .catch((err) => {
@@ -95,7 +99,8 @@ const userList = async (req, res) => {
       req.flash("error", err);
       return res.render("newViews/users/index", {
         title: "Users List",
-        layout: true,
+            layout: true,
+    user : req.user,
       });
     });
 };
@@ -113,7 +118,8 @@ const deleteAUser = async (req, res) => {
         req.flash("error", message.MESSAGE_NO_USER_FOUND);
         return res.render("newViews/users/index", {
           title: "Users List",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       } else req.flash("success", message.MESSAGE_SUCCESS_DELETE_USER);
       return res.redirect(301, "/users");
@@ -127,7 +133,8 @@ const deleteAUser = async (req, res) => {
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
     return res.render("newViews/users/index", {
       title: "Users List",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };
@@ -149,7 +156,8 @@ const userEditView = async (req, res) => {
         return res.render("newViews/users/edit", {
           user,
           title: "Edit User",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
     });
   } catch (error) {
@@ -158,7 +166,8 @@ const userEditView = async (req, res) => {
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
     return res.render("newViews/users/index", {
       title: "Users List",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };
@@ -177,7 +186,8 @@ const userView = async (req, res) => {
           userProfile,
           currencyFormat: currencyFormat,
           title: "User Profile",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
     });
   } catch (error) {
@@ -186,7 +196,8 @@ const userView = async (req, res) => {
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
     return res.render("newViews/users/index", {
       title: "Users List",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };
@@ -209,7 +220,8 @@ const updateUser = async (req, res) => {
           req.flash("error", message.MESSAGE_NO_USER_FOUND);
           return res.render("newViews/users/edit", {
             title: "Edit User",
-            layout: true,
+                layout: true,
+    user : req.user,
           });
         } else {
           req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
@@ -224,7 +236,8 @@ const updateUser = async (req, res) => {
         req.flash("error", error);
         return res.render("newViews/users/edit", {
           title: "Edit User",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       });
   } catch (error) {
@@ -232,7 +245,8 @@ const updateUser = async (req, res) => {
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
     return res.render("newViews/users/edit", {
       title: "Edit User",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };

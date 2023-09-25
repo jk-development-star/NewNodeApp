@@ -25,7 +25,6 @@ const loginView = (req, res) => {
  * @param {*} res 
  */
 const dashboardView = async (req, res) => {
-    const user = req.user;
     const allUsers = await userSchema.count();
     const allLeads = await leadSchema.count();
     const activeLeads = await leadDriver.getActiveLead();
@@ -35,7 +34,6 @@ const dashboardView = async (req, res) => {
     const latestAddedLeads = await leadDriver.getLatestLeads();
     const closedLead = await leadDriver.getClosedLead();
     res.render("newViews/dashboard", {
-        user,
         allUsers,
         allLeads,
         activeLeads,
@@ -46,7 +44,7 @@ const dashboardView = async (req, res) => {
         closedLead,
         title: "Admin Dashboard",
         layout: "layout",
-    });
+        user : req.user    });
 };
 
 
