@@ -2,7 +2,8 @@
 
 const express = require("express");
 const router = express.Router();
-const checkJWTAuth = require("../middlewares/jwtAuth");
+// const checkJWTAuth = require("../middlewares/jwtAuth");
+const {checkPassportAuth} = require("../middlewares/passportAuth");
 const upload = require("../middlewares/imageUpload");
 const {
   storeLeadActivity,
@@ -11,11 +12,11 @@ const {
 
 router.post(
   "/store/lead/activity/:id",
-  checkJWTAuth,
+  checkPassportAuth,
   upload.array("lead_image", 10),
   storeLeadActivity
 );
 
-router.get("/activity/lead/:id", checkJWTAuth, leadActivityDetails);
+router.get("/activity/lead/:id", checkPassportAuth, leadActivityDetails);
 
 module.exports = router;
