@@ -1,7 +1,7 @@
 const userDriver = require("../drivers/users/user.driver");
 const { message } = require("../constants");
 const jwtToken = require("../helpers/jwt.token");
-const {initiateLogin} = require("../helpers/passport.authenticate");
+const {initiateLogin , googleInitiateLogin} = require("../helpers/passport.authenticate");
 const bcrypt = require("bcrypt");
 const userSchema = require("../models/users/users.model");
 const leadSchema = require("../models/leads/leads.model");
@@ -99,8 +99,13 @@ async function login(passport){
     await initiateLogin(passport)
 }
 
+async function googleLogin(passport){
+    await googleInitiateLogin(passport)
+}
+
 module.exports = {
     loginView,
     login,
+    googleLogin,
     dashboardView,
 };
