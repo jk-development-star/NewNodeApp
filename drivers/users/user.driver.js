@@ -19,6 +19,11 @@ exports.getAllUsersForAssignLeads = async () => {
   return allUsers;
 };
 
+exports.findUserById = async (id) => {
+  const user = await userSchema.findById(id);
+  return user;
+};
+
 exports.getAllUsers = async (id, role) => {
   if (role === "Admin") {
     const users = await userSchema.aggregate([
@@ -128,4 +133,16 @@ exports.userEdit = async (id) => {
     },
   ]);
   return usersWithLeadsInfo;
+};
+
+exports.updateUserPassword = async (id, data) => {
+  const user = await userSchema.findByIdAndUpdate(
+    id,
+    {
+      $set: data,
+    },
+    { new: true }
+  );
+  const { __v, ...result } = user._doc;
+  return result;
 };

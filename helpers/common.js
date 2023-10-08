@@ -30,3 +30,14 @@ exports.timeSince = function (timestamp) {
     }
   }
 };
+// To add minutes in time
+exports.addMinutes = function (date, minutes) {
+  date.setMinutes(date.getMinutes() + minutes);
+  return date;
+};
+
+// To add days in date
+exports.addDays = function (date, days) {
+  date.setDate(date.getDate() + days);
+  return date;
+};

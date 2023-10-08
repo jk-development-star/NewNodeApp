@@ -2,7 +2,8 @@
 
 const express = require("express");
 const router = express.Router();
-const checkJWTAuth = require("../middlewares/jwtAuth");
+// const checkJWTAuth = require("../middlewares/jwtAuth");
+const {checkPassportAuth} = require("../middlewares/passportAuth");
 const {
   createTask,
   storeTasks,
@@ -12,10 +13,10 @@ const {
   deleteTask,
 } = require("../controllers/tasks/tasks.controller");
 
-router.get("/task/create", checkJWTAuth, createTask);
-router.get("/tasks", checkJWTAuth, tasksList);
-router.get("/tasks/:id", checkJWTAuth, editTask);
-router.post("/store/task", checkJWTAuth, storeTasks);
-router.post("/tasks/update/:id", checkJWTAuth, updateTasks);
-router.post("/task/delete/:id", checkJWTAuth, deleteTask);
+router.get("/task/create", checkPassportAuth, createTask);
+router.get("/tasks", checkPassportAuth, tasksList);
+router.get("/tasks/:id", checkPassportAuth, editTask);
+router.post("/store/task", checkPassportAuth, storeTasks);
+router.post("/tasks/update/:id", checkPassportAuth, updateTasks);
+router.post("/task/delete/:id", checkPassportAuth, deleteTask);
 module.exports = router;
