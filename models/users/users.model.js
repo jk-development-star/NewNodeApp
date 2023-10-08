@@ -23,13 +23,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    verificationToken: {
-      required: false,
-      type: String,
-    },
-    verified_at: {
-      required: false,
-      type: Date,
+    verified: {
+      type: Boolean,
+      default: false,
     },
     profile_image: [
       {

@@ -26,12 +26,29 @@
   </head>
   <body class="hold-transition login-page">
     <div class="login-box">
-      <% if(messages.error) {%>
+      <% if(message.error) {%>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <%= messages.error %>
-        <a href="#" class="close" data-dismiss="alert" aria-label="close"
-          >&times;</a
+        <%= message.error %>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="close"
         >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <% }%> <% if(message.success) {%>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= message.success %>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <% }%>
 
@@ -47,7 +64,7 @@
               <input
                 type="text"
                 class="form-control"
-                name="username"
+                name="email"
                 placeholder="your-email@gmail.com"
                 id="email"
                 data-parsley-required="true"
@@ -84,13 +101,13 @@
           <!-- /.social-auth-links -->
 
           <p class="mb-1">
-            <a href="forgot-password.html">I forgot my password</a>
+            <a href="/forgot-password">I forgot my password</a>
           </p>
-          <p class="mb-0">
+          <!-- <p class="mb-0">
             <a href="register.html" class="text-center"
               >Register a new membership</a
             >
-          </p>
+          </p> -->
         </div>
         <!-- /.login-card-body -->
       </div>
