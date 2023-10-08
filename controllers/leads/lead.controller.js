@@ -16,7 +16,8 @@ const leadCreate = async (req, res) => {
   const usersList = await userDriver.getAllUsersForAssignLeads();
   res.render("newViews/leads/create", {
     usersList,
-    layout: true,
+        layout: true,
+    user : req.user,
     title: "Add New Lead",
   });
 };
@@ -37,14 +38,16 @@ const getAllLead = async (req, res) => {
           req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
           return res.render("newViews/leads/index", {
             title: "Lead List",
-            layout: true,
+                layout: true,
+    user : req.user,
           });
         } else {
           return res.render("newViews/leads/index", {
             leads,
             currencyFormat: currencyFormat,
             title: "Lead List",
-            layout: true,
+                layout: true,
+    user : req.user,
           });
         }
       })
@@ -52,14 +55,16 @@ const getAllLead = async (req, res) => {
         req.flash("error", error);
         return res.render("newViews/leads/index", {
           title: "Lead List",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       });
   } catch (error) {
     req.flash("error", error.message);
     return res.render("newViews/leads/index", {
       title: "Lead List",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };
@@ -76,7 +81,8 @@ const storeLead = async (req, res) => {
     req.flash("error", error.details[0].message);
     return res.render("newViews/leads/create", {
       title: "Add New Lead",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
   const { generatedBy, lead_id, lead_status, ...data } = value;
@@ -93,14 +99,16 @@ const storeLead = async (req, res) => {
         req.flash("error", error.message);
         return res.render("newViews/leads/create", {
           title: "Add New Lead",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       });
   } catch (error) {
     req.flash("error", error.message);
     return res.render("newViews/leads/create", {
       title: "Add New Lead",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };
@@ -118,20 +126,23 @@ const leadEdit = async (req, res) => {
             usersList,
             actionItems,
             title: "Edit Lead",
-            layout: true,
+                layout: true,
+    user : req.user,
           });
       })
       .catch((error) => {
         req.flash("error", error.message);
         res.render("newViews/leads/edit", {
-          layout: true,
+              layout: true,
+    user : req.user,
           title: "Edit Lead",
         });
       });
   } catch (error) {
     req.flash("error", error.message);
     res.render("newViews/leads/edit", {
-      layout: true,
+          layout: true,
+    user : req.user,
       title: "Edit Lead",
     });
   }
@@ -146,7 +157,8 @@ const leadUpdate = async (req, res) => {
           req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
           return res.render("newViews/leads/edit", {
             title: "Edit Lead",
-            layout: true,
+                layout: true,
+    user : req.user,
           });
         } else {
           req.flash("success", leadMessage.MESSAGE_SUCCESS_UPDATE_LEAD);
@@ -157,14 +169,16 @@ const leadUpdate = async (req, res) => {
         req.flash("error", error.message);
         return res.render("newView/leads/edit", {
           title: "Edit Lead",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       });
   } catch (error) {
     req.flash("error", error.message);
     return res.render("newView/leads/edit", {
       title: "Edit Lead",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };
@@ -178,7 +192,8 @@ const estimateForm = async (req, res) => {
       lead,
       actionItems,
       id,
-      layout: true,
+          layout: true,
+    user : req.user,
       title: "Intital Estimate",
     });
   } catch (error) {

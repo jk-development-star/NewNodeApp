@@ -9,10 +9,13 @@ const { checkPassportAuth } = require("../middlewares/passportAuth");
 const {
   loginView,
   login,
+  googleLogin,
   dashboardView,
 } = require("../controllers/authcontroller");
 
 login(passport);
+googleLogin(passport);
+
 router.get("/", loginView);
 router.post(
   "/login",
@@ -24,16 +27,32 @@ router.post(
 );
 router.get("/dashboard", checkPassportAuth, dashboardView);
 
+// // Logout the user
+// router.post("/logout", function (req, res, next) {
+//   try {
+//     req.logout(function (err) {
+//       if (err) {
+//         return next(err);
+//       }
+//       req.flash("success", "You are logged out.");
+//       res.redirect("/");
+//     });
+//   } catch (error) {
+//     req.flash("error", error);
+//     return res.redirect("back");
+//   }
+// });
+
 // Logout the user
-router.post("/logout", function (req, res, next) {
+router.post("/logout", checkPassportAuth, function (req, res) {
   try {
-    req.logout(function (err) {
-      if (err) {
-        return next(err);
-      }
+    if (req.session) {
+      req.session.passport = {};
       req.flash("success", "You are logged out.");
       res.redirect("/");
-    });
+    } else {
+      return res.redirect("back");
+    }
   } catch (error) {
     req.flash("error", error);
     return res.redirect("back");

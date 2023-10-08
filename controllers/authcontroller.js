@@ -1,4 +1,9 @@
-const { initiateLogin } = require("../helpers/passport.authenticate");
+"use strict";
+
+const {
+  initiateLogin,
+  googleInitiateLogin,
+} = require("../helpers/passport.authenticate");
 const userSchema = require("../models/users/users.model");
 const leadSchema = require("../models/leads/leads.model");
 const leadDriver = require("../drivers/leads/leads.driver");
@@ -48,8 +53,13 @@ const login = async (passport) => {
   await initiateLogin(passport);
 };
 
+async function googleLogin(passport) {
+  await googleInitiateLogin(passport);
+}
+
 module.exports = {
   loginView,
   login,
+  googleLogin,
   dashboardView,
 };
