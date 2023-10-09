@@ -75,7 +75,6 @@ const resetNewPasswordView = async (req, res) => {
     return res.redirect("/contact-us");
   }
   const token = await forgotTokenDriver.findForgotToken(user._id);
-  console.log(token);
   if (Date.now() > token.token_expire) {
     req.flash("error", message.MESSAGE_EMAIL_VERIFICATION_LINK_EXPIRED);
     return res.redirect("/contact-us");
@@ -91,7 +90,7 @@ const resetNewPasswordView = async (req, res) => {
 
 const resetNewPassword = async (req, res) => {
   try {
-    const { id, forgotToken } = req.params;
+    const { id } = req.params;
     const { error, value } = validateResetPassword(req.body);
     if (error) {
       req.flash("error", error.details[0].message);
@@ -118,12 +117,12 @@ const resetNewPassword = async (req, res) => {
           return res.redirect("/");
         } else {
           req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
-          return res.redirect(`/reset-password/${id}/${forgotToken}`);
+          return res.redirect(`/reset-password/${id}/${token.token}`);
         }
       });
     } else {
       req.flash("error", message.MESSAGE_PASSWORD_CONFIRM_PASSWORD_NOT_MATCH);
-      return res.redirect(`/reset-password/${id}/${forgotToken}`);
+      return res.redirect(`/reset-password/${id}/${token.token}`);
     }
   } catch (error) {
     req.flash("error", error.message);

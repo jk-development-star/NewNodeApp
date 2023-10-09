@@ -36,11 +36,19 @@
         <div class="card card-primary card-outline">
           <div class="card-body box-profile">
             <div class="text-center">
+              <% if(userProfile[0].profile_image){%>
               <img
                 class="profile-user-img img-fluid img-circle"
-                src="/newAssets/dist/img/user4-128x128.jpg"
-                alt="User profile picture"
+                src="/images/profileImage/<%= userProfile[0].profile_image %>"
+                alt="<%= userProfile[0].full_name %>"
               />
+              <%}else{%>
+              <img
+                class="profile-user-img img-fluid img-circle"
+                src="/images/User-icon-256-blue.png"
+                alt="<%= userProfile[0].full_name %>"
+              />
+              <%}%>
             </div>
 
             <h3 class="profile-username text-center">

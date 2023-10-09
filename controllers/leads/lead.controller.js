@@ -6,6 +6,7 @@ const { validateLead } = require("../../validations/leads/lead.validation");
 const userDriver = require("../../drivers/users/user.driver");
 const currencyFormat = require("../../helpers/common");
 const actionItemsDriver = require("../../drivers/actionItems/actionItems.driver");
+const { leadLogger } = require("../../utils/loggers");
 
 /**
  *
@@ -16,21 +17,19 @@ const leadCreate = async (req, res) => {
   const usersList = await userDriver.getAllUsersForAssignLeads();
   res.render("newViews/leads/create", {
     usersList,
-        layout: true,
-    user : req.user,
+    layout: true,
     title: "Add New Lead",
   });
 };
 
 /**
  *
- * @param {*} req
- * @param {*} res
+ * @param {string} status lead status to get the lead based on the status
+ * @return {object} array of object
  */
 const getAllLead = async (req, res) => {
   try {
     let status = req.params.status ? req.params.status : "";
-
     await leadDriver
       .getAllLeads(status)
       .then((leads) => {
@@ -38,34 +37,29 @@ const getAllLead = async (req, res) => {
           req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
           return res.render("newViews/leads/index", {
             title: "Lead List",
-                layout: true,
-    user : req.user,
+            layout: true,
           });
         } else {
           return res.render("newViews/leads/index", {
             leads,
             currencyFormat: currencyFormat,
             title: "Lead List",
-                layout: true,
-    user : req.user,
+            layout: true,
           });
         }
       })
       .catch((error) => {
+        leadLogger.error("Lead not found", { status: "500", error: error });
         req.flash("error", error);
         return res.render("newViews/leads/index", {
           title: "Lead List",
-              layout: true,
-    user : req.user,
+          layout: true,
         });
       });
   } catch (error) {
+    leadLogger.error("Error", { status: "500", error: error });
     req.flash("error", error.message);
-    return res.render("newViews/leads/index", {
-      title: "Lead List",
-          layout: true,
-    user : req.user,
-    });
+    return res.redirect("/leads");
   }
 };
 
@@ -79,14 +73,10 @@ const storeLead = async (req, res) => {
   const { error, value } = validateLead(req.body);
   if (error) {
     req.flash("error", error.details[0].message);
-    return res.render("newViews/leads/create", {
-      title: "Add New Lead",
-          layout: true,
-    user : req.user,
-    });
+    return res.redirect("/create/lead");
   }
   const { generatedBy, lead_id, lead_status, ...data } = value;
-  data["generatedBy"] = req.userId;
+  data["generatedBy"] = req.user._id;
   data["lead_id"] = Date.now();
   try {
     await leadDriver
@@ -96,29 +86,29 @@ const storeLead = async (req, res) => {
         return res.redirect(301, "/leads");
       })
       .catch((error) => {
+        leadLogger.error("Error", { status: "500", error: error });
         req.flash("error", error.message);
-        return res.render("newViews/leads/create", {
-          title: "Add New Lead",
-              layout: true,
-    user : req.user,
-        });
+        return res.redirect("/create/lead");
       });
   } catch (error) {
+    leadLogger.error("Error", { status: "500", error: error });
     req.flash("error", error.message);
-    return res.render("newViews/leads/create", {
-      title: "Add New Lead",
-          layout: true,
-    user : req.user,
-    });
+    return res.redirect("/create/lead");
   }
 };
 
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 const leadEdit = async (req, res) => {
   try {
+    const { id } = req.params;
     const usersList = await userDriver.getAllUsersForAssignLeads();
     const actionItems = await actionItemsDriver.getActionItems();
     await leadDriver
-      .getLead(req.params.id)
+      .getLead(id)
       .then((lead) => {
         if (lead)
           return res.render("newViews/leads/edit", {
@@ -126,30 +116,29 @@ const leadEdit = async (req, res) => {
             usersList,
             actionItems,
             title: "Edit Lead",
-                layout: true,
-    user : req.user,
+            layout: true,
           });
       })
       .catch((error) => {
+        leadLogger.error("Error", { status: "500", error: error });
         req.flash("error", error.message);
-        res.render("newViews/leads/edit", {
-              layout: true,
-    user : req.user,
-          title: "Edit Lead",
-        });
+        return res.redirect(`/edit/lead/${id}`);
       });
   } catch (error) {
+    leadLogger.error("Error", { status: "500", error: error });
     req.flash("error", error.message);
-    res.render("newViews/leads/edit", {
-          layout: true,
-    user : req.user,
-      title: "Edit Lead",
-    });
+    return res.redirect(`/edit/lead/${id}`);
   }
 };
 
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 const leadUpdate = async (req, res) => {
   try {
+    const { id } = req.params;
     await leadDriver
       .updateLead(req.params.id, req.body)
       .then((lead) => {
@@ -157,8 +146,7 @@ const leadUpdate = async (req, res) => {
           req.flash("error", leadMessage.MESSAGE_NO_LEAD_FOUND);
           return res.render("newViews/leads/edit", {
             title: "Edit Lead",
-                layout: true,
-    user : req.user,
+            layout: true,
           });
         } else {
           req.flash("success", leadMessage.MESSAGE_SUCCESS_UPDATE_LEAD);
@@ -166,23 +154,22 @@ const leadUpdate = async (req, res) => {
         }
       })
       .catch((error) => {
+        leadLogger.error("Error", { status: "500", error: error });
         req.flash("error", error.message);
-        return res.render("newView/leads/edit", {
-          title: "Edit Lead",
-              layout: true,
-    user : req.user,
-        });
+        return res.redirect(`/edit/lead/${id}`);
       });
   } catch (error) {
+    leadLogger.error("Error", { status: "500", error: error });
     req.flash("error", error.message);
-    return res.render("newView/leads/edit", {
-      title: "Edit Lead",
-          layout: true,
-    user : req.user,
-    });
+    return res.redirect(`/edit/lead/${id}`);
   }
 };
 
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 const estimateForm = async (req, res) => {
   try {
     const { id } = req.params;
@@ -192,12 +179,13 @@ const estimateForm = async (req, res) => {
       lead,
       actionItems,
       id,
-          layout: true,
-    user : req.user,
+      layout: true,
       title: "Intital Estimate",
     });
   } catch (error) {
-    console.log(error);
+    leadLogger.error("Error", { status: "500", error: error });
+    req.flash("error", "Something went wrong.");
+    return res.redirect("back");
   }
 };
 

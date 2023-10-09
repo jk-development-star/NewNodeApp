@@ -7,6 +7,9 @@ const bcryptPassword = require("../../helpers/bcrypt.password");
 const { userLogger } = require("../../utils/loggers");
 const currencyFormat = require("../../helpers/common");
 const tokenDriver = require("../../drivers/users/token.driver");
+const crypto = require("crypto");
+const { addMinutes } = require("../../helpers/common");
+const { sendEmail } = require("../../config/email.config");
 
 const userCreate = (req, res) => {
   res.render("newViews/users/create", {
@@ -39,13 +42,12 @@ const storeUser = async (req, res) => {
     return res.redirect("/create");
   }
   //convert password in to hashed
-
   const hasPass = await bcryptPassword.encrypt(value.password);
   const { password, ...data } = value;
   data["password"] = hasPass;
   data["profile_image"] = req.file.filename;
 
-  //create new user
+  //create new user and send email verification link on entered email address
   await userDriver
     .createUser(data)
     .then((user) => {
@@ -71,25 +73,34 @@ const storeUser = async (req, res) => {
     })
     .catch((error) => {
       userLogger.error("User not Created", { status: "500", error: error });
-      req.flash("error", error);
+      req.flash("error", error.message);
       res.redirect("/create");
     });
 };
 
+/**
+ * Verify the registered user email address
+ * @param {string} user_id user id
+ * @param {string} token generated token
+ * @returns {object} verified user detail
+ */
 const verifyUser = async (req, res) => {
   try {
     const { id } = req.params;
+    // find user by the user id
     const user = await userDriver.findUserById(id);
     if (!user) return res.status(400).send("Invalid link");
     const token = await tokenDriver.findToken(user._id);
-
+    // to check current time is greater than the allowed time for link expiration
     if (Date.now() > token.token_expire) {
       req.flash("error", message.MESSAGE_EMAIL_VERIFICATION_LINK_EXPIRED);
       return res.redirect("/contact-us");
     }
+    // if verification is success change verified true to false
     const data = {
       verified: true,
     };
+    // update user details
     await userDriver.userUpdate(id, data).then((user) => {
       if (user) {
         tokenDriver.removeToken(token._id);
@@ -98,7 +109,12 @@ const verifyUser = async (req, res) => {
       }
     });
   } catch (err) {
-    console.log(err);
+    userLogger.error("Error in verification", {
+      status: "500",
+      message: err.message,
+    });
+    req.flash("error", err.message);
+    return res.redirect("/contact-us");
   }
 };
 
