@@ -2,7 +2,8 @@
 
 const express = require("express");
 const router = express.Router();
-const checkJWTAuth = require("../middlewares/jwtAuth");
+// const checkJWTAuth = require("../middlewares/jwtAuth");
+const {checkPassportAuth} = require("../middlewares/passportAuth");
 
 const {
   getAllLead,
@@ -14,13 +15,13 @@ const {
 } = require("../controllers/leads/lead.controller");
 const { leadGallery } = require("../controllers/leads/lead.images.controller");
 
-router.get("/leads/:status?", checkJWTAuth, getAllLead);
-router.get("/create/lead", checkJWTAuth, leadCreate);
-router.get("/edit/lead/:id", checkJWTAuth, leadEdit);
-router.get("/estimate/lead/:id", checkJWTAuth, estimateForm);
-router.post("/store/lead", checkJWTAuth, storeLead);
-router.post("/update/lead/:id", checkJWTAuth, leadUpdate);
+router.get("/leads/:status?", checkPassportAuth, getAllLead);
+router.get("/create/lead", checkPassportAuth, leadCreate);
+router.get("/edit/lead/:id", checkPassportAuth, leadEdit);
+router.get("/estimate/lead/:id", checkPassportAuth, estimateForm);
+router.post("/store/lead", checkPassportAuth, storeLead);
+router.post("/update/lead/:id", checkPassportAuth, leadUpdate);
 
-router.get("/lead/gallery/:id", checkJWTAuth, leadGallery);
+router.get("/lead/gallery/:id", checkPassportAuth, leadGallery);
 
 module.exports = router;

@@ -6,7 +6,8 @@ const { validateTask } = require("../../validations/tasks/tasks.validation");
 const createTask = async (req, res) => {
   return res.render("newViews/tasks/create", {
     title: "Add New Task",
-    layout: true,
+        layout: true,
+    user : req.user,
   });
 };
 
@@ -16,7 +17,8 @@ const storeTasks = async (req, res) => {
     req.flash("error", error.details[0].message);
     return res.render("newViews/tasks/create", {
       title: "Add New Task",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
   var { created_by, task_status, ...data } = value;
@@ -31,7 +33,8 @@ const storeTasks = async (req, res) => {
         req.flash("error", error);
         return res.render("newViews/tasks/create", {
           title: "Add New Task",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       });
 };
@@ -44,19 +47,22 @@ const tasksList = async (req, res) => {
         return res.render("newViews/tasks/index", {
           tasks,
           title: "Tasks List",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       else req.flash("error", "No tasks are available");
       return res.render("newViews/tasks/index", {
         title: "Tasks List",
-        layout: true,
+            layout: true,
+    user : req.user,
       });
     })
     .catch((error) => {
       req.flash("error", error);
       return res.render("newViews/tasks/index", {
         title: "Tasks List",
-        layout: true,
+            layout: true,
+    user : req.user,
       });
     });
 };
@@ -68,7 +74,8 @@ const editTask = async (req, res) => {
       return res.render("newViews/tasks/edit", {
         task,
         title: "Edit Task",
-        layout: true,
+            layout: true,
+    user : req.user,
       });
     })
     .catch((error) => {
@@ -89,7 +96,8 @@ const updateTasks = async (req, res) => {
           req.flash("error", "No task found");
           return res.render("newViews/tasks/edit", {
             title: "Edit Task",
-            layout: true,
+                layout: true,
+    user : req.user,
           });
         } else {
           req.flash("success", "Task updated successfully.");
@@ -100,14 +108,16 @@ const updateTasks = async (req, res) => {
         req.flash("error", error);
         return res.render("newViews/tasks/edit", {
           title: "Edit User",
-          layout: true,
+              layout: true,
+    user : req.user,
         });
       });
   } catch (error) {
     req.flash("error", "Something went wrong");
     return res.render("newViews/tasks/edit", {
       title: "Edit Task",
-      layout: true,
+          layout: true,
+    user : req.user,
     });
   }
 };

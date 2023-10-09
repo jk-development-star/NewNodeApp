@@ -2,7 +2,8 @@
 
 const express = require("express");
 const router = express.Router();
-const checkJWTAuth = require("../middlewares/jwtAuth");
+// const checkJWTAuth = require("../middlewares/jwtAuth");
+const { checkPassportAuth } = require("../middlewares/passportAuth");
 const upload = require("../middlewares/imageUpload");
 const {
   userList,
@@ -12,14 +13,21 @@ const {
   userEditView,
   userView,
   updateUser,
+  verifyUser,
 } = require("../controllers/users/user.controller");
 
-router.get("/users", checkJWTAuth, userList);
-router.get("/create", checkJWTAuth, userCreate);
-router.get("/edit/:id", checkJWTAuth, userEditView);
-router.get("/view/:id", checkJWTAuth, userView);
-router.post("/store", checkJWTAuth, upload.single("profile_image"), storeUser);
-router.post("/update/:id", checkJWTAuth, updateUser);
-router.post("/delete/:id", checkJWTAuth, deleteAUser);
+router.get("/users", checkPassportAuth, userList);
+router.get("/create", checkPassportAuth, userCreate);
+router.get("/edit/:id", checkPassportAuth, userEditView);
+router.get("/view/:id", checkPassportAuth, userView);
+router.post(
+  "/store",
+  checkPassportAuth,
+  upload.single("profile_image"),
+  storeUser
+);
+router.post("/update/:id", checkPassportAuth, updateUser);
+router.post("/delete/:id", checkPassportAuth, deleteAUser);
+router.get("/verify/:id/:token", verifyUser);
 
 module.exports = router;

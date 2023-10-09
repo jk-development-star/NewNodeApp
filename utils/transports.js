@@ -1,10 +1,9 @@
-
 const transports = {
-    DEV:[],
-    STAGING:[],
-    PRODUCTION:[]
+  LOCAL: [],
+  STAGING: [],
+  PRODUCTION: [],
 };
 
 const env = process.env.ENVIRONMENT;
 
-module.exports =  transports[env];
+module.exports = transports[env];

@@ -2,7 +2,8 @@
 
 const express = require("express");
 const router = express.Router();
-const checkJWTAuth = require("../middlewares/jwtAuth");
+// const checkJWTAuth = require("../middlewares/jwtAuth");
+const {checkPassportAuth} = require("../middlewares/passportAuth");
 const {
   actionItemsIndex,
   actionItemsCreate,
@@ -10,9 +11,9 @@ const {
   deleteActionItem,
 } = require("../controllers/actionItems/actionItems.controller");
 
-router.get("/actionItems", checkJWTAuth, actionItemsIndex);
-router.get("/actionItems/create", checkJWTAuth, actionItemsCreate);
-router.post("/actionItems/store", checkJWTAuth, storeActionItems);
-router.post("/actionItems/delete/:id", checkJWTAuth, deleteActionItem);
+router.get("/actionItems", checkPassportAuth, actionItemsIndex);
+router.get("/actionItems/create", checkPassportAuth, actionItemsCreate);
+router.post("/actionItems/store", checkPassportAuth, storeActionItems);
+router.post("/actionItems/delete/:id", checkPassportAuth, deleteActionItem);
 
 module.exports = router;

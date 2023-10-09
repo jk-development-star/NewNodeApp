@@ -18,7 +18,8 @@ const storeLeadActivity = async (req, res) => {
       req.flash("error", error.details[0].message);
       return res.render("newViews/leads/lead_details", {
         title: "Lead Details",
-        layout: true,
+            layout: true,
+    user : req.user,
       });
     } else {
       const { lead_id, acitvity_added_by, ...data } = value;
@@ -67,7 +68,8 @@ const leadActivityDetails = async (req, res) => {
     leadImages,
     displayTime: displayTime,
     title: "Lead Activity",
-    layout: true,
+        layout: true,
+    user : req.user,
   });
 };
 

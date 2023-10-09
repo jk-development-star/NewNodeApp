@@ -1,15 +1,13 @@
-const userLogger = require('./user');
-const loginLogger = require('./login');
-const merchantLogger = require('./merchant/merchant')
-const branchLogger = require('./merchant/branch')
-const accountLogger = require('./merchant/account')
-const employeeLogger = require('./merchant/employee')
+const userLogger = require("./user/user");
+const loginLogger = require("./login/login");
+const leadLogger = require("./lead/lead");
+const leadImageLogger = require("./lead/lead.image");
+const leadActivityLogger = require("./lead/lead.activity");
 
 module.exports = {
-     userLogger,
-     loginLogger,
-     merchantLogger,
-     branchLogger,
-     accountLogger,
-     employeeLogger
-}
+  userLogger,
+  loginLogger,
+  leadLogger,
+  leadImageLogger,
+  leadActivityLogger,
+};

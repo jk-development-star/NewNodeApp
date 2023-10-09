@@ -37,4 +37,23 @@ const userSchemaValidate = Joi.object({
   profile_image: Joi.any(),
 });
 
+const forgotEmailValidate = Joi.object({
+  email: Joi.string().trim().email().required().label("Email"),
+});
+
+const resetPasswordValidate = Joi.object({
+  password: Joi.string()
+    .trim()
+    .regex(passwordPattern)
+    .rule({ message: stringPassswordError })
+    .required()
+    .label("Password"),
+  confirm_password: Joi.any()
+    .equal(Joi.ref("password"))
+    .required()
+    .label("Confirm password")
+    .messages({ "any.only": "Password and Confirm Password does not match" }),
+});
+exports.validateForgotEmail = validator(forgotEmailValidate);
 exports.validateSignup = validator(userSchemaValidate);
+exports.validateResetPassword = validator(resetPasswordValidate);

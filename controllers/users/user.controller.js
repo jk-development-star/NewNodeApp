@@ -6,6 +6,7 @@ const { validateSignup } = require("../../validations/users/user.validation");
 const bcryptPassword = require("../../helpers/bcrypt.password");
 const { userLogger } = require("../../utils/loggers");
 const currencyFormat = require("../../helpers/common");
+const tokenDriver = require("../../drivers/users/token.driver");
 
 const userCreate = (req, res) => {
   res.render("newViews/users/create", {
@@ -28,40 +29,77 @@ const storeUser = async (req, res) => {
   var { error, value } = validateSignup(req.body);
   if (error) {
     req.flash("error", error.details[0].message);
-    return res.render("newViews/users/create", {
-      title: "Create New User",
-      layout: "layout",
-    });
+    return res.redirect("/create");
   }
+
   //check the duplicate email
   const duplicateUser = await userDriver.findUserByEmail(value.email);
   if (duplicateUser) {
     req.flash("error", message.MESSAGE_DUPLICATE_EMAIL);
-    return res.render("newViews/users/create", {
-      title: "Create New User",
-      layout: "layout",
-    });
+    return res.redirect("/create");
   }
   //convert password in to hashed
+
   const hasPass = await bcryptPassword.encrypt(value.password);
-  var { password, profile_image, ...data } = value;
+  const { password, ...data } = value;
   data["password"] = hasPass;
   data["profile_image"] = req.file.filename;
+
   //create new user
   await userDriver
     .createUser(data)
     .then((user) => {
-      if (user) req.flash("success", message.MESSAGE_SUCCESS_CREATE_USER);
+      if (user) {
+        let tokenData = {
+          user_id: user._id,
+          token: crypto.randomBytes(32).toString("hex"),
+          token_expire: addMinutes(new Date(), 10),
+        };
+        tokenDriver.createToken(tokenData).then((token) => {
+          const content = {
+            message: `http://localhost:8081/verify/${user._id}/${token.token}`,
+            name: user.full_name,
+            team: "TechMRB",
+            templatePath: "views/newViews/email/email.verification.ejs",
+          };
+          const subject = "Verify Email";
+          sendEmail(user.email, subject, content);
+        });
+      }
+      req.flash("success", message.MESSAGE_SUCCESS_CREATE_USER);
       return res.redirect(301, "/users");
     })
     .catch((error) => {
       userLogger.error("User not Created", { status: "500", error: error });
-      req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
-      return res.render("newViews/users/create", {
-        title: "Create New User",
-        layout: "layout",
-      });
+      req.flash("error", error);
+      res.redirect("/create");
     });
+};
+
+const verifyUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await userDriver.findUserById(id);
+    if (!user) return res.status(400).send("Invalid link");
+    const token = await tokenDriver.findToken(user._id);
+
+    if (Date.now() > token.token_expire) {
+      req.flash("error", message.MESSAGE_EMAIL_VERIFICATION_LINK_EXPIRED);
+      return res.redirect("/contact-us");
+    }
+    const data = {
+      verified: true,
+    };
+    await userDriver.userUpdate(id, data).then((user) => {
+      if (user) {
+        tokenDriver.removeToken(token._id);
+        req.flash("success", "Email verified successfully");
+        return res.redirect(301, "/");
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 /**
@@ -72,7 +110,7 @@ const storeUser = async (req, res) => {
  */
 const userList = async (req, res) => {
   await userDriver
-    .getAllUsers(req.userId, req.userRole)
+    .getAllUsers(req.user.id, req.user.role)
     .then((users) => {
       if (users)
         return res.render("newViews/users/index", {
@@ -81,11 +119,7 @@ const userList = async (req, res) => {
           layout: true,
         });
       else req.flash("error", message.MESSAGE_NO_USER_FOUND);
-      return res.render("newViews/users/index", {
-        users: "",
-        title: "Users List",
-        layout: true,
-      });
+      return res.redirect("/users");
     })
     .catch((err) => {
       userLogger.error("Error in Listing User", {
@@ -93,10 +127,7 @@ const userList = async (req, res) => {
         message: err,
       });
       req.flash("error", err);
-      return res.render("newViews/users/index", {
-        title: "Users List",
-        layout: true,
-      });
+      return res.redirect("/users");
     });
 };
 
@@ -107,14 +138,12 @@ const userList = async (req, res) => {
  */
 const deleteAUser = async (req, res) => {
   try {
+    const { id } = req.params;
     //Deleting the User
-    await userDriver.deleteUser(req.params.id).then((user) => {
+    await userDriver.deleteUser(id).then((user) => {
       if (!user) {
         req.flash("error", message.MESSAGE_NO_USER_FOUND);
-        return res.render("newViews/users/index", {
-          title: "Users List",
-          layout: true,
-        });
+        return res.redirect("/users");
       } else req.flash("success", message.MESSAGE_SUCCESS_DELETE_USER);
       return res.redirect(301, "/users");
     });
@@ -125,10 +154,7 @@ const deleteAUser = async (req, res) => {
       message: error,
     });
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
-    return res.render("newViews/users/index", {
-      title: "Users List",
-      layout: true,
-    });
+    return res.redirect("/users");
   }
 };
 
@@ -143,8 +169,9 @@ const deleteAUser = async (req, res) => {
  */
 const userEditView = async (req, res) => {
   try {
+    const { id } = req.params;
     // Edit the User
-    await userDriver.userEdit(req.params.id).then((user) => {
+    await userDriver.userEdit(id).then((user) => {
       if (user)
         return res.render("newViews/users/edit", {
           user,
@@ -156,10 +183,7 @@ const userEditView = async (req, res) => {
     //Logging the error
     userLogger.error("Error in Edit User", { status: "500", message: error });
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
-    return res.render("newViews/users/index", {
-      title: "Users List",
-      layout: true,
-    });
+    return res.redirect(`/edit/${id}`);
   }
 };
 
@@ -184,10 +208,7 @@ const userView = async (req, res) => {
     //Logging the error
     userLogger.error("Error in Edit User", { status: "500", message: error });
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
-    return res.render("newViews/users/index", {
-      title: "Users List",
-      layout: true,
-    });
+    return res.redirect("/users");
   }
 };
 
@@ -202,8 +223,9 @@ const userView = async (req, res) => {
  */
 const updateUser = async (req, res) => {
   try {
+    const { id } = req.params;
     await userDriver
-      .userUpdate(req.params.id, req.body)
+      .userUpdate(id, req.body)
       .then((user) => {
         if (!user) {
           req.flash("error", message.MESSAGE_NO_USER_FOUND);
@@ -222,18 +244,12 @@ const updateUser = async (req, res) => {
           message: error,
         });
         req.flash("error", error);
-        return res.render("newViews/users/edit", {
-          title: "Edit User",
-          layout: true,
-        });
+        return res.redirect(`/edit/${id}`);
       });
   } catch (error) {
     userLogger.info("Error in update user", { status: "500", message: error });
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
-    return res.render("newViews/users/edit", {
-      title: "Edit User",
-      layout: true,
-    });
+    return res.redirect(`/edit/${id}`);
   }
 };
 
@@ -245,4 +261,5 @@ module.exports = {
   userEditView,
   userView,
   updateUser,
+  verifyUser,
 };
