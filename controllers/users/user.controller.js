@@ -216,7 +216,7 @@ const userView = async (req, res) => {
         return res.render("newViews/users/view", {
           userProfile,
           currencyFormat: currencyFormat,
-          title: "User Profile",
+          title: "View User",
           layout: true,
         });
     });
@@ -245,10 +245,7 @@ const updateUser = async (req, res) => {
       .then((user) => {
         if (!user) {
           req.flash("error", message.MESSAGE_NO_USER_FOUND);
-          return res.render("newViews/users/edit", {
-            title: "Edit User",
-            layout: true,
-          });
+          return res.redirect("back");
         } else {
           req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
           return res.redirect(301, "/users");
@@ -269,6 +266,73 @@ const updateUser = async (req, res) => {
   }
 };
 
+// User Profile Functions
+
+/**
+ *
+ * @param {id} _id to view the specific user details
+ * @returns {object}  selected user details to view on view page
+ */
+const userProfileView = async (req, res) => {
+  try {
+    // Edit the User
+    await userDriver.userEdit(req.params.id).then((userProfile) => {
+      if (userProfile)
+        return res.render("newViews/users/profile", {
+          userProfile,
+          currencyFormat: currencyFormat,
+          title: "User Profile",
+          layout: true,
+        });
+    });
+  } catch (error) {
+    //Logging the error
+    userLogger.error("Error in User", { status: "500", message: error });
+    req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
+    return res.redirect("back");
+  }
+};
+
+/**
+ *
+ * @param {id} _id pass the user object id
+ * @param {text} full_name user full name
+ * @param {text} email user email address
+ * @param {number} phone phone number
+ * @param {text} role role that define the user permission
+ * @returns {object} updated user details
+ */
+const updateProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await userDriver
+      .userUpdate(id, req.body)
+      .then((user) => {
+        if (!user) {
+          req.flash("error", message.MESSAGE_NO_USER_FOUND);
+          return res.redirect("back");
+        } else {
+          req.flash("success", message.MESSAGE_PROFILE_UPDATE_SUCCESS);
+          return res.redirect(301, `/profile/${id}`);
+        }
+      })
+      .catch((error) => {
+        userLogger.info("Error in update user profile", {
+          status: "500",
+          message: error,
+        });
+        req.flash("error", error);
+        return res.redirect(`/profile/${id}`);
+      });
+  } catch (error) {
+    userLogger.info("Error in update user profile", {
+      status: "500",
+      message: error,
+    });
+    req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
+    return res.redirect(`/profile/${id}`);
+  }
+};
 module.exports = {
   userList,
   userCreate,
@@ -278,4 +342,6 @@ module.exports = {
   userView,
   updateUser,
   verifyUser,
+  updateProfile,
+  userProfileView,
 };

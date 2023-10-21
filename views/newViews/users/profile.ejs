@@ -132,7 +132,6 @@
 
           <!-- /.card-body -->
         </div>
-        <a href="/users" class="btn-sm btn-danger">Back to User List</a>
         <!-- /.card -->
       </div>
       <!-- /.col -->
@@ -150,6 +149,21 @@
                   >Assigned Leads</a
                 >
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#settings" data-toggle="tab"
+                  >Update Profile
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#profileimage" data-toggle="tab"
+                  >Update Profile Image
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#changepassword" data-toggle="tab"
+                  >Change Password
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -158,7 +172,6 @@
             <div class="tab-content">
               <!-- /.tab-pane -->
               <!-- /.tab-pane -->
-
               <div class="active tab-pane" id="generatedby">
                 <div class="card-header border-transparent">
                   <h3 class="card-title">Generated Leads</h3>
@@ -207,7 +220,7 @@
                             data-color="#00a65a"
                             data-height="20"
                           >
-                            <%= currencyFormat.indianFormat(lead.lead_budget) %>
+                            <%= lead.lead_budget %>
                           </div>
                         </td>
                       </tr>
@@ -277,6 +290,166 @@
                 </div>
                 <!-- /.card-body -->
                 <!-- /.card-footer -->
+              </div>
+              <!----- Update Pfile image  -->
+              <div class="tab-pane" id="settings">
+                <form
+                  action="/profile/<%= user._id %>"
+                  method="post"
+                  class="form-horizontal"
+                >
+                  <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label"
+                      >Name</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputName"
+                        value="<%= user.full_name %>"
+                        name="full_name"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail" class="col-sm-2 col-form-label"
+                      >Email</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="inputEmail"
+                        name="email"
+                        value="<%= user.email %>"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label"
+                      >Phone Number</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputName2"
+                        value="<%= user.phone %>"
+                        name="phone"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label"
+                      >Role</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        class="form-control"
+                        id="inputExperience"
+                        name="role"
+                        value="<%= user.role %>"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <span style="color: red"
+                        >Email and Role can not be change, So they are
+                        disbaled.</span
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <button type="submit" class="btn btn-danger">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!----- Profile image update  -->
+              <div class="tab-pane" id="profileimage">
+                <form class="form-horizontal">
+                  <div class="form-group row">
+                    <label for="profile_image" class="col-sm-2 col-form-label"
+                      >Profile Image</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="profile_image"
+                        name="profile_image"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <button type="submit" class="btn btn-danger">
+                        Update Profile Image
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!----- Change password  -->
+              <div class="tab-pane" id="changepassword">
+                <form class="form-horizontal">
+                  <div class="form-group row">
+                    <label for="password" class="col-sm-2 col-form-label"
+                      >Old Password</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="oldpassword"
+                        name="old_password"
+                        placeholder="Old Password"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="newpassword" class="col-sm-2 col-form-label"
+                      >New Password</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        placeholder="New Password"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="profile_image" class="col-sm-2 col-form-label"
+                      >Confirm New Password</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="confirmpassword"
+                        name="confirm_password"
+                        placeholder="Confirm New Password"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <button type="submit" class="btn btn-danger">
+                        Update Password
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
               <!-- /.tab-pane -->
             </div>
