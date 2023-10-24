@@ -29,7 +29,13 @@ router.post(
   upload.single("profile_image"),
   storeUser
 );
-router.post("/update/:id", checkPassportAuth, updateUser);
+
+router.post(
+  "/update/:id",
+  checkPassportAuth,
+  upload.single("profile_image"),
+  updateUser
+);
 router.post("/delete/:id", checkPassportAuth, deleteAUser);
 router.get("/verify/:id/:token", verifyUser);
 

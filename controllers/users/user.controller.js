@@ -10,6 +10,7 @@ const tokenDriver = require("../../drivers/users/token.driver");
 const crypto = require("crypto");
 const { addMinutes } = require("../../helpers/common");
 const { sendEmail } = require("../../config/email.config");
+const fs = require("fs");
 
 const userCreate = (req, res) => {
   res.render("newViews/users/create", {
@@ -211,7 +212,7 @@ const userEditView = async (req, res) => {
 const userView = async (req, res) => {
   try {
     // Edit the User
-    await userDriver.userEdit(req.params.id).then((userProfile) => {
+    await userDriver.userView(req.params.id).then((userProfile) => {
       if (userProfile)
         return res.render("newViews/users/view", {
           userProfile,
@@ -240,29 +241,53 @@ const userView = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    await userDriver
-      .userUpdate(id, req.body)
-      .then((user) => {
-        if (!user) {
-          req.flash("error", message.MESSAGE_NO_USER_FOUND);
+    const { value, ...data } = req.body;
+    if (req.file) {
+      data["profile_image"] = req.file.filename;
+      await userDriver
+        .userUpdate(id, data)
+        .then((user) => {
+          if (!user) {
+            req.flash("error", message.MESSAGE_NO_USER_FOUND);
+            return res.redirect("back");
+          } else {
+            req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
+            return res.redirect(301, "/users");
+          }
+        })
+        .catch((error) => {
+          userLogger.info("Error in update user", {
+            status: "500",
+            message: error,
+          });
+          req.flash("error", error);
           return res.redirect("back");
-        } else {
-          req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
-          return res.redirect(301, "/users");
-        }
-      })
-      .catch((error) => {
-        userLogger.info("Error in update user", {
-          status: "500",
-          message: error,
         });
-        req.flash("error", error);
-        return res.redirect(`/edit/${id}`);
-      });
+    } else {
+      await userDriver
+        .userUpdate(id, data)
+        .then((user) => {
+          if (!user) {
+            req.flash("error", message.MESSAGE_NO_USER_FOUND);
+            return res.redirect("back");
+          } else {
+            req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
+            return res.redirect(301, "/users");
+          }
+        })
+        .catch((error) => {
+          userLogger.info("Error in update user", {
+            status: "500",
+            message: error,
+          });
+          req.flash("error", error);
+          return res.redirect("back");
+        });
+    }
   } catch (error) {
     userLogger.info("Error in update user", { status: "500", message: error });
-    req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
-    return res.redirect(`/edit/${id}`);
+    req.flash("error", error.message);
+    return res.redirect("back");
   }
 };
 
@@ -276,7 +301,7 @@ const updateUser = async (req, res) => {
 const userProfileView = async (req, res) => {
   try {
     // Edit the User
-    await userDriver.userEdit(req.params.id).then((userProfile) => {
+    await userDriver.userView(req.params.id).then((userProfile) => {
       if (userProfile)
         return res.render("newViews/users/profile", {
           userProfile,

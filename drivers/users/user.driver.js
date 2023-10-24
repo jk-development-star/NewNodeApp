@@ -109,6 +109,11 @@ exports.deleteUser = async (id) => {
 };
 
 exports.userEdit = async (id) => {
+  const user = await userSchema.findById({ _id: id });
+  return user;
+};
+
+exports.userView = async (id) => {
   const usersWithLeadsInfo = await userSchema.aggregate([
     {
       $match: {
