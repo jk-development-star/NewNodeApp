@@ -59,15 +59,37 @@
               ><i class="fa fa-plus"></i> Add New User</a
             >
           </div>
-          <% if(messages.success) { %>
-          <div class="alert alert-success alert-dismissible" role="alert">
-            <%= messages.success %>
+          <% if(message.error) {%>
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <%= message.error %>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <% } %> <% if(messages.error) { %>
-          <div class="alert alert-danger alert-dismissible" role="alert">
-            <%= messages.error %>
+          <% }%> <% if(message.success) {%>
+          <div
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <%= message.success %>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <% } %>
+          <% }%>
           <!-- /.card-header -->
           <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
@@ -92,13 +114,13 @@
                   <td>
                     <% if(user.profile_image) { %>
                     <img
-                      src="/images/userProfiles/<%= user.profile_image %>"
+                      src="/images/profileImage/<%= user.profile_image %>"
                       width="50"
                       height="50"
                     />
                     <% } else { %>
                     <img
-                      src="/newAssets/dist/img/user2-160x160.jpg"
+                      src="/images/User-icon-256-blue.png"
                       alt="<%= user.full_name %>"
                       width="50"
                       height="50"

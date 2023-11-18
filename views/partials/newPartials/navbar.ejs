@@ -175,17 +175,28 @@
       </a>
     </li>
     <li class="nav-item">
-      <form action="/logout" method="post">
-        <button
-          class="nav-link btn-sm btn-danger"
-          data-toggle="tooltip"
-          data-placement="bottom"
-          title="Logout"
-          type="submit"
+      <div class="dropdown show">
+        <a
+          class="btn btn-secondary dropdown-toggle"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
         >
-          <i class="fa fa-arrow-alt-circle-right"></i>
-        </button>
-      </form>
+          <%= user.full_name %>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="/profile/<%= user._id %>"
+            >My Profile</a
+          >
+          <form action="/logout" method="post">
+            <button class="dropdown-item">Logout</button>
+          </form>
+        </div>
+      </div>
     </li>
   </ul>
 </nav>
