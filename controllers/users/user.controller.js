@@ -32,7 +32,7 @@ const storeUser = async (req, res) => {
   //to check the validations
   var { error, value } = validateSignup(req.body);
   if (error) {
-    req.flash("error", error.details[0].message);
+    req.flash("error", error.details);
     return res.redirect("/create");
   }
 
