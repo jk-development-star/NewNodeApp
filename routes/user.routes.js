@@ -2,7 +2,6 @@
 
 const express = require("express");
 const router = express.Router();
-// const checkJWTAuth = require("../middlewares/jwtAuth");
 const { checkPassportAuth } = require("../middlewares/passportAuth");
 const upload = require("../middlewares/imageUpload");
 const {
