@@ -1,6 +1,6 @@
 "use strict";
-
 const leadTrackDriver = require("../../drivers/leads/lead.images.driver");
+const { leadImageLogger } = require("../../utils/loggers");
 const leadGallery = async (req, res) => {
   const { id } = req.params;
   const leadImages = await leadTrackDriver.getAllUploadedImages(id);
@@ -8,14 +8,12 @@ const leadGallery = async (req, res) => {
     leadImages,
     id,
     title: "Lead Gallery",
-        layout: true,
-    user : req.user,
+    layout: true,
   });
 };
 const storeLeadImages = async (req, res) => {
   try {
     const { id } = req.params;
-
     req.files.map(async (file) => {
       const data = {
         track_lead_id: id,
@@ -33,11 +31,13 @@ const storeLeadImages = async (req, res) => {
           }
         })
         .catch((error) => {
+          leadImageLogger.error("Error", { status: "500", error: error });
           req.flash("error", error.message);
           res.redirect(`/track/lead/${id}`);
         });
     });
   } catch (error) {
+    leadImageLogger.error("Error", { status: "500", error: error });
     req.flash("error", error.message);
     res.redirect(`/track/lead/${req.params.id}`);
   }

@@ -7,6 +7,10 @@ const bcryptPassword = require("../../helpers/bcrypt.password");
 const { userLogger } = require("../../utils/loggers");
 const currencyFormat = require("../../helpers/common");
 const tokenDriver = require("../../drivers/users/token.driver");
+const crypto = require("crypto");
+const { addMinutes } = require("../../helpers/common");
+const { sendEmail } = require("../../config/email.config");
+const fs = require("fs");
 
 const userCreate = (req, res) => {
   res.render("newViews/users/create", {
@@ -28,7 +32,7 @@ const storeUser = async (req, res) => {
   //to check the validations
   var { error, value } = validateSignup(req.body);
   if (error) {
-    req.flash("error", error.details[0].message);
+    req.flash("error", error.details);
     return res.redirect("/create");
   }
 
@@ -39,13 +43,12 @@ const storeUser = async (req, res) => {
     return res.redirect("/create");
   }
   //convert password in to hashed
-
   const hasPass = await bcryptPassword.encrypt(value.password);
   const { password, ...data } = value;
   data["password"] = hasPass;
   data["profile_image"] = req.file.filename;
 
-  //create new user
+  //create new user and send email verification link on entered email address
   await userDriver
     .createUser(data)
     .then((user) => {
@@ -71,25 +74,34 @@ const storeUser = async (req, res) => {
     })
     .catch((error) => {
       userLogger.error("User not Created", { status: "500", error: error });
-      req.flash("error", error);
+      req.flash("error", error.message);
       res.redirect("/create");
     });
 };
 
+/**
+ * Verify the registered user email address
+ * @param {string} user_id user id
+ * @param {string} token generated token
+ * @returns {object} verified user detail
+ */
 const verifyUser = async (req, res) => {
   try {
     const { id } = req.params;
+    // find user by the user id
     const user = await userDriver.findUserById(id);
     if (!user) return res.status(400).send("Invalid link");
     const token = await tokenDriver.findToken(user._id);
-
+    // to check current time is greater than the allowed time for link expiration
     if (Date.now() > token.token_expire) {
       req.flash("error", message.MESSAGE_EMAIL_VERIFICATION_LINK_EXPIRED);
       return res.redirect("/contact-us");
     }
+    // if verification is success change verified true to false
     const data = {
       verified: true,
     };
+    // update user details
     await userDriver.userUpdate(id, data).then((user) => {
       if (user) {
         tokenDriver.removeToken(token._id);
@@ -98,7 +110,12 @@ const verifyUser = async (req, res) => {
       }
     });
   } catch (err) {
-    console.log(err);
+    userLogger.error("Error in verification", {
+      status: "500",
+      message: err.message,
+    });
+    req.flash("error", err.message);
+    return res.redirect("/contact-us");
   }
 };
 
@@ -195,12 +212,12 @@ const userEditView = async (req, res) => {
 const userView = async (req, res) => {
   try {
     // Edit the User
-    await userDriver.userEdit(req.params.id).then((userProfile) => {
+    await userDriver.userView(req.params.id).then((userProfile) => {
       if (userProfile)
         return res.render("newViews/users/view", {
           userProfile,
           currencyFormat: currencyFormat,
-          title: "User Profile",
+          title: "View User",
           layout: true,
         });
     });
@@ -224,35 +241,123 @@ const userView = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
+    const { value, ...data } = req.body;
+    if (req.file) {
+      data["profile_image"] = req.file.filename;
+      await userDriver
+        .userUpdate(id, data)
+        .then((user) => {
+          if (!user) {
+            req.flash("error", message.MESSAGE_NO_USER_FOUND);
+            return res.redirect("back");
+          } else {
+            req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
+            return res.redirect(301, "/users");
+          }
+        })
+        .catch((error) => {
+          userLogger.info("Error in update user", {
+            status: "500",
+            message: error,
+          });
+          req.flash("error", error);
+          return res.redirect("back");
+        });
+    } else {
+      await userDriver
+        .userUpdate(id, data)
+        .then((user) => {
+          if (!user) {
+            req.flash("error", message.MESSAGE_NO_USER_FOUND);
+            return res.redirect("back");
+          } else {
+            req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
+            return res.redirect(301, "/users");
+          }
+        })
+        .catch((error) => {
+          userLogger.info("Error in update user", {
+            status: "500",
+            message: error,
+          });
+          req.flash("error", error);
+          return res.redirect("back");
+        });
+    }
+  } catch (error) {
+    userLogger.info("Error in update user", { status: "500", message: error });
+    req.flash("error", error.message);
+    return res.redirect("back");
+  }
+};
+
+// User Profile Functions
+
+/**
+ *
+ * @param {id} _id to view the specific user details
+ * @returns {object}  selected user details to view on view page
+ */
+const userProfileView = async (req, res) => {
+  try {
+    // Edit the User
+    await userDriver.userView(req.params.id).then((userProfile) => {
+      if (userProfile)
+        return res.render("newViews/users/profile", {
+          userProfile,
+          currencyFormat: currencyFormat,
+          title: "User Profile",
+          layout: true,
+        });
+    });
+  } catch (error) {
+    //Logging the error
+    userLogger.error("Error in User", { status: "500", message: error });
+    req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
+    return res.redirect("back");
+  }
+};
+
+/**
+ *
+ * @param {id} _id pass the user object id
+ * @param {text} full_name user full name
+ * @param {text} email user email address
+ * @param {number} phone phone number
+ * @param {text} role role that define the user permission
+ * @returns {object} updated user details
+ */
+const updateProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
     await userDriver
       .userUpdate(id, req.body)
       .then((user) => {
         if (!user) {
           req.flash("error", message.MESSAGE_NO_USER_FOUND);
-          return res.render("newViews/users/edit", {
-            title: "Edit User",
-            layout: true,
-          });
+          return res.redirect("back");
         } else {
-          req.flash("success", message.MESSAGE_SUCCESS_UPDATE_USER);
-          return res.redirect(301, "/users");
+          req.flash("success", message.MESSAGE_PROFILE_UPDATE_SUCCESS);
+          return res.redirect(301, `/profile/${id}`);
         }
       })
       .catch((error) => {
-        userLogger.info("Error in update user", {
+        userLogger.info("Error in update user profile", {
           status: "500",
           message: error,
         });
         req.flash("error", error);
-        return res.redirect(`/edit/${id}`);
+        return res.redirect(`/profile/${id}`);
       });
   } catch (error) {
-    userLogger.info("Error in update user", { status: "500", message: error });
+    userLogger.info("Error in update user profile", {
+      status: "500",
+      message: error,
+    });
     req.flash("error", message.MESSAGE_INTERNAL_SERVER_ERROR);
-    return res.redirect(`/edit/${id}`);
+    return res.redirect(`/profile/${id}`);
   }
 };
-
 module.exports = {
   userList,
   userCreate,
@@ -262,4 +367,6 @@ module.exports = {
   userView,
   updateUser,
   verifyUser,
+  updateProfile,
+  userProfileView,
 };

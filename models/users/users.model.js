@@ -1,5 +1,5 @@
-"use strict";
-const mongoose = require("mongoose");
+'use strict';
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
@@ -27,13 +27,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    profile_image: [
-      {
-        type: Array,
-      },
-    ],
+    profile_image: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model('Users', userSchema);

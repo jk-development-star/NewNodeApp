@@ -8,8 +8,7 @@ exports.createForgotToken = async (data) => {
 };
 
 exports.findForgotToken = async (id) => {
-  const token = await forgotTokenSchema.find({ user_id: id });
-  // .sort({ createdAt: -1 });
+  const token = await forgotTokenSchema.findOne({ user_id: id });
   return token;
 };
 

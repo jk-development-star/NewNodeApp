@@ -44,6 +44,9 @@ module.exports = {
     "Reset password link has been expired, Please contact to Admin for new link!!",
   MESSAGE_EMAIL_VERIFICATION_LINK_EXPIRED:
     "Email verification link has been expired please contact to Admin for new link!!",
+  MESSAGE_PROFILE_UPDATE_SUCCESS: "Profile has been updated successfully.",
+  MESSAGE_PROFILE_UPDATE_ERROR: "Something went wrong, Please try again.",
+
   //Merchant Messages
   MESSAGE_NO_MERCHANT_FOUND: "Merchant not found",
   MESSAGE_DUPLICATE_MERCHANT: "Duplicate merchant",

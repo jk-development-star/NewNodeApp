@@ -5,7 +5,7 @@ const userSchema = require("../../models/users/users.model");
 
 exports.createUser = async (data) => {
   const newUser = await userSchema.create(data);
-  const { password, profile_image, __v, ...result } = newUser._doc;
+  const { __v, ...result } = newUser._doc;
   return result;
 };
 
@@ -109,6 +109,11 @@ exports.deleteUser = async (id) => {
 };
 
 exports.userEdit = async (id) => {
+  const user = await userSchema.findById({ _id: id });
+  return user;
+};
+
+exports.userView = async (id) => {
   const usersWithLeadsInfo = await userSchema.aggregate([
     {
       $match: {

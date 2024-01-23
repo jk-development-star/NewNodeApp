@@ -1,5 +1,3 @@
-"use strict";
-
 const Joi = require("joi");
 
 const validator = (schema) => (payload) =>
@@ -8,10 +6,9 @@ const validator = (schema) => (payload) =>
 const passwordPattern =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
 const stringPassswordError =
-  "Password length must be 8 to 20 characters long and password must contains a combination of uppercase, lowercase letter, number, and a special character are required.";
-const mobilePattern = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+  "Your password must be at least 8 characters long, contain at least one number and have a mixture of uppercase ,  lowercase letters, and special characters";
+const mobilePattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
 const stringMobileError = "Enter a valid Mobile Number";
-const stringDateError = "Date should be less than today's date";
 
 const userSchemaValidate = Joi.object({
   full_name: Joi.string().trim().required(),

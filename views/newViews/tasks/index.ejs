@@ -59,15 +59,37 @@
               ><i class="fa fa-plus"></i> Add New Task</a
             >
           </div>
-          <% if(messages.success) { %>
-          <div class="alert alert-success alert-dismissible" role="alert">
-            <%= messages.success %>
+          <% if(message.error) {%>
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <%= message.error %>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <% } %> <% if(messages.error) { %>
-          <div class="alert alert-danger alert-dismissible" role="alert">
-            <%= messages.error %>
+          <% }%> <% if(message.success) {%>
+          <div
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <%= message.success %>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <% } %>
+          <% }%>
           <!-- /.card-header -->
           <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">

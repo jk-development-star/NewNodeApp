@@ -17,11 +17,7 @@
   </div>
   <!-- /.container-fluid -->
 </section>
-<% if(messages.error) { %>
-<div class="alert alert-danger" role="alert"><%= messages.error %></div>
-<% } %> <% if(messages.success) { %>
-<div class="alert alert-success" role="alert"><%= messages.success %></div>
-<% } %>
+<%- include('../../partials/messages') %>
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
@@ -31,8 +27,9 @@
         <div class="card card-primary">
           <form
             class="form"
-            action="/update/<%= user[0]._id %>?method=put"
+            action="/update/<%= user._id %>?method=put"
             method="POST"
+            enctype="multipart/form-data"
             data-parsley-validate
           >
             <div class="card-body">
@@ -46,22 +43,21 @@
                       class="form-control"
                       name="full_name"
                       id="full_name"
-                      value="<%= user[0].full_name %>"
+                      value="<%= user.full_name %>"
                       data-parsley-required="true"
                     />
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group mandatory">
+                  <div class="form-group">
                     <label for="email" class="form-label">Email Address</label>
                     <input
                       type="email"
                       class="form-control"
                       name="email"
                       id="email"
-                      value="<%= user[0].email %>"
-                      placeholder="Email address"
-                      data-parsley-required="true"
+                      value="<%= user.email %>"
+                      readonly
                     />
                   </div>
                 </div>
@@ -78,7 +74,7 @@
                       class="form-control"
                       name="phone"
                       id="phone"
-                      value="<%= user[0].phone %>"
+                      value="<%= user.phone %>"
                       placeholder="Enter Contact Number"
                       data-parsley-required="true"
                     />
@@ -93,9 +89,36 @@
                       class="form-control"
                       name="role"
                       id="role"
-                      value="<%= user[0].role %>"
+                      value="<%= user.role %>"
                       placeholder="Enter user role"
                       data-parsley-required="true"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label for="contact" class="form-label"
+                      >Profile Image</label
+                    >
+                    <input
+                      type="file"
+                      class="form-control"
+                      name="profile_image"
+                      id="profile_image"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="contact" class="form-label">Uploaded Image</label>
+                  <!-- text input -->
+                  <div class="image-div">
+                    <img
+                      src="/images/profileImage/<%= user.profile_image %>"
+                      width="100"
+                      height="100"
                     />
                   </div>
                 </div>

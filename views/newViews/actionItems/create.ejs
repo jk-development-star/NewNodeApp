@@ -29,11 +29,7 @@
   </div>
   <!-- /.container-fluid -->
 </section>
-<% if(messages.error) { %>
-<div class="alert alert-danger" role="alert"><%= messages.error %></div>
-<% } %> <% if(messages.success) { %>
-<div class="alert alert-success" role="alert"><%= messages.success %></div>
-<% } %>
+<%- include('../../partials/messages') %>
 <!-- Main content -->
 
 <section class="content">
